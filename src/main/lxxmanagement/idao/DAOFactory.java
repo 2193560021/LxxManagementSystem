@@ -1,14 +1,14 @@
 package main.lxxmanagement.idao;
 
-
-import main.lxxmanagement.dao.CustomerDAO;
-import main.lxxmanagement.dao.FlowersDAO;
+import main.lxxmanagement.dao.*;
+import main.lxxmanagement.idao.*;
 
 public class DAOFactory
 {
+
     private static iCustomerDAO cusDao;
 
-    private  static iFlowersDAO flowerDAO;
+    private static iMessagesDAO messDao;
 
     public static synchronized iCustomerDAO creatCustomerDAO()
     {
@@ -18,11 +18,10 @@ public class DAOFactory
     }
 
 
-    public static synchronized iFlowersDAO creatflowerDAO()
+    public static synchronized iMessagesDAO creatMessagesDAO()
     {
-        if(null == flowerDAO)
-            flowerDAO=new FlowersDAO();
-        return flowerDAO;
+        if(null == messDao)
+            messDao=new MessagesDAO();
+        return messDao;
     }
-
 }

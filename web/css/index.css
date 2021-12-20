@@ -1,0 +1,364 @@
+/* Google Font CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
+    /* Poppins  */
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: #E4E9F7;
+}
+::selection{
+    color: #fff;
+    background: #11101d;
+}
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101d;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+}
+.sidebar.active{
+    width: 240px
+}
+.sidebar .logo_content .logo{
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+.sidebar.active .logo_content .logo{
+    opacity: 1;
+    pointer-events: none;
+}
+.logo_content .logo i{
+    font-size: 28px;
+    margin-right: 5px;
+}
+.logo_content .logo .logo_name{
+    font-size: 20px;
+    font-weight: 400;
+}
+.sidebar #btn{
+    position: absolute;
+    color: #fff;
+    top: 6px;
+    left: 50%;
+    font-size: 22px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+}
+.sidebar.active #btn{
+    left: 90%;
+}
+.sidebar ul{
+    margin-top: 20px;
+}
+.sidebar ul li{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+    margin: 5px 0;
+}
+.sidebar ul li .tooltip{
+    position: absolute;
+    left: 125px;
+    top: 0;
+    transform: translate(-50% , -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 120px;
+    background: #fff;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+.sidebar.active ul li .tooltip{
+    display: none;
+}
+.sidebar ul li:hover .tooltip{
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%
+}
+.sidebar ul li input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    background: #11101d;
+    padding-left: 50px;
+    font-size: 18px;
+    color: #fff;
+}
+.sidebar ul li .bx-search{
+    position: absolute;
+    z-index: 99;
+    color: #fff;
+    font-size: 22px;
+    transition: all .5s linear;
+}
+.sidebar ul li .bx-search:hover{
+    background: #fff;
+    color: #1d1b31;
+}
+.sidebar ul li a{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 12px;
+    white-space: nowrap;
+    transition: all 0.4s ease;
+}
+.sidebar ul li a:hover{
+    color: #11101d;
+    background: #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+
+}
+.sidebar ul li i{
+    font-size: 22px;
+    font-weight: 400;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+.sidebar .links_name{
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.sidebar.active .links_name{
+    transition: 0s;
+    opacity: 1;
+    pointer-events: auto
+}
+.sidebar .profile_content{
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.sidebar .profile_content .profile{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: none;
+    transition: all 0.4s ease;
+}
+.sidebar.active .profile_content .profile{
+    background: #11101d;
+}
+.profile_content .profile .profile_details{
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: all 0.4s ease;
+}
+.sidebar.active ~ .profile .profile_details{
+    opacity: 1;
+    pointer-events: auto;
+}
+.profile .profile_details img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.profile .profile_details .name_job{
+    margin-left: 10px;
+}
+.profile .profile_details .name{
+    font-size: 15px;
+    font-weight: 400;
+}
+.profile .profile_details .job{
+    font-size: 12px;
+}
+.profile #log_out{
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.4s ease;
+    background: #11101d;
+}
+.sidebar.active .profile #log_out{
+    left: 88%;
+}
+.sidebar.active .profile #log_out{
+    background: none
+}
+.home_content{
+    /*position: absolute;*/
+    height: 100%;
+    width: calc(100% - 78px);
+    /*left: 78px;*/
+    float: right;
+    background: #E4E9F7;
+    box-shadows: 0 5px 10px rgba(0,0,0,0.2);
+    transition: all 0.5s ease;
+}
+.sidebar.active ~ .home_content{
+    z-index: 100;
+}
+.home_content .text{
+    font-size: 25px;
+    font-weight: 500;
+    color: #11101d;
+    margin: 12px;
+}
+.sidebar.active ~ .home_content{
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+/*页面主题部分*/
+.main_card{
+    /*height: 120px;*/
+    border-radius: 20px;
+}
+.main_sta{
+    height: 260px;
+    border-radius: 20px;
+}
+.card-icon{
+    border-radius: 10px;
+    height: 85px;
+}
+
+.icon i{
+    margin: 30px auto;
+
+}
+
+/*销量部分*/
+#sales{
+    height: 445px;
+
+}
+
+.sales{
+    font-size: 13px;
+}
+.sales thead,tr,th{
+    height: 10px;
+}
+
+/*评论部分*/
+#comment{
+    height: 445px;
+}
+
+.comment{
+    /*border: #00f 1px solid;*/
+    margin: 0.5rem auto;
+    border-radius: 8px;
+    background: #dff1fd;
+}
+
+.comment_name{
+    /*border: #000 1px solid;*/
+}
+
+.user_name{
+    color: #555;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.comment_time{
+    color: #777;
+    font-size: 12px;
+}
+
+.comment_content{
+    /*border: #000 1px solid;*/
+
+}
+
+.comment_content p{
+    color: #353a3e;
+    font-size: 14px;
+
+}
+
+/*精彩文章*/
+#Blogs{
+    height: 540px;
+}
+
+.blogs_title{
+    font-size: 22px;
+    color: #1b1e21;
+    font-weight: bolder;
+}
+
+.blogs_content p{
+    color: #717679;
+    font-size: 13px;
+}
+.blogs_img img{
+    margin: 0 5px 0 0 !important;
+    padding: 0 !important;
+    border-radius:5px
+;
+}
+
+/*页脚部分*/
+footer{
+    height: 70px;
+    width: calc(100% - 78px);
+    background: #dcdee0;
+    float: right;
+
+}
+
+.flower_data{
+    height: 250px;
+}
+
+td{
+    vertical-align: middle !important;
+}

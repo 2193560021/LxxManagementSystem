@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>消息</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/public/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/public/animate.min.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/Messages.css">
+
+  <style>
+    #active{
+      color: #11101d;
+      background: #fff;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    td{
+      margin: auto auto;
+    }
+    body{
+      background: #E4E9F7;
+
+    }
+
+  </style>
+
+  <script src="../js/public/jquery-1.12.4.min.js"></script>
+  <script src="../css/public/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+  <script src="../js/public/vue.min.js"></script>
+  <script src="../js/public/axios.min.js"></script>
+
+</head>
+<body>
+<div class="sidebar shadow">
+  <div class="logo_content">
+    <div class="logo">
+      <!--            <img src="../../public/img/logo_white.png" width="50" height="50" alt="">-->
+      <div class="logo_name">花博士</div>
+    </div>
+    <img src="../img/logo/logo_white.png" id="btn" width="50" height="50" alt="">
+  </div>
+  <ul class="nav_list">
+    <li class="active">
+      <a href="#">
+        <i class='fa fa-home fa-3x' ></i>
+        <span class="links_name">首页</span>
+      </a>
+      <span class="tooltip">首页</span>
+    </li>
+    <li>
+      <a href="Orders.html">
+        <i class='fa fa-list-alt' ></i>
+        <span class="links_name">账单</span>
+      </a>
+      <span class="tooltip">账单</span>
+    </li>
+    <li>
+      <a href="Users.html">
+        <i class='fa fa-archive' ></i>
+        <span class="links_name">快递</span>
+      </a>
+      <span class="tooltip">快递</span>
+    </li>
+    <li>
+      <a href="Messages.html" id="active" class="shadow">
+        <i class='fa fa-comments' ></i>
+        <span class="links_name">消息</span>
+      </a>
+      <span class="tooltip">消息</span>
+    </li>
+    <li>
+      <a href="Plants.html">
+        <i class='fa fa-align-left' ></i>
+        <span class="links_name">记事</span>
+      </a>
+      <span class="tooltip">记事</span>
+    </li>
+    <li>
+      <a href="Shops.html">
+        <i class='fa fa-photo' ></i>
+        <span class="links_name">照片墙</span>
+      </a>
+      <span class="tooltip">照片墙</span>
+    </li>
+    <li>
+      <a href="Blogs.html">
+        <i class='fa fa-heart' style="color: #f92f60" ></i>
+        <span class="links_name">💕空间</span>
+      </a>
+      <span class="tooltip">💕空间</span>
+    </li>
+    <li>
+      <a href="Messages.html">
+        <i class='fa fa-cog' ></i>
+        <span class="links_name">设置</span>
+      </a>
+      <span class="tooltip">设置</span>
+    </li>
+  </ul>
+  <div class="profile_content">
+    <div class="profile">
+      <div class="profile_details">
+        <img src="profile.jpg" alt="">
+        <div class="name_job">
+          <div class="name">Prem Shahi</div>
+          <div class="job">Web Designer</div>
+        </div>
+      </div>
+      <i class='bx bx-log-out' id="log_out" ></i>
+    </div>
+  </div>
+</div>
+
+
+<!--入驻花博士店家信息-->
+<div class="home_content">
+  <div class="row mx-1">
+    <div id="messages_left" class="col-md-7">
+
+      <!--            删除警示-->
+      <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="delModalLabel">确认删除</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              请谨慎操作！！！确认删除该订单？
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--            列表-->
+      <div class="my-4 col-12">
+        <div class="card mb-4  main_card animated bounceInUp shadow">
+          <div class="card-body p-3">
+            <div class="row">
+              <div id="message_left_title" class="col-12">
+                <div class="numbers">
+                  <span class="title mb-0 text-capitalize font-weight-bolder">我的消息</span>
+                  <div class="btn-toolbar mb-2 mb-md-0 float-right">
+                    <div class="input-group mr-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">搜索</span>
+                      </div>
+                      <input type="text" id="order_search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
+                    </div>
+                  </div>
+                </div>
+                <!--                                <hr class="col-11">-->
+                <div class="messages_list sales_flower my-3 p-2">
+
+                  <div class="messages_card_list mx-auto sales_flower mx-1 shadow row mb-3">
+                    <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 text-center">
+                      <img src="../img/profile.jpg" alt="" class="messages_card_list_img rounded-circle mt-2">
+                      <span class="mx-auto text-center font-weight-bolder mt-1">刘小璇</span>
+                    </div>
+                    <div class="col-xl-10 messages_card_content mt-2 mb-2 pt-2">
+                      <span class="messages_card_content_text mx-auto text-center font-weight-bolder mt-3">我叫刘小璇，你好呀~</span>
+                      <span class="messages_card_content_time mx-auto text-center font-weight-bolder mt-3">2021-12-19 11:52</span>
+                    </div>
+                  </div>
+
+                  <div class="messages_card_list mx-auto sales_flower mx-1 shadow row mb-3">
+                    <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 text-center">
+                      <img src="../img/profile.jpg" alt="" class="messages_card_list_img rounded-circle mt-2">
+                      <span class="mx-auto text-center font-weight-bolder mt-1">刘小璇</span>
+                    </div>
+                    <div class="col-xl-10 messages_card_content mt-2 mb-2 pt-2">
+                      <span class="messages_card_content_text mx-auto text-center font-weight-bolder mt-3">我叫刘小璇，你好呀~</span>
+                      <span class="messages_card_content_time mx-auto text-center font-weight-bolder mt-3">2021-12-19 11:52</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="messages_right" class="col-md-5">
+
+      <!--            列表-->
+      <div class="my-4 col-12">
+        <div class="card mb-4  main_card animated bounceInUp shadow">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-12">
+                <div class="numbers">
+                  <span class="title mb-0 text-capitalize font-weight-bolder">发送消息</span>
+                </div>
+                <!--                                <hr class="col-11">-->
+                <div class="shop_list sales_flower my-3">
+                   <form class="form clearfix"  id="form_message">
+                      <input type="hidden" id="user_name" value="未登录用户" name="user_name">
+                      <input type="text" placeholder="收方" class="box" name="message_name">
+                      <textarea name="message_text" class="box" placeholder="内容，请输入..."  cols="30" rows="10"></textarea>
+                      <input type="button" value="发送消息" class="btn btn-primary rounded-pill float-right font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="check_message()">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  let btn = document.querySelector("#btn");
+  let sidebar = document.querySelector(".sidebar");
+  let searchBtn = document.querySelector(".bx-search");
+
+  btn.onclick = function() {
+    sidebar.classList.toggle("active");
+    if(btn.classList.contains("bx-menu")){
+      btn.classList.replace("bx-menu" , "bx-menu-alt-right");
+    }else{
+      btn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  }
+  searchBtn.onclick = function() {
+    sidebar.classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

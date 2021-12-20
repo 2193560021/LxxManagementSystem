@@ -107,7 +107,6 @@ public class CustomerDAO  implements iCustomerDAO {
                     sql="select * from customer where cus_telnum like '" + customerEmail + "'";
                 } else if (path.equalsIgnoreCase("email")){
                     sql="select * from customer where cus_email like '" + customerEmail + "'";
-
                 }
             }
             else if(method.equalsIgnoreCase("byEmail")){
@@ -136,12 +135,9 @@ public class CustomerDAO  implements iCustomerDAO {
                     customer.setTel(rst.getString("cus_telnum"));
                     customer.setEmail(rst.getString("cus_email"));
                     customer.setPwd(rst.getString("cus_pwd"));
-                    customer.setPayPwd(rst.getString("cus_paypwd"));
                     customer.setImg(rst.getString("cus_img"));
                     customer.setImg_bg(rst.getString("cus_img_bg"));
                     customer.setAddress(rst.getString("cus_address"));
-                    customer.setOrders(rst.getString("cus_orders"));
-                    customer.setFriends(rst.getString("cus_friends"));
 
                     customerList.add(customer);
                 }

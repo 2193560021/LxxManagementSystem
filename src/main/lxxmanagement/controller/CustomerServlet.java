@@ -65,7 +65,7 @@ public class CustomerServlet  extends HttpServlet
             String img_bg="";
 
             String address="";
-            customer=new Customer(id,tel, name, email, pwd,paypwd,img_bg,address);
+            customer=new Customer(id,tel, name, email, pwd,img_bg,address);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -131,7 +131,7 @@ public class CustomerServlet  extends HttpServlet
             String img_bg=request.getParameter("customerimg_bg");
             String address=request.getParameter("customeraddress");
             String path="";
-            customer=new Customer(id,tel, name, email,null,null,img_bg,address);
+            customer=new Customer(id,tel, name, email,null,img_bg,address);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -207,12 +207,9 @@ public class CustomerServlet  extends HttpServlet
                 json.put("tel", s.getTel());
                 json.put("email", s.getEmail());
                 json.put("pwd", s.getPwd());
-                json.put("paypwd", s.getPayPwd());
                 json.put("img",s.getImg());
                 json.put("imgbg", s.getImg_bg());
                 json.put("address", s.getAddress());
-                json.put("orders", s.getOrders());
-                json.put("friends", s.getFriends());
                 array.put(json);
             }
             jsonStr=array.toString();

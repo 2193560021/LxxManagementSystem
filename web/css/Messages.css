@@ -1,0 +1,63 @@
+.title{
+    font-size: 25px;
+}
+
+#message_left_title{
+    /*border-bottom: 5px solid #1b1e21;*/
+}
+
+.messages_list{
+    background: #E4E9F7;
+    /*height: 700px;*/
+    border-radius: 20px;
+}
+.messages_card_list{
+
+    background: #ffe3e3;
+    height: 130px;
+    border-radius: 20px;
+}
+.messages_card_list_img{
+    width: 100%;
+}
+.messages_card_content{
+    position: relative;
+    border-left: 0.3px solid #d2d2d2;
+}
+.messages_card_content_text{
+    font-size: 22px;
+}
+.messages_card_content_time{
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    color: #747576;
+}
+
+
+.shop_list .form{
+    flex:1 1 40rem;
+    background: #fff;
+    border-radius: .5rem;
+}
+
+
+.shop_list .form .box{
+    padding:.55rem;
+    font-size: 1.05rem;
+    color:#333;
+    text-transform: none;
+    border:.1rem solid rgba(0,0,0,.1);
+    border-radius: .5rem;
+    margin:.5rem 0;
+    width: 100%;
+}
+
+.shop_list .form .box:focus{
+    border-color: var(--pink);
+}
+
+.shop_list .form textarea{
+    height: 15rem;
+    resize: none;
+}

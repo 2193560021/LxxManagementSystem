@@ -1,158 +1,615 @@
 <!DOCTYPE html>
-<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title> Drop Down Sidebar Menu | CodingLab </title>
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- Boxiocns CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+    <title>花博士管理系统-首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/public/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/public/animate.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+
+
+    <style>
+
+        .animated {
+            -webkit-animation-duration: .8s;
+            animation-duration: .8s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        #active{
+            color: #043a58;
+            background: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+        #myStat{
+            margin: -10px auto;
+        }
+
+
+        .toggle-button-cover
+        {
+            display: table-cell;
+            position: relative;
+            width: 200px;
+            height: 30px;
+            box-sizing: border-box;
+        }
+
+        .button-cover
+        {
+            height: 35px;
+            background-color: #fff;
+            border-radius: 4px;
+        }
+
+
+        .button-cover, .knobs, .layer
+        {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .button
+        {
+            position: relative;
+            top: 50%;
+            width: 140px;
+            height: 40px;
+            margin: -25px auto 0 auto;
+            overflow: hidden;
+        }
+
+        .button.r, .button.r .layer
+        {
+            border-radius: 100px;
+        }
+
+        .button.b2
+        {
+            border-radius: 2px;
+        }
+
+        .checkbox
+        {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .knobs
+        {
+            z-index: 2;
+        }
+
+        .layer
+        {
+            width: 100%;
+            background-color: #ebf7fc;
+            transition: 0.3s ease all;
+            z-index: 1;
+        }
+
+        /* Button 13 */
+        .button-13 .knobs:before, .button-13 .knobs:after, .button-13 .knobs span
+        {
+            position: absolute;
+            top: 3px;
+            width: 70px;
+            height: 36px;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1;
+            padding: 9px 4px;
+            border-radius: 2px;
+            transition: 0.3s ease all;
+        }
+
+        .button-13 .knobs:before, .button-13 .knobs:after
+        {
+            color: #4e4e4e;
+            z-index: 1;
+        }
+
+        .button-13 .knobs:before
+        {
+            content: '花卉';
+            font-size: 14px;
+            color: #d4247b;
+            left: 4px;
+            top: 5px;
+        }
+
+        .button-13 .knobs:after
+        {
+            content: '绿植';
+            font-size: 14px;
+            color: #168023;
+            right: 4px;
+            top: 5px;
+
+        }
+
+        .button-13 .knobs span
+        {
+            width: 65px;
+            left: 70px;
+            background-color: #d4247b;
+            z-index: 2;
+        }
+
+        .button-13 .checkbox:checked + .knobs span
+        {
+            left: 4px;
+            background-color: #168023;
+        }
+
+        .button-13 .checkbox:checked ~ .layer
+        {
+            background-color: #fcebeb;
+        }
+
+    </style>
+
+
+    <script src="../js/public/jquery-1.12.4.min.js"></script>
+    <script src="../css/public/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+    <script src="../js/public/vue.min.js"></script>
+    <script src="../js/public/axios.min.js"></script>
+
+</head>
 <body>
-  <div class="sidebar">
-    <div class="logo-details">
-      <img src="../img/logo/logo_white.png" alt="" >
-      <span class="logo_name">CodingLab</span>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <a href="#">
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Category</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-collection' ></i>
-            <span class="link_name">Category</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
+<div class="sidebar shadow ">
+    <div class="logo_content">
+        <div class="logo">
+            <!--            <img src="../../public/img/logo_white.png" width="50" height="50" alt="">-->
+            <div class="logo_name">杂物管理</div>
         </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Category</a></li>
-          <li><a href="#">HTML & CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
-          <li><a href="#">PHP & MySQL</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-book-alt' ></i>
-            <span class="link_name">Posts</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Posts</a></li>
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">Login Form</a></li>
-          <li><a href="#">Card Design</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-line-chart' ></i>
-          <span class="link_name">Chart</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Chart</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-plug' ></i>
-            <span class="link_name">Plugins</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Plugins</a></li>
-          <li><a href="#">UI Face</a></li>
-          <li><a href="#">Pigments</a></li>
-          <li><a href="#">Box Icons</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-cog' ></i>
-          <span class="link_name">Setting</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Setting</a></li>
-        </ul>
-      </li>
-      <li>
-    <div class="profile-details">
-      <div class="profile-content">
-        <img src="../img/profile.jpg" alt="profile">
-      </div>
-      <div class="name-job">
-        <div class="profile_name">Prem Shahi</div>
-        <div class="job">Web Desginer</div>
-      </div>
-      <i class='bx bx-log-out' ></i>
+        <img src="../img/logo/logo_white.png" id="btn" width="50" height="50" alt="">
     </div>
-  </li>
-</ul>
-  </div>
-  <section class="home-section">
-    <div class="home-content">
-      <i class='bx bx-menu' ></i>
-      <span class="text">宝宝杂物账单管理</span>
+    <ul class="nav_list">
+        <li class="active">
+            <a href="#" id="active" class="shadow">
+                <i class='fa fa-home fa-3x' ></i>
+                <span class="links_name">首页</span>
+            </a>
+            <span class="tooltip">首页</span>
+        </li>
+        <li>
+            <a href="Orders.html">
+                <i class='fa fa-list-alt' ></i>
+                <span class="links_name">账单</span>
+            </a>
+            <span class="tooltip">账单</span>
+        </li>
+        <li>
+            <a href="Users.html">
+                <i class='fa fa-archive' ></i>
+                <span class="links_name">快递</span>
+            </a>
+            <span class="tooltip">快递</span>
+        </li>
+        <li>
+            <a href="Messages.html">
+                <i class='fa fa-comments' ></i>
+                <span class="links_name">消息</span>
+            </a>
+            <span class="tooltip">消息</span>
+        </li>
+        <li>
+            <a href="Plants.html">
+                <i class='fa fa-align-left' ></i>
+                <span class="links_name">记事</span>
+            </a>
+            <span class="tooltip">记事</span>
+        </li>
+        <li>
+            <a href="Shops.html">
+                <i class='fa fa-photo' ></i>
+                <span class="links_name">照片墙</span>
+            </a>
+            <span class="tooltip">照片墙</span>
+        </li>
+        <li>
+            <a href="Blogs.html">
+                <i class='fa fa-heart' style="color: #f92f60" ></i>
+                <span class="links_name">💕空间</span>
+            </a>
+            <span class="tooltip">💕空间</span>
+        </li>
+        <li>
+            <a href="Messages.html">
+                <i class='fa fa-cog' ></i>
+                <span class="links_name">设置</span>
+            </a>
+            <span class="tooltip">设置</span>
+        </li>
+    </ul>
+</div>
+<div class="home_content">
+    <div class="text">
+        <div id="root" class="row mx-1">
+            <div class="col-lg-4 col-sm-4">
+                <div class="card mb-4 main_card animated flipInX">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">留言总量</p>
+                                    <h3 class="font-weight-bolder mb-0">
+                                        {{MessagesNum}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end ">
+                                <div class="icon icon-shape bg-gradient-primary text-center text-center border-radius-md align-content-center card-icon">
+                                    <i class=' fa fa-envelope fa-lg' ></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4  main_card animated flipInX">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">用户总量</p>
+                                    <h3 class="font-weight-bolder mb-0" id="user_num">
+                                        {{UserNum}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end ">
+                                <div class="icon icon-shape bg-gradient-primary  text-center border-radius-md align-content-center card-icon">
+                                    <i class='fa fa-users fa-lg' ></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-4">
+                <div class="card mb-4 main_card animated flipInX">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">订单总量</p>
+                                    <h3 class="font-weight-bolder mb-0">
+                                        {{OrdersNum}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end ">
+                                <div class="icon icon-shape bg-gradient-primary  text-center border-radius-md align-content-center card-icon">
+                                    <i class='fa fa-list-alt fa-lg' ></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4  main_card animated flipInX">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">文章总量</p>
+                                    <h3 class="font-weight-bolder mb-0">
+                                        {{BlogsNum}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end ">
+                                <div class="icon icon-shape bg-gradient-primary  text-center border-radius-md align-content-center card-icon">
+                                    <i class='fa fa-book fa-lg' ></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-4 animated bounceInRight">
+                <div class="card mb-4 main_sta">
+                    <div class="card-body p-3 text-center">
+                        <input type="hidden" id="circle_stock" value="0" >
+                        <input type="hidden" id="circle_all" value="0" >
+                        <div id="myStat" data-dimension="250" data-text="67%" data-info="库存剩余" data-width="30" data-fontsize="30" data-percent="67" data-fgcolor="#043a58" data-bgcolor="#eee" data-fill="#ddd"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-lg-4">
+                <div id="sales" class="card mb-4  main_card animated flipInY">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">销量排名</p>
+
+                                </div>
+                                <!--                                <hr class="col-11">-->
+                                <div class="sales sales_flower">
+                                    <table class="table  col-md-12">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">排名</th>
+                                            <th scope="col">鲜花</th>
+                                            <th scope="col">近一个月销量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>{{FlowersSaleList[0].flower_name}}</td>
+                                                <td>{{FlowersSaleList[0].flower_sale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>{{FlowersSaleList[1].flower_name}}</td>
+                                                <td>{{FlowersSaleList[1].flower_sale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>{{FlowersSaleList[2].flower_name}}</td>
+                                                <td>{{FlowersSaleList[2].flower_sale}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="sales sales_plants">
+                                    <table class="table  col-md-12">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">排名</th>
+                                            <th scope="col">绿植</th>
+                                            <th scope="col">近一个月销量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>{{PlantsSaleList[0].plantname}}</td>
+                                                <td>{{PlantsSaleList[0].plantsale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>{{PlantsSaleList[1].plantname}}</td>
+                                                <td>{{PlantsSaleList[1].plantsale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>{{PlantsSaleList[2].plantname}}</td>
+                                                <td>{{PlantsSaleList[2].plantsale}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12  col-xl-8">
+                <div id="comment" class="card mb-4  main_card animated bounceInUp">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">留言评论</p>
+
+                                </div>
+                                <hr class="col-11">
+                                <div id="messages">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-sm-12  col-xl-8">
+                <div id="Blogs" class="card mb-4  main_card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">热门博客</p>
+
+                                </div>
+                                <hr class="col-11">
+                                <div class="comment col-md-12">
+                                    <div class="comment_name ">
+                                        <img src="../../Client/img/用户.png" height="30" width="30"/>
+                                        <span class="user_name">
+                                            ----
+                                        </span>
+                                        <span class="comment_time mx-3">
+                                            57分钟前
+                                        </span>
+                                    </div>
+                                    <div class="blogs_content" >
+                                        <span class="blogs_title mx-2">
+                                            中秋节适合送什么花给家人或者另一半呢？
+                                        </span>
+                                        <p class="my-1 text-truncate">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中秋节是我国的团圆的节日，而在节日
+                                            到来的时候，人们也会想要选择一个适合的礼物送给重要的人，那么2021中秋节
+                                            给父母送什么花呢？让我们与老黄历一起了解这个节日吧！
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="comment col-md-12">
+                                    <div class="comment_name ">
+                                        <img src="../../Client/img/用户.png" height="30" width="30"/>
+                                        <span class="user_name">
+                                            ----
+                                        </span>
+                                        <span class="comment_time mx-3">
+                                            57分钟前
+                                        </span>
+                                    </div>
+                                    <div class="blogs_content" >
+                                        <span class="blogs_title mx-2">
+                                            使用鲜花打扮自己的卧室
+                                        </span>
+                                        <div class="blogs_img">
+                                            <img src="../img/u=2326533772,591990493&fm=26&fmt=auto.webp" class="col-md-3" />
+                                            <img src="../img/u=3498847879,3390794141&fm=26&fmt=auto.webp" class="col-md-3" />
+                                            <img src="../img/u=2326533772,591990493&fm=26&fmt=auto.webp" class="col-md-3" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="comment col-md-12">
+                                    <div class="comment_name ">
+                                        <img src="../../Client/img/用户.png" height="30" width="30"/>
+                                        <span class="user_name">
+                                            ----
+                                        </span>
+                                        <span class="comment_time mx-3">
+                                            57分钟前
+                                        </span>
+                                    </div>
+                                    <div class="blogs_content" >
+                                        <span class="blogs_title mx-2">
+                                            实用小技巧：如何为家中的鲜花或者绿植松土
+                                        </span>
+                                        <p class="my-1 text-truncate">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;养花的过程中松土是必须的，有的土壤板结或盆沿有缝隙，都是需要用疏土来解决的，而且可以增加土壤的透水和排水性，让植物根系长得更好。今天就和大叔一起学习学习吧！
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-sm-12  col-xl-4">
+                <div class="stock_low card mb-4  main_card animated flipInY">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers clearfix">
+                                    <p class="text-sm text-danger mb-0 text-capitalize font-weight-bold float-left">库存紧张</p>
+
+                                    <div class="toggle-button-cover float-right">
+                                        <div class="button-cover">
+                                            <div class="button b2 button-13" id="">
+                                                <input id="checkbox" type="checkbox" class="checkbox" value="flowers" onclick="stock_low_switch()">
+                                                <div class="knobs">
+                                                    <span></span>
+                                                </div>
+                                                <div class="layer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                <hr class="col-11">-->
+                                <div id="stock_low_main" class="sales sales_flower animated">
+                                    <table class="table  col-md-12">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">编号</th>
+                                            <th scope="col">名称</th>
+                                            <th scope="col">库存量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="stock_low" class="animated">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flower_data card mb-4  main_card animated flipInY">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers clearfix">
+                                    <p class="text-sm text-warning mb-0 text-capitalize float-left font-weight-bold">库存堆积</p>
+
+                                    <div class="toggle-button-cover float-right">
+                                        <div class="button-cover">
+                                            <div class="button b2 button-13">
+                                                <input id="checkbox2" type="checkbox" class="checkbox" value="flowers" onclick="stock_high_switch()">
+                                                <div class="knobs">
+                                                    <span></span>
+                                                </div>
+                                                <div class="layer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                <hr class="col-11">-->
+
+                                <div id="stock_high_main" class="sales sales_plants animated">
+                                    <table class="table  col-md-12">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">编号</th>
+                                            <th scope="col">名称</th>
+                                            <th scope="col">库存量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="stock_high">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</div>
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+    let searchBtn = document.querySelector(".bx-search");
 
-  <script>
-
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
-
+    btn.onclick = function() {
+        sidebar.classList.toggle("active");
+        if(btn.classList.contains("bx-menu")){
+            btn.classList.replace("bx-menu" , "bx-menu-alt-right");
+        }else{
+            btn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    }
+    searchBtn.onclick = function() {
+        sidebar.classList.toggle("active");
+    }
+</script>
 </body>
 </html>

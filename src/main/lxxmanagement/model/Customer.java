@@ -7,23 +7,19 @@ public class Customer {
     private String tel="" ;
     private String Email="";
     private String Pwd="";
-    private String PayPwd="";
     private String img="";
     private String img_bg="";
     private String address="";
-    private String orders="";
-    private String friends="";
 
     public Customer(){
         id = 0;
     }
-    public Customer(int ID,String tel,String name, String email, String pwd,String PayPwd,String img_bg,String address){
+    public Customer(int ID,String tel,String name, String email, String pwd,String img_bg,String address){
         this.id = ID;
         this.tel = tel;
         this.name=name;
         this.Email = email;
         this.Pwd = pwd;
-        this.PayPwd = PayPwd;
         this.img_bg = img_bg;
         this.address = address;
     }
@@ -74,14 +70,6 @@ public class Customer {
         return Pwd;
     }
 
-    public void setPayPwd(String pwd){
-        this.PayPwd=pwd;
-    }
-
-    public String getPayPwd(){
-        return PayPwd;
-    }
-
     public void setImg(String pwd){
         this.img=pwd;
     }
@@ -104,22 +92,6 @@ public class Customer {
 
     public String getAddress(){
         return address;
-    }
-
-    public void setOrders(String pwd){
-        this.orders=pwd;
-    }
-
-    public String getOrders(){
-        return orders;
-    }
-
-    public void setFriends(String pwd){
-        this.friends=pwd;
-    }
-
-    public String getFriends(){
-        return friends;
     }
 
 
