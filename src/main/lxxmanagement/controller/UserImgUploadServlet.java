@@ -1,7 +1,8 @@
 package main.lxxmanagement.controller;
 
-import main.java.com.example.docflower.docflower.model.Customer;
-import main.java.com.example.docflower.util.DBUtil;
+
+import main.lxxmanagement.model.Customer;
+import main.util.DBUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;

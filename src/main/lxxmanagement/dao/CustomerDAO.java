@@ -16,7 +16,7 @@ public class CustomerDAO  implements iCustomerDAO {
         int result=0;
         try
         {
-            String sql="insert into customer(cus_name,cus_telnum, cus_email, cus_pwd )"
+            String sql="insert into customer(cus_name,cus_tel, cus_email, cus_pwd )"
                     + " values('" + customer.getName() + "', '" + customer.getTel() + "', '" + customer.getEmail() + "', '" + customer.getPwd() + "' )";
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -104,7 +104,7 @@ public class CustomerDAO  implements iCustomerDAO {
                 sql="select * from customer where cus_email like '%" + customerEmail + "%'";
             }else if(method.equalsIgnoreCase("login")){
                 if(path.equalsIgnoreCase("tel")){
-                    sql="select * from customer where cus_telnum like '" + customerEmail + "'";
+                    sql="select * from customer where cus_tel like '" + customerEmail + "'";
                 } else if (path.equalsIgnoreCase("email")){
                     sql="select * from customer where cus_email like '" + customerEmail + "'";
                 }
@@ -116,7 +116,7 @@ public class CustomerDAO  implements iCustomerDAO {
                 sql="select * from customer where cus_email like '" + customerEmail + "'";
             }
             else if(method.equalsIgnoreCase("method_tel")){
-                sql="select * from customer where cus_telnum like '" + customerEmail + "'";
+                sql="select * from customer where cus_tel like '" + customerEmail + "'";
             }
             db=new DBUtil();
             if(!db.openConnection())
@@ -132,12 +132,11 @@ public class CustomerDAO  implements iCustomerDAO {
                     Customer customer = new Customer();
                     customer.setID(rst.getInt("cus_id"));
                     customer.setName(rst.getString("cus_name"));
-                    customer.setTel(rst.getString("cus_telnum"));
+                    customer.setTel(rst.getString("cus_tel"));
                     customer.setEmail(rst.getString("cus_email"));
                     customer.setPwd(rst.getString("cus_pwd"));
                     customer.setImg(rst.getString("cus_img"));
                     customer.setImg_bg(rst.getString("cus_img_bg"));
-                    customer.setAddress(rst.getString("cus_address"));
 
                     customerList.add(customer);
                 }

@@ -16,8 +16,8 @@ public class MessagesDAO implements iMessagesDAO {
         int result=0;
         try
         {
-            String sql="INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text)"
-                    + " values('" + messages.getName() + "','"+ messages.getImg() +"','" + messages.getTitle() + "', '" + messages.getEmail() + "', '" + messages.getTime() + "', '" + messages.getText() + "' )";
+            String sql="insert into messages (message_send_name, message_send_tel, message_accept_name, message_accept_tel, message_send_user_img, message_time, message_text)"
+                    + " values('" + messages.getMessage_send_name() + "','"+ messages.getMessage_send_tel() +"','" + messages.getMessage_accept_name() + "', '" + messages.getMessage_accept_tel() + "', '" + messages.getMessage_send_user_img() + "', '" + messages.getMessage_time() + "','"+ messages.getMessage_text() +"' )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
@@ -61,20 +61,20 @@ public class MessagesDAO implements iMessagesDAO {
 
     @SuppressWarnings("finally")
     @Override
-    public List<Messages> select(String customerEmail,String method)
+    public List<Messages> select(String customerTel,String method)
     {
         DBUtil db=null;
-        List<Messages> customerList=null;
-        customerList=new LinkedList<Messages>();
+        List<Messages> messagesList=null;
+        messagesList=new LinkedList<Messages>();
         try
         {
-            customerEmail.trim();
+            customerTel.trim();
             String sql = null;
             System.out.println("method:" + method);
             if(method.equalsIgnoreCase("search")){
-                sql="select * from messages where message_title like '%" + customerEmail + "%'";
+                sql="select * from messages where message_accept_tel like '%" + customerTel + "%'";
             }else if (method.equalsIgnoreCase("searchByEmail")){
-                sql="select * from messages where message_email like '" + customerEmail + "'";
+                sql="select * from messages where message_accept_tel like '" + customerTel + "'";
             }
             db=new DBUtil();
             if(!db.openConnection())
@@ -89,13 +89,15 @@ public class MessagesDAO implements iMessagesDAO {
                 {
                     Messages messages = new Messages();
                     messages.setID(rst.getInt("message_id"));
-                    messages.setName(rst.getString("message_name"));
-                    messages.setImg(rst.getString("message_user_img"));
-                    messages.setTitle(rst.getString("message_title"));
-                    messages.setEmail(rst.getString("message_email"));
-                    messages.setTime(rst.getString("message_time"));
-                    messages.setText(rst.getString("message_text"));
-                    customerList.add(messages);
+                    messages.setMessage_send_name(rst.getString("message_send_name"));
+                    messages.setMessage_send_tel(rst.getString("message_send_tel"));
+                    messages.setMessage_accept_name(rst.getString("message_accept_name"));
+                    messages.setMessage_accept_tel(rst.getString("message_accept_tel"));
+                    messages.setMessage_time(rst.getString("message_time"));
+                    messages.setMessage_send_user_img(rst.getString("message_send_user_img"));
+                    messages.setMessage_text(rst.getString("message_text"));
+
+                    messagesList.add(messages);
                 }
             }
             db.close(rst);
@@ -107,7 +109,7 @@ public class MessagesDAO implements iMessagesDAO {
         }
         finally
         {
-            return customerList;
+            return messagesList;
         }
     }
 }

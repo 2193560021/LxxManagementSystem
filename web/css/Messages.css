@@ -13,7 +13,9 @@
 }
 .messages_card_list{
 
-    background: #ffe3e3;
+    /*background: #ffe3e3;*/
+    background: #fff;
+
     height: 130px;
     border-radius: 20px;
 }

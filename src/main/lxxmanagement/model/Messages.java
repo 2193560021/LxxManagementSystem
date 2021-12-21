@@ -3,26 +3,27 @@ package main.lxxmanagement.model;
 public class Messages {
 
     private int id=0      ;
-    private String name="" ;
-    private String img="" ;
-    private String title="" ;
-    private String Email="";
-    private String time="";
-    private String text="";
+    private String message_send_name="" ;
+    private String message_send_tel="" ;
+    private String message_accept_name="" ;
+    private String message_accept_tel="";
+    private String message_time="";
+    private String message_send_user_img="";
+    private String message_text="";
+
+    public Messages(int id, String message_send_name, String message_send_tel, String message_accept_name, String message_accept_tel, String message_time, String message_send_user_img, String message_text) {
+        this.id = id;
+        this.message_send_name = message_send_name;
+        this.message_send_tel = message_send_tel;
+        this.message_accept_name = message_accept_name;
+        this.message_accept_tel = message_accept_tel;
+        this.message_time = message_time;
+        this.message_send_user_img = message_send_user_img;
+        this.message_text = message_text;
+    }
 
     public Messages(){
         id = 0;
-    }
-    public Messages(int ID, String name,String img, String title, String email, String time, String text){
-        this.id = ID;
-        this.title = title;
-        this.name=name;
-        this.img=img;
-        this.Email = email;
-        this.time = time;
-        this.text = text;
-
-
     }
 
     public int getId() {
@@ -39,52 +40,63 @@ public class Messages {
         return id;
     }
 
-    public void setTitle(String tel){
-        this.title=tel;
+
+    public String getMessage_send_name() {
+        return message_send_name;
     }
 
-    public String getTitle(){
-        return title;
+    public void setMessage_send_name(String message_send_name) {
+        this.message_send_name = message_send_name;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public String getMessage_send_tel() {
+        return message_send_tel;
     }
 
-    public String getName(){
-        return name;
+    public void setMessage_send_tel(String message_send_tel) {
+        this.message_send_tel = message_send_tel;
     }
 
-    public void setImg(String img){
-        this.img=img;
+    public String getMessage_accept_name() {
+        return message_accept_name;
     }
 
-    public String getImg(){
-        return img;
+    public void setMessage_accept_name(String message_accept_name) {
+        this.message_accept_name = message_accept_name;
     }
 
-    public void setEmail(String count){
-        this.Email=count;
+    public String getMessage_accept_tel() {
+        return message_accept_tel;
     }
 
-    public String getEmail(){
-        return Email;
-    }
-    public void setTime(String pwd){
-        this.time=pwd;
+    public void setMessage_accept_tel(String message_accept_tel) {
+        this.message_accept_tel = message_accept_tel;
     }
 
-    public String getTime(){
-        return time;
+    public String getMessage_time() {
+        return message_time;
     }
 
-    public void setText(String pwd){
-        this.text=pwd;
+    public void setMessage_time(String message_time) {
+        this.message_time = message_time;
     }
 
-    public String getText(){
-        return text;
+    public String getMessage_send_user_img() {
+        return message_send_user_img;
     }
+
+    public void setMessage_send_user_img(String message_send_user_img) {
+        this.message_send_user_img = message_send_user_img;
+    }
+
+    public String getMessage_text() {
+        return message_text;
+    }
+
+    public void setMessage_text(String message_text) {
+        this.message_text = message_text;
+    }
+
 
 
 }

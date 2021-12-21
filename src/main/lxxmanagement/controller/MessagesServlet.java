@@ -40,21 +40,23 @@ public class MessagesServlet extends HttpServlet
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Messages customer=null;
+        Messages messages=null;
         int id=0;
         try
         {
-            String name=request.getParameter("messagename");
-            String img=request.getParameter("messageimg");
-            String title=request.getParameter("messagetitle");
-            String email=request.getParameter("messageemail");
-            String time=request.getParameter("messagetime");
-            String text=request.getParameter("messagetext");
-            customer=new Messages(id,name,img, title, email,time,text);
+            String message_send_name=request.getParameter("message_send_name");
+            String message_send_tel=request.getParameter("message_send_tel");
+            String message_accept_name=request.getParameter("message_accept_name");
+            String message_accept_tel=request.getParameter("message_accept_tel");
+            String message_time=request.getParameter("message_time");
+            String message_send_user_img=request.getParameter("message_send_user_img");
+            String message_text=request.getParameter("message_text");
+            messages=new Messages( id,  message_send_name,  message_send_tel,  message_accept_name,  message_accept_tel,  message_time,  message_send_user_img,  message_text);
+
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            if(new MessagesSrv().add(customer) == 1)
+            if(new MessagesSrv().add(messages) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
@@ -91,10 +93,10 @@ public class MessagesServlet extends HttpServlet
     {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
-        String name=request.getParameter("name");
+        String message_accept_tel=request.getParameter("message_accept_tel");
         String method=request.getParameter("method");
         List<Messages> result=null;
-        result=new MessagesSrv().Fetch(name ,method);
+        result=new MessagesSrv().Fetch(message_accept_tel ,method);
         String jsonStr="";
         try
         {
@@ -104,12 +106,14 @@ public class MessagesServlet extends HttpServlet
             {
                 json=new JSONObject();
                 json.put("id", s.getID());
-                json.put("name", s.getName());
-                json.put("img", s.getImg());
-                json.put("title", s.getTitle());
-                json.put("email", s.getEmail());
-                json.put("time", s.getTime());
-                json.put("text", s.getText());
+                json.put("message_send_name", s.getMessage_send_name());
+                json.put("message_send_tel", s.getMessage_send_tel());
+                json.put("message_accept_name", s.getMessage_accept_name());
+                json.put("message_accept_tel", s.getMessage_accept_tel());
+                json.put("message_time", s.getMessage_time());
+                json.put("message_send_user_img", s.getMessage_send_user_img());
+                json.put("message_text", s.getMessage_text());
+
                 array.put(json);
             }
             jsonStr=array.toString();

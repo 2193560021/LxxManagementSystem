@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/Sign.css">
+    <link rel="stylesheet" href="../css/public/animate.min.css">
+    <script src="../js/Sign.js"></script>
+</head>
+<body>
+    <section>
+        <br>
+        <div class="container animated bounceInDown left" >
+            <div class="user signinBx">
+                <div class="imgBx">
+                    <img src="http://www.lyylxx125420.xyz/LX/lxlyy.jpg" height="1080" width="1920"/></div>
+
+                <div class="formBx">
+                    <form>
+                        <img src="../img/logo/logo_black.png" alt="" width="110" height="110">
+
+                        <h1>登  录</h1>
+                        <input type="text" id="emailOrTel" name="emailOrTel" placeholder="电话号码/邮箱地址" autofocus >
+                        <input type="password" id="password" name="password" placeholder="密码">
+                        <input type="button" id="bt1" value="登 录" onclick="search()">
+                        <p class="signup">还没有账户？ <a href="#" onclick="toggleForm();">去注册</a></p>
+                    </form>
+                </div>
+            </div>
+            <div class="user signupBx">
+                <div class="formBx">
+                    <form id="form_signUp">
+                        <h1>创建账户</h1>
+                        <input type="hidden" id="type" name="type" value="add">
+
+                        <input type="text" id="customername" name="customername" placeholder="用户名" onblur="checkName()">
+                        <input type="text" id="customertel" name="customertel" placeholder="电话号码" onblur="checkTel()">
+                        <input type="text" id="customeremail" name="customeremail" placeholder="邮箱地址" onblur="checkMail()">
+                        <input type="password" id="customerpwd" name="customerpwd" placeholder="密码，6-20位" onblur="checkPwd()">
+                        <input type="password" id="customercfmpwd" name="customercfmpwd" placeholder="确认密码" onblur="checkcfmpwd()">
+                        <input type="button" value="注 册" onclick="check()">
+                        <p class="signup">已经有账户了？ <a href="#" onclick="toggleForm();">登录</a></p>
+                    </form>
+                </div>
+                <div class="imgBx">
+                    <img src="http://www.lyylxx125420.xyz/LX/bj.jpg" height="1080" width="1920"/></div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleForm(){
+            section = document.querySelector('section');
+            container = document.querySelector('.container');
+            container.classList.toggle('active');
+            section.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
