@@ -189,11 +189,11 @@ public class CustomerServlet  extends HttpServlet
     {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
-        String name=request.getParameter("name");
+        String tel=request.getParameter("tel");
         String method=request.getParameter("method");
         String path="";
         List<Customer> result=null;
-        result=new CustomerSrv().Fetch(name,method,path);
+        result=new CustomerSrv().Fetch(tel,method,path);
         String jsonStr="";
         try
         {

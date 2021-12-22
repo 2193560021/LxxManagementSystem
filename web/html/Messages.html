@@ -31,10 +31,15 @@
   <script src="../js/public/vue.min.js"></script>
   <script src="../js/public/axios.min.js"></script>
 
+  <script src="../js/Cookie_search.js"></script>
   <script src="../js/Messages.js"></script>
-
 </head>
 <body>
+  <div>
+    <input type="hidden" id="user_name">
+    <input type="hidden" id="user_tel">
+
+  </div>
 <div class="sidebar shadow">
   <div class="logo_content">
     <div class="logo">
@@ -45,7 +50,7 @@
   </div>
   <ul class="nav_list">
     <li class="active">
-      <a href="#">
+      <a href="index.html">
         <i class='fa fa-home fa-3x' ></i>
         <span class="links_name">首页</span>
       </a>
@@ -66,7 +71,7 @@
       <span class="tooltip">快递</span>
     </li>
     <li>
-      <a href="Messages.html" id="active" class="shadow">
+      <a href="#" id="active" class="shadow">
         <i class='fa fa-comments' ></i>
         <span class="links_name">消息</span>
       </a>
@@ -102,15 +107,15 @@
     </li>
   </ul>
   <div class="profile_content">
-    <div class="profile">
+    <div id="profile" class="profile">
       <div class="profile_details">
-        <img src="profile.jpg" alt="">
+        <img src="../img/user_img/profile.jpg" id="user_img" alt="">
         <div class="name_job">
-          <div class="name">Prem Shahi</div>
-          <div class="job">Web Designer</div>
+          <div id="name" class="name"></div>
+          <div id="tel" class="tel"></div>
         </div>
       </div>
-      <i class='bx bx-log-out' id="log_out" ></i>
+      <i id="log_out" ></i>
     </div>
   </div>
 </div>
@@ -119,7 +124,7 @@
 <!--入驻花博士店家信息-->
 <div class="home_content">
   <div class="row mx-1">
-    <div id="messages_left" class="col-md-7">
+    <div id="messages_left" class="col-xl-7 col-md-12 col-sm-12">
 
       <!--            删除警示-->
       <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
@@ -150,13 +155,8 @@
               <div id="message_left_title" class="col-12">
                 <div class="numbers">
                   <span class="title mb-0 text-capitalize font-weight-bolder">我的消息</span>
-                  <div class="btn-toolbar mb-2 mb-md-0 float-right">
-                    <div class="input-group mr-2">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">搜索</span>
-                      </div>
-                      <input type="text" id="order_search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
-                    </div>
+                  <div class="btn-toolbar mt-2 mb-md-0 float-right">
+                    <span class="text-primary font-weight-bolder" style="font-size: 16px">总计<span id="messages_num"></span>条</span>
                   </div>
                 </div>
                 <!--                                <hr class="col-11">-->
@@ -194,7 +194,28 @@
     </div>
 
 
-    <div id="messages_right" class="col-md-5">
+    <div id="messages_right" class="col-xl-5 col-md-12 col-sm-12">
+
+      <!--发送成功-->
+      <div class="modal fade" id="sendSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="sendSuccessModalLabel">发送成功</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              消息发送成功！
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success"  data-dismiss="modal">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!--            列表-->
       <div class="my-4 col-12">
@@ -208,10 +229,11 @@
                 <!--                                <hr class="col-11">-->
                 <div class="shop_list sales_flower my-3">
                    <form class="form clearfix"  id="form_message">
-                      <input type="hidden" id="user_name" value="未登录用户" name="user_name">
-                      <input type="text" placeholder="收方" class="box" name="message_name">
-                      <textarea name="message_text" class="box" placeholder="内容，请输入..."  cols="30" rows="10"></textarea>
-                      <input type="button" value="发送消息" class="btn btn-primary rounded-pill float-right font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="check_message()">
+                     <select class="form-control" id="accept_name">
+                       <option selected="">请选择收方...</option>
+                     </select>
+                      <textarea id="message_text" name="message_text" class="box" placeholder="内容，请输入..."  cols="30" rows="10"></textarea>
+                      <input type="button" value="发送消息" class="btn btn-primary rounded-pill float-right font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="add()">
                     </form>
                 </div>
               </div>

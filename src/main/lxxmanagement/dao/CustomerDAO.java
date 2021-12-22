@@ -101,7 +101,7 @@ public class CustomerDAO  implements iCustomerDAO {
             method.trim();
             String sql = null;
             if(method.equalsIgnoreCase("search")) {
-                sql="select * from customer where cus_email like '%" + customerEmail + "%'";
+                sql="select * from customer where cus_tel like '%" + customerEmail + "%'";
             }else if(method.equalsIgnoreCase("login")){
                 if(path.equalsIgnoreCase("tel")){
                     sql="select * from customer where cus_tel like '" + customerEmail + "'";
@@ -109,13 +109,10 @@ public class CustomerDAO  implements iCustomerDAO {
                     sql="select * from customer where cus_email like '" + customerEmail + "'";
                 }
             }
-            else if(method.equalsIgnoreCase("byEmail")){
-                sql="select * from customer where cus_email like '" + customerEmail + "'";
-            }
             else if(method.equalsIgnoreCase("method_email")){
                 sql="select * from customer where cus_email like '" + customerEmail + "'";
             }
-            else if(method.equalsIgnoreCase("method_tel")){
+            else if(method.equalsIgnoreCase("byTel")){
                 sql="select * from customer where cus_tel like '" + customerEmail + "'";
             }
             db=new DBUtil();
@@ -137,7 +134,6 @@ public class CustomerDAO  implements iCustomerDAO {
                     customer.setPwd(rst.getString("cus_pwd"));
                     customer.setImg(rst.getString("cus_img"));
                     customer.setImg_bg(rst.getString("cus_img_bg"));
-
                     customerList.add(customer);
                 }
             }

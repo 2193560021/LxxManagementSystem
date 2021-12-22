@@ -33,8 +33,8 @@ function searchComplete() {
         if(req.responseText == "failed"){
             setTimeout(failSignIn, 100);
         } else {
-            setTimeout(SignInSuccess,100);
             document.cookie = "tel=" + req.responseText;
+            setTimeout(SignInSuccess,100);
             console.log(document.cookie);
         }
 
@@ -208,5 +208,5 @@ function SignInSuccess(){
 function successSignIn_animateRemove(){
     card[0].classList.remove("bounce");
     bg[0].classList.remove("success");
-    window.location = "Sign.html";
+    window.location = "html/index.html";
 }

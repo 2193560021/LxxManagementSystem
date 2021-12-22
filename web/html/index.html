@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/public/animate.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/index.js"></script>
+    <script src="../js/Cookie_search.js"></script>
 
 
     <style>
@@ -20,7 +22,7 @@
         }
 
         #active{
-            color: #043a58;
+            color: #11101d;
             background: #fff;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
         }
@@ -171,6 +173,12 @@
 
 </head>
 <body>
+
+<div>
+    <input type="hidden" id="user_name">
+    <input type="hidden" id="user_tel">
+
+</div>
 <div class="sidebar shadow ">
     <div class="logo_content">
         <div class="logo">
@@ -237,6 +245,18 @@
             <span class="tooltip">设置</span>
         </li>
     </ul>
+    <div class="profile_content">
+        <div id="profile" class="profile">
+            <div class="profile_details">
+                <img src="../img/user_img/profile.jpg" id="user_img" alt="">
+                <div class="name_job">
+                    <div id="name" class="name"></div>
+                    <div id="tel" class="tel"></div>
+                </div>
+            </div>
+            <i id="log_out" ></i>
+        </div>
+    </div>
 </div>
 <div class="home_content">
     <div class="text">

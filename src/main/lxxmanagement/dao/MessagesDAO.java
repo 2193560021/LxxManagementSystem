@@ -73,7 +73,7 @@ public class MessagesDAO implements iMessagesDAO {
             System.out.println("method:" + method);
             if(method.equalsIgnoreCase("search")){
                 sql="select * from messages where message_accept_tel like '%" + customerTel + "%'";
-            }else if (method.equalsIgnoreCase("searchByEmail")){
+            }else if (method.equalsIgnoreCase("searchByTel")){
                 sql="select * from messages where message_accept_tel like '" + customerTel + "'";
             }
             db=new DBUtil();

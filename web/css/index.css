@@ -191,10 +191,12 @@ body{
     white-space: nowrap;
     transition: all 0.4s ease;
 }
-.sidebar.active ~ .profile .profile_details{
+.sidebar.active .profile .profile_details{
     opacity: 1;
     pointer-events: auto;
+    cursor: pointer;
 }
+
 .profile .profile_details img{
     height: 45px;
     width: 45px;
@@ -208,7 +210,7 @@ body{
     font-size: 15px;
     font-weight: 400;
 }
-.profile .profile_details .job{
+.profile .profile_details .tel{
     font-size: 12px;
 }
 .profile #log_out{
@@ -223,13 +225,27 @@ body{
     text-align: center;
     transition: all 0.4s ease;
     background: #11101d;
+    color: #11101d;
+    cursor: pointer;
 }
+.profile #log_out:hover{
+    background: #fff;
+}
+
 .sidebar.active .profile #log_out{
     left: 88%;
+    cursor: pointer;
 }
 .sidebar.active .profile #log_out{
     background: none
 }
+
+.sidebar.active .profile #log_out:hover{
+
+    background: #fff;
+}
+
+
 .home_content{
     /*position: absolute;*/
     height: 100%;
