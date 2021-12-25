@@ -63,3 +63,12 @@
     height: 15rem;
     resize: none;
 }
+
+
+@media screen and (min-width: 1200px) {
+    #messages_right{
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+}

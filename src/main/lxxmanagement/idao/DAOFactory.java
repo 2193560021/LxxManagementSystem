@@ -10,6 +10,8 @@ public class DAOFactory
 
     private static iMessagesDAO messDao;
 
+    private static iExpressagesDAO expressagesDAO;
+
     public static synchronized iCustomerDAO creatCustomerDAO()
     {
         if(null == cusDao)
@@ -23,5 +25,12 @@ public class DAOFactory
         if(null == messDao)
             messDao=new MessagesDAO();
         return messDao;
+    }
+
+    public static synchronized iExpressagesDAO creatExpressagesDAO()
+    {
+        if(null == expressagesDAO)
+            expressagesDAO=new ExpressagesDAO();
+        return expressagesDAO;
     }
 }

@@ -20,24 +20,29 @@ CREATE TABLE `customer`(
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Table structure for flowers
+-- Table structure for expressages
 -- ----------------------------
-DROP TABLE IF EXISTS `flowers`;
-DROP TABLE IF EXISTS `flowers`;
-CREATE TABLE `flowers`  (
-  `flower_id` int(11) NOT NULL AUTO_INCREMENT,
-  `flower_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_kind` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_introduction` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_image1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_image2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_image3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_image4` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `flower_price` int(5) DEFAULT NULL,
-  `flower_sale` int (5) DEFAULT 0,
-  `flower_stock` int (5) DEFAULT 1000,
-  PRIMARY KEY (`flower_id`) USING BTREE
+DROP TABLE IF EXISTS `expressages`;
+DROP TABLE IF EXISTS `expressages`;
+CREATE TABLE `expressages`  (
+  `expressage_id` int(11) NOT NULL AUTO_INCREMENT,
+  `expressage_code` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `expressage_company` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `expressage_time` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `expressage_yes_time` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `expressage_owner_tel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `expressage_status` int (5) DEFAULT 0,
+  PRIMARY KEY (`expressage_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+
+
+
+insert into expressages(expressage_code, expressage_company, expressage_time, expressage_yes_time, expressage_owner_tel) values
+('14-2-5680','中通快递&../img/Expressage_img/ztkd.png','2021-12-23 15:29','2021-12-24 11:55','13279505680');
+
+insert into expressages(expressage_code, expressage_company, expressage_time, expressage_yes_time, expressage_owner_tel,expressage_status) values
+('A-2-8966','圆通速递&../img/Expressage_img/ytsd.png','2021-12-22 13:17','2021-12-24 15:31','13279505680',1);
+
 
 -- ----------------------------
 -- Table structure for plants
