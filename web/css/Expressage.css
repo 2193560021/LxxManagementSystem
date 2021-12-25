@@ -71,3 +71,102 @@
     color: #71040f;
     font-weight: bolder;
 }
+
+/*右侧*/
+#DocFlower{
+    height: 200px;
+    background: #d4237a;
+    border-radius: 10px;
+    text-align: center;
+    transition: .3s;
+}
+#DocFlower:hover{
+
+    background: #970b50;
+}
+#tb{
+
+    height: 200px;
+    width: 49%;
+    background: #ff7224;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    transition: .3s;
+}
+#tb:hover{
+
+    background: #bf4a0a;
+}
+#jd{
+    width: 49%;
+    height: 200px;
+    background: #cb0507;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    transition: .3s;
+}
+#jd:hover{
+
+    background: #a00204;
+}
+
+
+#wph{
+
+    height: 200px;
+    width: 49%;
+    background: #f10180;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    transition: .3s;
+}
+#wph:hover{
+
+    background: #bd0164;
+}
+#tm{
+    width: 49%;
+    height: 200px;
+    background: #cb0507;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    transition: .3s;
+}
+#tm:hover{
+
+    background: #a00608;
+}
+
+
+#sn{
+
+    height: 200px;
+    width: 49%;
+    background: #f7b401;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    transition: .3s;
+}
+#sn:hover{
+
+    background: #bd8b00;
+}
+
+#dw{
+    width: 49%;
+    height: 200px;
+    background: #333;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    transition: .3s;
+}
+#dw:hover{
+
+    background: #111;
+}

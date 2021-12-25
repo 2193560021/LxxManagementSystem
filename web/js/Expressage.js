@@ -114,6 +114,10 @@ function searchAllComplete(){
                 "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
 
         }
+    }else {
+        document.getElementById("expressage_yes_list").setAttribute("style","display:none")
+        document.getElementById("expressage_list_main").innerHTML =
+            "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
     }
 }
 
