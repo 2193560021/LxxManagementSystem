@@ -58,19 +58,21 @@ function searchAllComplete(){
                 '                    </div>\n' +
                 '                  </div>'
             }
-        }else {
-            document.getElementById("messages_num").innerHTML = "0"
-            document.getElementById("messages_list").style.height = 200
-            document.getElementById("messages_list").innerHTML =
-                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>😭你没人爱了，一条消息都没有</p> "
         }
+        // else {
+        //     document.getElementById("messages_num").innerHTML = "0"
+        //     document.getElementById("messages_list").style.height = 200
+        //     document.getElementById("messages_list").innerHTML =
+        //         "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>😭你没人爱了，一条消息都没有</p> "
+        // }
         searchAccept()
-    }else {
-        document.getElementById("messages_num").innerHTML = "0"
-        document.getElementById("messages_list").style.height = 200
-        document.getElementById("messages_list").innerHTML =
-            "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>😭你没人爱了，一条消息都没有</p> "
     }
+    // else {
+    //     document.getElementById("messages_num").innerHTML = "0"
+    //     document.getElementById("messages_list").style.height = 200
+    //     document.getElementById("messages_list").innerHTML =
+    //         "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>😭你没人爱了，一条消息都没有</p> "
+    // }
 }
 
 function searchAccept(){

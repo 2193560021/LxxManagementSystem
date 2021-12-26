@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/public/animate.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/Messages.css">
+  <link rel="stylesheet" href="../css/Notes.css">
 
   <style>
     #active{
@@ -33,7 +33,7 @@
   <script src="../js/public/axios.min.js"></script>
 
   <script src="../js/Cookie_search.js"></script>
-  <script src="../js/Messages.js"></script>
+  <script src="../js/Notes.js"></script>
 </head>
 <body>
   <div>
@@ -72,14 +72,14 @@
       <span class="tooltip">快递</span>
     </li>
     <li>
-      <a href="#" id="active" class="shadow">
+      <a href="Messages.html">
         <i class='fa fa-comments' ></i>
         <span class="links_name">消息</span>
       </a>
       <span class="tooltip">消息</span>
     </li>
     <li>
-      <a href="Notes.html">
+      <a href="#"  id="active" class="shadow">
         <i class='fa fa-align-left' ></i>
         <span class="links_name">记事</span>
       </a>
@@ -155,7 +155,7 @@
             <div class="row">
               <div id="message_left_title" class="col-12">
                 <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">我的消息</span>
+                  <span class="title mb-0 text-capitalize font-weight-bolder">我的待办</span>
                   <div class="btn-toolbar mt-2 mb-md-0 float-right">
                     <span class="text-primary font-weight-bolder" style="font-size: 16px">总计<span id="messages_num"></span>条</span>
                   </div>
@@ -163,7 +163,28 @@
                 <!--                                <hr class="col-11">-->
                   <input type="hidden" id="message_accept_tel" value="">
                 <div id="messages_list" class="messages_list my-3 p-2">
+<!--                    -->
+                  <div class="messages_card_list mx-auto sales_flower mx-1 shadow row mb-3">
+                    <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 text-center">
+                      <img src="../img/profile.jpg" alt="" class="messages_card_list_img rounded-circle mt-2">
+                      <span class="mx-auto text-center font-weight-bolder mt-1">刘小璇</span>
+                    </div>
+                    <div class="col-xl-10 messages_card_content mt-2 mb-2 pt-2">
+                      <span class="messages_card_content_text mx-auto text-center font-weight-bolder mt-3">我叫刘小璇，你好呀~</span>
+                      <span class="messages_card_content_time mx-auto text-center font-weight-bolder mt-3">2021-12-19 11:52</span>
+                    </div>
+                  </div>
 
+                  <div class="messages_card_list mx-auto sales_flower mx-1 shadow row mb-3">
+                    <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 text-center">
+                      <img src="../img/profile.jpg" alt="" class="messages_card_list_img rounded-circle mt-2">
+                      <span class="mx-auto text-center font-weight-bolder mt-1">刘小璇</span>
+                    </div>
+                    <div class="col-xl-10 messages_card_content mt-2 mb-2 pt-2">
+                      <span class="messages_card_content_text mx-auto text-center font-weight-bolder mt-3">我叫刘小璇，你好呀~</span>
+                      <span class="messages_card_content_time mx-auto text-center font-weight-bolder mt-3">2021-12-19 11:52</span>
+                    </div>
+                  </div>
 
                 </div>
               </div>
