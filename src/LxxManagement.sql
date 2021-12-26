@@ -45,21 +45,26 @@ insert into expressages(expressage_code, expressage_company, expressage_time, ex
 
 
 -- ----------------------------
--- Table structure for plants
+-- Table structure for Orders
 -- ----------------------------
-DROP TABLE IF EXISTS `plants`;
-CREATE TABLE `plants`  (
-       `plant_id` int(11) NOT NULL AUTO_INCREMENT,
-       `plant_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-       `plant_introduction` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-       `plant_image1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-       `plant_image2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-       `plant_price` int(5) DEFAULT NULL,
-       `plant_sale` int (5) DEFAULT 0,
-       `plant_stock` int (5) DEFAULT 1000,
-       PRIMARY KEY (`plant_id`) USING BTREE
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+       `order_id` int(11) NOT NULL AUTO_INCREMENT,
+       `order_text` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+       `order_kind` int(5) DEFAULT NULL comment '0为支出，1为收入',
+       `order_amount` float(11) DEFAULT NULL,
+       `order_amount_sum` float(11) DEFAULT 0,
+       `order_owner_tel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+       `order_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+
+       PRIMARY KEY (`order_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
+
+insert into `orders`(order_text, order_kind, order_amount, order_amount_sum, order_owner_tel, order_time) VALUES
+('充饭卡','0','100','19900','13279505680','2021-12-26 14:39');
+insert into `orders`(order_text, order_kind, order_amount, order_amount_sum, order_owner_tel, order_time) VALUES
+('发工资','1','20000','20000','13279505680','2021-12-25 07:04');
 
 
 -- ----------------------------

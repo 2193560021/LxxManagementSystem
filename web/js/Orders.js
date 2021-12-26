@@ -26,7 +26,7 @@ function getCurrentDate() {
 
 
 function searchAll(){
-    var url = "../ExpressagesServlet"
+    var url = "../OrdersServlet"
     if (window.XMLHttpRequest)
         req = new XMLHttpRequest();
     else if (window.ActiveXObject)
@@ -35,89 +35,74 @@ function searchAll(){
         req.open("post", url, true);
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         req.onreadystatechange = searchAllComplete;
-        req.send("type=search&method=searchByTel&expressage_owner_tel=" + getCookie("tel"));
+        req.send("type=search&method=searchByTel&order_owner_tel=" + getCookie("tel"));
     }
 }
 
 function searchAllComplete(){
     if(req.readyState === 4 && req.status === 200){
         var json =  JSON.parse(req.responseText);//转换为json对象
+        document.getElementById("orders_num").innerText = 0
+        document.getElementById("orders_0").innerText = 0
+        document.getElementById("orders_1").innerText = 0
 
-        document.getElementById("expressages_num").innerText = 0
-        document.getElementById("expressages_0").innerText = 0
-        document.getElementById("expressages_1").innerText = 0
+
+        document.getElementById("order_list_main").innerHTML = ""
 
         if(json.length > 0){
 
-            document.getElementById("expressages_num").innerHTML = json.length
-            document.getElementById("expressage_list_main").innerHTML = ""
-            document.getElementById("expressage_yes_list_main").innerHTML = ""
-            let b=0
             for(let i=0; i < json.length; i++) {
-                if(json[i].expressage_status === "0"){
-                    document.getElementById("expressages_0").innerText = parseInt(parseInt(document.getElementById("expressages_0").innerText) + 1);
 
 
 
-                    document.getElementById("expressage_list_main").innerHTML +=
-                        '<div class="expressage_card_list mx-auto sales_flower mx-1 shadow row mb-3">\n' +
-                        '                <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 pt-1 text-center">\n' +
-                        '                  <img src="../img/Expressage_img/'+ json[i].expressage_company.split("&")[1] +'" alt="" class="expressage_card_list_img mt-4 mb-1">\n' +
-                        '                  <span class="mx-auto text-center font-weight-bolder ">'+ json[i].expressage_company.split("&")[0] +'</span>\n' +
-                        '                </div>\n' +
-                        '                <div class="col-xl-10 col-md-10 col-sm-10 expressage_card_content text-center pt-5 pb-4">\n' +
-                        '                  <span class="expressage_card_content_code mx-auto font-weight-bolder">'+ json[i].expressage_code +'</span>\n' +
-                        '                  <span class="expressage_card_content_other mx-auto text-center font-weight-bolder mt-2"><span class="expressage_card_content_time">'+ json[i].expressage_time +'</span>\n' +
-                        '                  <i class="fa fa-check  fa-lg mx-1 expressage_check"  data-toggle="modal" data-target="#checkModal" onclick="check('+ json[i].expressage_id +')"></i>\n' +
-                        '                  <i class="fa fa-trash-o fa-lg mx-1 expressage_delete" data-toggle="modal" data-target="#delModal" onclick="del('+ json[i].expressage_id +')"></i>\n' +
-                        '                  </span>\n' +
-                        '                </div>\n' +
+                if(json[i].order_kind == "0"){
+
+
+                    document.getElementById("orders_0").innerText = parseFloat(parseFloat(document.getElementById("orders_0").innerText) + json[i].order_amount).toFixed(2);
+
+
+                    let kind = "-"
+                    document.getElementById("order_list_main").innerHTML +=
+                        '<div id="order_'+ i +'" class="col-xl-12 col-md-12 col-sm-12 order_list alert-danger sales_flower mb-3 p-2">\n' +
+                        '                <h2 class="col-12 font-weight-bolder my-3 clearfix">' + json[i].order_text +
+                        '\n' +
+                        '                  <span class="float-right" style="font-size: 16px">'+ json[i].order_time +'</span>\n' +
+                        '                </h2>\n' +
+                        '                <h1 class="col-12 text-center">'+ kind + json[i].order_amount.toFixed(2) +'</h1>\n' +
+                        '                <h4 class="col-12 text-right">余额：<span class="order_amount_sum_new">'+ json[i].order_amount_sum.toFixed(2)  +'</span>\n' +
+                        '                  <i class="fa fa-trash-o fa-lg mx-1 order_delete" data-toggle="modal" data-target="#delModal" onclick="del('+ json[i].order_id +')"></i>\n' +
+                        '                </h4>\n' +
                         '              </div>'
+                }else if(json[i].order_kind == "1"){
 
-                }else if(json[i].expressage_status === "1"){
+                    document.getElementById("orders_1").innerText = parseFloat(parseFloat(document.getElementById("orders_1").innerText) + json[i].order_amount).toFixed(2);
 
-
-                    document.getElementById("expressages_1").innerText = parseInt(parseInt(document.getElementById("expressages_1").innerText) + 1);
-
-
-                    document.getElementById("expressage_yes_list").setAttribute("style","")
-
-
-                    document.getElementById("expressage_yes_list_main").innerHTML +=
-                        '              <div class="expressage_card_list mx-auto sales_flower mx-1 shadow row mb-3">\n' +
-                        '                <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 pt-1 text-center">\n' +
-                        '                  <img src="../img/Expressage_img/'+ json[i].expressage_company.split("&")[1] +'" alt="" class="expressage_card_list_img mt-4 mb-1">\n' +
-                        '                  <span class="mx-auto text-center font-weight-bolder ">'+ json[i].expressage_company.split("&")[0] +'</span>\n' +
-                        '                </div>\n' +
-                        '                <div class="col-xl-10 col-md-10 col-sm-10 expressage_card_content text-center py-4">\n' +
-                        '                  <span class="expressage_card_content_code mx-auto font-weight-bolder ">'+ json[i].expressage_code +'</span>\n' +
-                        '                  <span class="expressage_card_content_other mx-auto text-center font-weight-bolder mt-3"><span class="expressage_card_content_time">'+ json[i].expressage_yes_time +'</span>\n' +
-                        '                  <i class="fa fa-repeat  fa-lg mx-1 expressage_repeat" data-toggle="modal" data-target="#repeatModal"  onclick="repeat('+ json[i].expressage_id +')"></i>\n' +
-                        '                  <i class="fa fa-trash-o fa-lg mx-1 expressage_delete" data-toggle="modal" data-target="#delModal" onclick="del('+ json[i].expressage_id +')"></i>\n' +
-                        '                  </span>\n' +
-                        '                </div>\n' +
+                    let kind = "+"
+                    document.getElementById("order_list_main").innerHTML +=
+                        '<div id="order_'+ i +'"  class="col-xl-12 col-md-12 col-sm-12 order_list alert-success sales_flower mb-3 p-2">\n' +
+                        '                <h2 class="col-12 font-weight-bolder my-3 clearfix">' + json[i].order_text +
+                        '\n' +
+                        '                  <span class="float-right" style="font-size: 16px">'+ json[i].order_time +'</span>\n' +
+                        '                </h2>\n' +
+                        '                <h1 class="col-12 text-center">'+ kind + json[i].order_amount.toFixed(2) +'</h1>\n' +
+                        '                <h4 class="col-12 text-right">余额：<span class="order_amount_sum_new">'+ json[i].order_amount_sum.toFixed(2)  +'</span>\n' +
+                        '                  <i class="fa fa-trash-o fa-lg mx-1 order_delete" data-toggle="modal" data-target="#delModal" onclick="del('+ json[i].order_id +')"></i>\n' +
+                        '                </h4>\n' +
                         '              </div>'
                 }
-
-
-                if(document.getElementById("expressages_0").innerHTML === "0"){
-                    document.getElementById("expressage_list_main").innerHTML =
-                        "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
-
-                }
-
 
             }
+
+            document.getElementById("orders_num").innerText = parseFloat(parseFloat(document.getElementById("orders_1").innerText) - parseFloat(document.getElementById("orders_0").innerText))
+
         }else {
-            document.getElementById("expressage_yes_list").setAttribute("style","display:none")
-            document.getElementById("expressage_list_main").innerHTML =
-                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
+            document.getElementById("order_list_main").innerHTML =
+                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去添加账单...</p> "
 
         }
     }else {
-        document.getElementById("expressage_yes_list").setAttribute("style","display:none")
-        document.getElementById("expressage_list_main").innerHTML =
-            "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
+        document.getElementById("order_list_main").innerHTML =
+            "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去添加账单...</p> "
     }
 }
 
@@ -125,7 +110,7 @@ function searchAllComplete(){
 function del(id){
     $("#delConfirm").click(function (){
 
-        var url = "../ExpressagesServlet";
+        var url = "../OrdersServlet";
         if (window.XMLHttpRequest)
             req = new XMLHttpRequest();
         else if (window.ActiveXObject)
@@ -178,31 +163,60 @@ function delAllComplete(){
 
 function add(){
 
-    var url = "../ExpressagesServlet"
-    if (window.XMLHttpRequest)
-        req = new XMLHttpRequest();
-    else if (window.ActiveXObject)
-        req = new ActiveXObject("Microsoft.XMLHTTP");
-    if (req) {
-        req.open("post", url, true);
-        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req.onreadystatechange = addComplete;
-        req.send("type=add&expressage_code="
-            +encodeURIComponent(document.getElementById("expressage_code").value)
-            +"&expressage_company="
-            +encodeURIComponent(document.getElementById("expressage_company_name").value)
-            +"&expressage_time="
-            +encodeURIComponent(getCurrentDate())
-            +"&expressage_owner_tel="
-            +encodeURIComponent(getCookie("tel"))
+    if(document.getElementById("order_kind").value == "请选择收支类别"){
+        document.getElementById("sendSuccessModalLabel").innerHTML = "<span class='text-danger'>添加失败</span>"
+        document.getElementById("modal_body").innerHTML = "请选择收支类别后再添加"
+        document.getElementById("modal_btn").classList.remove("btn-success")
+        document.getElementById("modal_btn").classList.add("btn-danger")
 
-        )
+        return false;
+    }else if(document.getElementById("order_amount").value == "" || document.getElementById("order_text").value == ""){
+        document.getElementById("sendSuccessModalLabel").innerHTML = "<span class='text-danger'>添加失败</span>"
+        document.getElementById("modal_body").innerHTML = "请填写金额和标题"
+        document.getElementById("modal_btn").classList.remove("btn-success")
+        document.getElementById("modal_btn").classList.add("btn-danger")
+        return false;
+    }else {
+
+
+
+
+        var url = "../OrdersServlet"
+        if (window.XMLHttpRequest)
+            req = new XMLHttpRequest();
+        else if (window.ActiveXObject)
+            req = new ActiveXObject("Microsoft.XMLHTTP");
+        if (req) {
+            req.open("post", url, true);
+            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            req.onreadystatechange = addComplete;
+            req.send("type=add&order_text="
+                +encodeURIComponent(document.getElementById("order_text").value)
+                +"&order_kind="
+                +document.getElementById("order_kind").value
+                +"&order_amount="
+                +document.getElementById("order_amount").value
+                +"&order_amount_sum_new="
+                +document.getElementById("order_0").getElementsByClassName("order_amount_sum_new")[0].innerHTML
+                +"&order_owner_tel="
+                +encodeURIComponent(getCookie("tel"))
+                +"&order_time="
+                +encodeURIComponent(getCurrentDate())
+
+            )
+        }
     }
 }
 
 function addComplete(){
     if(req.readyState === 4 && req.status === 200){
-        document.getElementById("expressage_code").value = ''
+
+        document.getElementById("sendSuccessModalLabel").innerHTML = "添加成功"
+        document.getElementById("modal_body").innerHTML = "消费记录添加成功！"
+        document.getElementById("modal_btn").classList.remove("btn-danger")
+        document.getElementById("modal_btn").classList.add("btn-success")
+        document.getElementById("order_text").value = ""
+        document.getElementById("order_amount").value = ""
         searchAll()
     }
 }

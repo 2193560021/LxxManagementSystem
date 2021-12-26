@@ -2,14 +2,14 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>消息</title>
+  <title>账单</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/public/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/public/animate.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/Expressage.css">
+  <link rel="stylesheet" href="../css/Orders.css">
 
   <style>
     #active{
@@ -33,7 +33,7 @@
   <script src="../js/public/axios.min.js"></script>
 
   <script src="../js/Cookie_search.js"></script>
-  <script src="../js/Expressage.js"></script>
+  <script src="../js/Orders.js"></script>
 </head>
 <body>
   <div>
@@ -124,7 +124,7 @@
 
 <div class="home_content">
   <div class="row mx-1 clearfix">
-    <div id="expressage_left" class=" col-xl-6 col-md-6 col-sm-12">
+    <div id="expressage_left" class=" col-xl-12 col-md-12 col-sm-12">
 
       <!--            删除警示-->
       <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
@@ -137,7 +137,7 @@
               </button>
             </div>
             <div class="modal-body">
-              确认删除该快递？
+              确认删除此笔消费记录？
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -147,26 +147,6 @@
         </div>
       </div>
 
-
-      <div class="modal fade" id="delAllModal" tabindex="-1" aria-labelledby="delAllModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="delAllModalLabel">确认删除</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              确认删除所有已取快递？
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delAllConfirm">确认删除</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <!--发送成功-->
@@ -179,58 +159,16 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              快递添加成功！
+            <div id="modal_body" class="modal-body">
+              消费记录添加成功！
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success"  data-dismiss="modal">确定</button>
+              <button type="button" class="btn btn-success" id="modal_btn"  data-dismiss="modal">确定</button>
             </div>
           </div>
         </div>
       </div>
 
-<!--      取件确认-->
-      <div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="checkModalLabel">确认取件</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              确认已取到该快递？
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-success"  data-dismiss="modal" id="checkConfirm" >确认取件</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--      恢复确认-->
-      <div class="modal fade" id="repeatModal" tabindex="-1" aria-labelledby="repeatModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="repeatModalLabel">确认恢复</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              没取到该快递？恢复一下
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary"  data-dismiss="modal" id="repeatConfirm" >确认恢复</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!--            列表-->
       <div class="my-4 col-12">
@@ -239,11 +177,11 @@
             <div class="row">
               <div id="message_left_title" class="col-12">
                 <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">我的快递</span>
+                  <span class="title mb-0 text-capitalize font-weight-bolder">我的账单</span>
                   <div class="btn-toolbar mt-2 mb-md-0 float-right">
-                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计<span id="expressages_num" style="font-size: 25px">0</span>件</span>
-                    <span class="text-danger font-weight-bolder mx-2" style="font-size: 16px">未取<span id="expressages_0" style="font-size: 25px">0</span>件</span>
-                    <span class="text-success font-weight-bolder mx-2" style="font-size: 16px">已取<span id="expressages_1" style="font-size: 25px">0</span>件</span>
+                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计￥<span id="orders_num" style="font-size: 25px">0</span></span>
+                    <span class="text-danger font-weight-bolder mx-2" style="font-size: 16px">支出￥<span id="orders_0" style="font-size: 25px">0</span></span>
+                    <span class="text-success font-weight-bolder mx-2" style="font-size: 16px">收入￥<span id="orders_1" style="font-size: 25px">0</span></span>
 
                   </div>
                 </div>
@@ -258,20 +196,16 @@
                     <div class="row">
                       <div class="col-12">
                         <form class="form clearfix"  id="form_expressage">
-                          <select class="form-control col-xl-4 m-2 float-left" id="expressage_company_name">
-                              <option selected="">请选择快递公司</option>
-                              <option value="中通快递&ztkd.png">中通快递</option>
-                              <option value="圆通速递&ytsd.png">圆通速递</option>
-                              <option value="百世快递&bskd.png">百世快递</option>
-                              <option value="邮政快递&yzkd.png">邮政快递</option>
-                              <option value="韵达快递&ydkd.png">韵达快递</option>
-                              <option value="极兔速递&jtsd.png">极兔速递</option>
-                              <option value="京东快递&jdkd.png">京东快递</option>
-                              <option value="顺丰快递&sfkd.png">顺丰快递</option>
+                          <select class="form-control col-xl-2 m-2 float-left" id="order_kind">
+                              <option selected="" class="font-weight-bolder">请选择收支类别</option>
+                              <option value="1" class="text-success font-weight-bolder">收入</option>
+                              <option value="0" class="text-danger font-weight-bolder">支出</option>
 
                           </select>
-                          <input type="text" id="expressage_code" class="col-xl-4 m-2 form-control float-left" name="message_text" placeholder="输入取货码"/>
-                          <input type="button" value="添加快递" class="btn btn-primary m-2 col-xl-2 rounded-pill float-left font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="return add()">
+                          <input type="text" id="order_text" class="col-xl-2 m-2 form-control float-left" name="message_text" placeholder="标题"/>
+                          <input type="text" id="order_amount" class="col-xl-2 m-2 form-control float-left" name="message_text" placeholder="输入金额"/>
+
+                          <input type="button" value="添加账单" class="btn btn-primary m-2 col-xl-2 rounded-pill float-left font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="return add()">
                         </form>
                       </div>
                     </div>
@@ -281,31 +215,10 @@
             </div>
 
 
-
-            <div id="expressage_list" class="col-xl-12 col-md-12 col-sm-12 alert-danger expressage_list sales_flower my-2 p-2">
-
-              <h3 class="col-12 font-weight-bolder text-danger my-2">未取快递</h3>
-
-              <div id="expressage_list_main">
-
-              </div>
-
+            <div id="order_list_main">
 
             </div>
 
-
-            <div id="expressage_yes_list" class="col-xl-12 col-md-12 col-sm-12 alert-success expressage_list sales_flower my-2 p-2">
-
-              <h3 class="col-12 font-weight-bolder text-success my-2">
-                已取快递
-                <span class="float-right text-danger" style="font-size: 18px;cursor: pointer"  data-toggle="modal" data-target="#delAllModal" onclick="delAll()">清空所有</span>
-              </h3>
-
-
-              <div id="expressage_yes_list_main">
-
-              </div>
-            </div>
 
 
           </div>
@@ -313,88 +226,6 @@
       </div>
     </div>
 
-
-
-
-
-    <div id="expressage_right" class="float-right col-xl-6 col-md-6 col-sm-12">
-
-
-      <!--            列表-->
-      <div class="my-4 col-12">
-        <div class="card mb-4  main_card animated bounceInUp shadow">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-12">
-                <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">购物推荐</span>
-                </div>
-                <!--                                <hr class="col-11">-->
-                <div class="shop_list sales_flower my-3">
-                  <a href="http://www.lyylxx125420.xyz/Doc.flower" target="_blank">
-                    <div id="DocFlower" class="mb-3">
-                      <img src="../img/shop_img/Doc.flower_logo_white.png" class="col-xl-3 col-md-4 col-sm-2 mt-4" alt="">
-                    </div>
-                  </a>
-
-                  <div class="mb-3 clearfix">
-                    <a href="http://www.taobao.com" target="_blank">
-
-                      <div id="tb" class="float-left pt-3">
-                        <img src="../img/shop_img/tb.png" class="col-xl-5 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-                    <a href="http://jd.com" target="_blank">
-
-                      <div id="jd" class="float-right pt-5">
-                        <img src="../img/shop_img/jd.png" class="col-xl-4 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-
-                  </div>
-
-
-                  <div class="mt-3 clearfix">
-                    <a href="http://www.vip.com" target="_blank">
-
-                      <div id="wph" class="float-left pt-3">
-                        <img src="../img/shop_img/wph.png" class="col-xl-5 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-
-                    <a href="http://www.tmall.com" target="_blank">
-
-                      <div id="tm" class="float-right pt-4">
-                        <img src="../img/shop_img/tm.png" class="col-xl-4 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-                  </div>
-
-
-
-                  <div class="mt-3 clearfix">
-                    <a href="http://www.suning.com" target="_blank">
-
-                      <div id="sn" class="float-left pt-3">
-                        <img src="../img/shop_img/sn.png" class="col-xl-5 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-
-                    <a href="https://www.dewu.com/" target="_blank">
-
-                      <div id="dw" class="float-right pt-4">
-                        <img src="../img/shop_img/dw.png" class="col-xl-4 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </div>
