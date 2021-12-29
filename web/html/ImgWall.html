@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/public/animate.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/Expressage.css">
-
+  <link rel="stylesheet" href="../css/ImgWall.css">
+<!--  <link rel="stylesheet" href="../css/ma5gallery.css">-->
   <style>
     #active{
       color: #11101d;
@@ -26,6 +26,27 @@
 
     }
 
+    #addImg{
+      width: 12rem;
+      height: 12rem;
+      cursor: pointer;
+    }
+    #ma5_gallery_main img{
+      height: 12rem;
+      cursor: pointer;
+    }
+    @media screen and (max-width: 767px) {
+
+      #addImg{
+        width: 7rem;
+        height: 7rem;
+      }
+      #ma5_gallery_main img{
+        height: 7rem;
+      }
+    }
+
+
   </style>
 
   <script src="../js/public/jquery-1.12.4.min.js"></script>
@@ -34,10 +55,8 @@
   <script src="../js/public/axios.min.js"></script>
 
   <script src="../js/Cookie_search.js"></script>
-  <script src="../js/Expressage.js"></script>
-  <link rel="stylesheet" href="../css/ma5gallery.css">
-  <script src="../js/ma5gallery.js"></script>
-  <script src="../js/functions.js"></script>
+  <script src="../js/ImgWall.js"></script>
+
 </head>
 <body>
 <div>
@@ -132,7 +151,7 @@
 
       <!--            删除警示-->
       <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="delModalLabel">确认删除</h5>
@@ -141,7 +160,7 @@
               </button>
             </div>
             <div class="modal-body">
-              确认删除该快递？
+              确认删除该照片？
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -152,89 +171,67 @@
       </div>
 
 
-      <div class="modal fade" id="delAllModal" tabindex="-1" aria-labelledby="delAllModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+      <!--展示照片-->
+      <div class="modal fade" id="ImgShowModal" tabindex="-1" aria-labelledby="ImgShowModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="delAllModalLabel">确认删除</h5>
+              <h5 class="modal-title" id="ImgShowModalLabel"><span id="title">灯光下的宝宝</span>
+                <span class="font-weight-bolder mx-3" style="font-size: 15px ">上传日期：<span id="time">2021-12-29 11:50</span></span>
+              </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              确认删除所有已取快递？
+              <img src="../img/ImgWall_img/bg.jpg" id="img_modal_body" class="col-12" alt="">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delAllConfirm">确认删除</button>
+              <button type="button" class="btn btn-danger mx-3" data-dismiss="modal"  data-toggle="modal" data-target="#delModal" id="del_btn" onclick="">删除照片</button>
+              <button type="button" class="btn btn-primary mx-3"  data-dismiss="modal">关闭</button>
             </div>
           </div>
         </div>
       </div>
 
 
-      <!--发送成功-->
-      <div class="modal fade" id="sendSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+
+      <!--上传图片_模态框 ↓fade-->
+      <div class="modal fade" id="ImgWallUploadModal" tabindex="-1" aria-labelledby="ImgWallUploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" >
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="sendSuccessModalLabel">添加成功</h5>
+              <h5 class="modal-title" id="ImgWallUploadModalLabel">上传图片</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              快递添加成功！
+            <div class="modal-body col-md-12">
+              <div class="col-md-12 float-right">
+
+                <form name="myform" id="img_wall_upload_form" action="../ImgWallUploadServlet" method="post" enctype="multipart/form-data">
+                  <input type="text" id="imgWall_title" name="imgWall_title" class="form-control" placeholder="输入图片标题">
+                  <input type="file" style="visibility: hidden" id="imgWall_image" name="imgWall_image"><br>
+                  <input type="button" id="btn_select" value="选择图片" class="mx-3 btn btn-danger my-1">
+                  <span id="img_name"></span>
+                  <input type="hidden" id="imgWall_time" name="imgWall_time" value="0" >
+                  <input type="hidden" id="imgWall_owner_tel" name="imgWall_owner_tel" value="0" >
+                  <span class=" px-3" style="font-size: 14px;color: #4e555b">仅支持jpg,png,gif格式，大小不要超过20MB</span>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <input type="submit" value="确认" class="btn btn-success" onclick="return isPic()">
+                  </div>
+                </form>
+
+              </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success"  data-dismiss="modal">确定</button>
-            </div>
+
           </div>
         </div>
       </div>
 
-      <!--      取件确认-->
-      <div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="checkModalLabel">确认取件</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              确认已取到该快递？
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-success"  data-dismiss="modal" id="checkConfirm" >确认取件</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--      恢复确认-->
-      <div class="modal fade" id="repeatModal" tabindex="-1" aria-labelledby="repeatModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="repeatModalLabel">确认恢复</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              没取到该快递？恢复一下
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary"  data-dismiss="modal" id="repeatConfirm" >确认恢复</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!--            列表-->
       <div class="my-4 col-12">
@@ -243,97 +240,45 @@
             <div class="row">
               <div id="message_left_title" class="col-12">
                 <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">我的快递</span>
+                  <span class="title mb-0 text-capitalize font-weight-bolder">我的照片墙</span>
                   <div class="btn-toolbar mt-2 mb-md-0 float-right">
-                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计<span id="expressages_num" style="font-size: 25px">0</span>件</span>
-                    <span class="text-danger font-weight-bolder mx-2" style="font-size: 16px">未取<span id="expressages_0" style="font-size: 25px">0</span>件</span>
-                    <span class="text-success font-weight-bolder mx-2" style="font-size: 16px">已取<span id="expressages_1" style="font-size: 25px">0</span>件</span>
+                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计<span id="imgWall_num" style="font-size: 25px">0</span>张</span>
 
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="expressage_add " class="">
-              <!--            列表-->
-              <div class="my-4">
-                <div class="card mb-4  main_card animated fadeInUp">
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-12">
-                        <form class="form clearfix"  id="form_expressage">
-                          <select class="form-control col-xl-4 m-2 float-left" id="expressage_company_name">
-                            <option selected="">请选择快递公司</option>
-                            <option value="中通快递&ztkd.png">中通快递</option>
-                            <option value="圆通速递&ytsd.png">圆通速递</option>
-                            <option value="百世快递&bskd.png">百世快递</option>
-                            <option value="邮政快递&yzkd.png">邮政快递</option>
-                            <option value="韵达快递&ydkd.png">韵达快递</option>
-                            <option value="极兔速递&jtsd.png">极兔速递</option>
-                            <option value="京东快递&jdkd.png">京东快递</option>
-                            <option value="顺丰快递&sfkd.png">顺丰快递</option>
+            <div style="border-bottom: 5px solid black"></div>
 
-                          </select>
-                          <input type="text" id="expressage_code" class="col-xl-4 m-2 form-control float-left" name="message_text" placeholder="输入取货码"/>
-                          <input type="button" value="添加快递" class="btn btn-primary m-2 col-xl-2 rounded-pill float-left font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="return add()">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <section class="site-header col-12">
 
+              <div id="ma5_gallery_main" class="ma5-gallery row">
 
-
-            <div id="expressage_list" class="col-xl-12 col-md-12 col-sm-12 alert-danger expressage_list sales_flower my-2 p-2">
-
-              <h3 class="col-12 font-weight-bolder text-danger my-2">未取快递</h3>
-
-              <div id="expressage_list_main">
-
-              </div>
-
-
-            </div>
-
-
-
-            <section class="site-header container">
-              <div class="ma5-gallery">
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a1.jpg" alt="">
-                  <figcaption>Kurka wodna</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a2.jpg" alt="">
-                  <figcaption>Łyska</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a3.jpg" alt="">
-                  <figcaption>Kawka</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a4.jpg" alt="">
-                  <figcaption>Kaczka</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a5.jpg" alt="">
-                  <figcaption>Wrona</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a6.jpg" alt="">
-                  <figcaption>Wróbel</figcaption>
+                <figure class="float-left m-3" onclick="addTel()">
+                  <img src="../img/ImgWall_img/addImg.png" id="addImg"  data-toggle="modal" data-target="#ImgWallUploadModal" alt="">
                 </figure>
 
 
-                </figure>
+<!--                <figure class="gallery-item m-3"  data-toggle="modal" data-target="#ImgShowModal">-->
+<!--                  <img src="../img/ImgWall_img/bg.jpg" alt="">-->
+<!--                </figure>-->
+<!--                <figure class="gallery-item m-3">-->
+<!--                  <img src="../img/ImgWall_img/LiuXiaoXuan.jpg" alt="">-->
+<!--                </figure>-->
+<!--                <figure class="gallery-item m-3">-->
+<!--                  <img src="../img/ImgWall_img/LiuXiaoYang.jpg" alt="">-->
+<!--                </figure>-->
+<!--                <figure class="gallery-item m-3">-->
+<!--                  <img src="../img/ImgWall_img/lxlyy.jpg" alt="">-->
+<!--                </figure>-->
+<!--                <figure class="gallery-item m-3">-->
+<!--                  <img src="../img/ImgWall_img/lyylxx.jpg" alt="">-->
+<!--                </figure>-->
 
 
               </div>
             </section>
-
-
 
 
           </div>
@@ -343,6 +288,16 @@
 
   </div>
 </div>
+
+<script>
+
+  document.querySelector('#btn_select').addEventListener('click',function () {
+    document.querySelector('#imgWall_image').click();
+  });
+  document.querySelector('#imgWall_image').onchange = function (){
+    document.getElementById("img_name").innerText = document.querySelector('#imgWall_image').value;
+  }
+</script>
 
 
 <script>

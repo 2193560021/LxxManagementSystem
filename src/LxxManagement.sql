@@ -44,44 +44,32 @@ insert into expressages(expressage_code, expressage_company, expressage_time, ex
 ('A-2-8966','圆通速递&../img/Expressage_img/ytsd.png','2021-12-22 13:17','2021-12-24 15:31','13279505680',1);
 
 
--- ----------------------------
--- Table structure for Orders
--- ----------------------------
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE `orders`  (
-       `order_id` int(11) NOT NULL AUTO_INCREMENT,
-       `order_text` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-       `order_kind` int(5) DEFAULT NULL comment '0为支出，1为收入',
-       `order_amount` float(11) DEFAULT NULL,
-       `order_amount_sum` float(11) DEFAULT 0,
-       `order_owner_tel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-       `order_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-
-       PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
-
-
-insert into `orders`(order_text, order_kind, order_amount, order_amount_sum, order_owner_tel, order_time) VALUES
-('充饭卡','0','100','19900','13279505680','2021-12-26 14:39');
-insert into `orders`(order_text, order_kind, order_amount, order_amount_sum, order_owner_tel, order_time) VALUES
-('发工资','1','20000','20000','13279505680','2021-12-25 07:04');
-
 
 -- ----------------------------
--- Table structure for shops
+-- Table structure for imgWall
 -- ----------------------------
-DROP TABLE IF EXISTS `shops`;
-CREATE TABLE `shops`  (
-  `shop_id` int(11) NOT NULL AUTO_INCREMENT,
-  `shop_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `shop_address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `shop_tel` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `shop_text` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+DROP TABLE IF EXISTS `imgWall`;
+CREATE TABLE `imgWall`  (
+  `imgWall_id` int(11) NOT NULL AUTO_INCREMENT,
+  `imgWall_title` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `imgWall_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `imgWall_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `imgWall_owner_tel` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
 
-  PRIMARY KEY (`shop_id`) USING BTREE
+  PRIMARY KEY (`imgWall_id`) USING BTREE
 
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
+insert into imgWall(imgWall_title, imgWall_name, imgWall_time, imgWall_owner_tel) VALUES
+('灯光下的宝宝','bg.jpg','2021-12-27 11:59','13279505680');
+insert into imgWall(imgWall_title, imgWall_name, imgWall_time, imgWall_owner_tel) VALUES
+('宝宝头像','LiuXiaoXuan.jpg','2021-11-27 11:59','13279505680');
+insert into imgWall(imgWall_title, imgWall_name, imgWall_time, imgWall_owner_tel) VALUES
+('刘小阳头像','LiuXiaoYang.jpg','2021-10-27 11:59','13279505680');
+insert into imgWall(imgWall_title, imgWall_name, imgWall_time, imgWall_owner_tel) VALUES
+('大活的背影','lxlyy.jpg','2021-12-17 11:59','13279505680');
+insert into imgWall(imgWall_title, imgWall_name, imgWall_time, imgWall_owner_tel) VALUES
+('拼图','lyylxx.jpg','2021-12-07 11:59','13279505680');
 
 
 -- ----------------------------
@@ -198,6 +186,7 @@ CREATE TABLE `messages`  (
     `message_text` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
     PRIMARY KEY (`message_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -209,20 +198,6 @@ insert into messages (message_send_name, message_send_tel, message_accept_name, 
 insert into messages (message_send_name, message_send_tel, message_accept_name, message_accept_tel, message_send_user_img, message_time, message_text) values
 ('隔壁润迎','13279505680','刘小璇','15929068966','../img/user_img/用户.png','2021-12-21 10:07','我是隔壁润迎');
 
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('001','范佳伟的店铺','西安邮电大学1517-1',15830599166,'备注1');
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('002','徐卓龙的店铺','西安邮电大学1517-5',17792379816,'备注2');
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('003','刘璇的店铺','西安邮电大学3518-3',15929068966,'备注3');
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('004','刘宇阳的店铺','西安邮电大学1517-4',13279505680,'备注4');
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('005','张嘉祺的店铺','西安邮电大学1517-2',17792379816,'备注5');
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('006','张若鹏的店铺','西安邮电大学1517-3',17792379816,'备注6');
-INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('007','钱璞玉的店铺','西安邮电大学1517-6',17792379816,'备注7');
 
 
 

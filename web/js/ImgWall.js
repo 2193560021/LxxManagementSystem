@@ -1,7 +1,9 @@
 window.onload = function (){
+
     cookie_tel_search()
     searchAll();
 }
+
 
 
 function getCurrentDate() {
@@ -26,7 +28,8 @@ function getCurrentDate() {
 
 
 function searchAll(){
-    var url = "../MessagesServlet"
+    console.log(123)
+    var url = "../ImgWallServlet"
     if (window.XMLHttpRequest)
         req = new XMLHttpRequest();
     else if (window.ActiveXObject)
@@ -35,110 +38,81 @@ function searchAll(){
         req.open("post", url, true);
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         req.onreadystatechange = searchAllComplete;
-        req.send("type=search&method=searchByTel&message_accept_tel=" + getCookie("tel"));
+        req.send("type=search&method=searchByTel&imgWall_owner_tel=" + getCookie("tel"));
     }
 }
 
 function searchAllComplete(){
     if(req.readyState === 4 && req.status === 200){
         var json =  JSON.parse(req.responseText);//转换为json对象
+
+        document.getElementById("ma5_gallery_main").innerHTML =
+            '<figure class="float-left m-3">\n' +
+            '                  <img src="../img/ImgWall_img/addImg.png" id="addImg"  data-toggle="modal" data-target="#ImgWallUploadModal" alt="">\n' +
+            '                </figure>'
+
         if(json.length > 0){
-            document.getElementById("messages_num").innerHTML = json.length
-            document.getElementById("messages_list").innerHTML = ""
+            document.getElementById("imgWall_num").innerHTML = json.length
             for(let i=0; i < json.length; i++) {
-                document.getElementById("messages_list").innerHTML +=
-                '                  <div class="messages_card_list mx-auto sales_flower mx-1 shadow row mb-3">\n' +
-                '                    <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 text-center">\n' +
-                '                      <img src="'+ json[i].message_send_user_img +'" alt="" class="messages_card_list_img rounded-circle mt-2">\n' +
-                '                      <span class="mx-auto text-center font-weight-bolder mt-1">'+ json[i].message_send_name +'</span>\n' +
-                '                    </div>\n' +
-                '                    <div class="col-xl-10 col-md-10 col-sm-10 messages_card_content mt-2 mb-2 pt-2">\n' +
-                '                      <span class="messages_card_content_text mx-auto text-center font-weight-bolder mt-3">'+ json[i].message_text +'</span>\n' +
-                '                      <span class="messages_card_content_time mx-auto text-center font-weight-bolder mt-3">'+ json[i].message_time +'</span>\n' +
-                '                    </div>\n' +
-                '                  </div>'
+                document.getElementById("ma5_gallery_main").innerHTML +=
+                    '<figure class="gallery-item m-3"  data-toggle="modal" data-target="#ImgShowModal" onclick="showImg(\''+ json[i].imgWall_title +'\','+ json[i].imgWall_id + ',\''+ json[i].imgWall_name +'\',\''+ json[i].imgWall_time +'\' )">\n' +
+                    '        <img src="../img/ImgWall_img/'+ json[i].imgWall_name +'" alt="">\n' +
+                    '</figure>'
             }
         }
-        // else {
-        //     document.getElementById("messages_num").innerHTML = "0"
-        //     document.getElementById("messages_list").style.height = 200
-        //     document.getElementById("messages_list").innerHTML =
-        //         "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>😭你没人爱了，一条消息都没有</p> "
-        // }
-        searchAccept()
-    }
-    // else {
-    //     document.getElementById("messages_num").innerHTML = "0"
-    //     document.getElementById("messages_list").style.height = 200
-    //     document.getElementById("messages_list").innerHTML =
-    //         "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>😭你没人爱了，一条消息都没有</p> "
-    // }
-}
-
-function searchAccept(){
-    var url = "../CustomerServlet";
-    if (window.XMLHttpRequest)
-        req1 = new XMLHttpRequest();
-    else if (window.ActiveXObject)
-        req1 = new ActiveXObject("Microsoft.XMLHTTP");
-    if (req1) {
-        //采用POST方式，异步传输
-        req1.open("post", url, true);
-        //POST方式，必须加入如下头信息设定
-        req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req1.onreadystatechange = searchAcceptComplete;
-        req1.send("type=search&method=search&tel=");
-    }
-}
-
-function searchAcceptComplete(){
-    if(req.readyState == 4 && req.status == 200){
-        var json1 = JSON.parse(req1.responseText)
-        document.getElementById("accept_name").innerHTML = '<option selected>请选择收方...</option>'
-        for(let i = 0;i < json1.length;i++){
-            if(json1[i].tel !== getCookie("tel")){
-                document.getElementById("accept_name").innerHTML +=
-                    '<option value="'+ json1[i].name +'-'+ json1[i].tel +'">'+ json1[i].name +'</option>'
-            }
+        else {
+            document.getElementById("ma5_gallery_main").innerHTML +=
+                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 35px'>一张照片都没有...快添加吧</p> "
         }
     }
 }
 
+function isPic()
+{
+    var pic=document.getElementById("img_wall_upload_form").imgWall_image.value;
+    $("#imgWall_time").val(getCurrentDate())
+    document.getElementById("imgWall_owner_tel").value =
+        document.getElementById("tel").innerText
 
-
-
-function add(){
-
-    var url = "../MessagesServlet"
-    if (window.XMLHttpRequest)
-        req = new XMLHttpRequest();
-    else if (window.ActiveXObject)
-        req = new ActiveXObject("Microsoft.XMLHTTP");
-    if (req) {
-        req.open("post", url, true);
-        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req.onreadystatechange = addComplete;
-        req.send("type=add&message_send_name="
-            +encodeURIComponent(document.getElementById("user_name").value)
-            +"&message_send_tel="
-            +encodeURIComponent(document.getElementById("user_tel").value)
-            +"&message_accept_name="
-            +encodeURIComponent(document.getElementById("accept_name").value.split("-")[0])
-            +"&message_accept_tel="
-            +encodeURIComponent(document.getElementById("accept_name").value.split("-")[1])
-            +"&message_time="
-            +encodeURIComponent(getCurrentDate())
-            +"&message_send_user_img="
-            +encodeURIComponent(document.getElementById("user_img").getAttribute("src"))
-            +"&message_text="
-            +encodeURIComponent(document.getElementById("message_text").value)
-
-        )
+    var ext=pic.substring(pic.lastIndexOf(".")+1);
+    //可以再添加允许类型
+    if(ext.toLowerCase()=="jpg" || ext.toLowerCase()=="png" || ext.toLowerCase()=="gif")
+        return true;
+    else
+    {
+        alert("只能上传jpg、png、gif图像!");
+        return false;
     }
 }
 
-function addComplete(){
+function showImg(imgWall_title,imgWall_id,imgWall_name,imgWall_time){
+    document.getElementById("img_modal_body").setAttribute("src","../img/ImgWall_img/" + imgWall_name)
+    document.getElementById("title").innerHTML = imgWall_title
+    document.getElementById("time").innerHTML  = imgWall_time
+    document.getElementById("del_btn").setAttribute("onclick","del("+ imgWall_id +")")
+}
+
+function del(id){
+    $("#delConfirm").click(function (){
+
+        var url = "../ImgWallServlet";
+        if (window.XMLHttpRequest)
+            req = new XMLHttpRequest();
+        else if (window.ActiveXObject)
+            req = new ActiveXObject("Microsoft.XMLHTTP");
+        if (req) {
+            //采用POST方式，异步传输
+            req.open("post", url, true);
+            //POST方式，必须加入如下头信息设定
+            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            req.onreadystatechange = delComplete;
+            req.send("type=delete&id="+id);
+        }
+    })
+}
+
+function delComplete(){
     if(req.readyState === 4 && req.status === 200){
-        document.getElementById("message_text").value = ''
+        searchAll()
     }
 }

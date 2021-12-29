@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
-@WebServlet("/UserImgUploadServlet")
-public class UserImgUploadServlet extends HttpServlet
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
+@WebServlet("/ImgWallUploadServlet")
+public class ImgWallUploadServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final MultipartConfig config;
@@ -23,7 +23,7 @@ public class UserImgUploadServlet extends HttpServlet
     // 得到注解信息
     static
     {
-        config = UserImgUploadServlet.class.getAnnotation(MultipartConfig.class);
+        config = ImgWallUploadServlet.class.getAnnotation(MultipartConfig.class);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,26 +41,26 @@ public class UserImgUploadServlet extends HttpServlet
         {
             request.setCharacterEncoding("UTF-8");
             // 接收文本
-            int user_name_id = Integer.parseInt(request.getParameter("img_user_id"));
-            String user_email = request.getParameter("img_user_email");
-            System.out.println(user_name_id);
+            String imgWall_title = request.getParameter("imgWall_title");
+            String imgWall_time = request.getParameter("imgWall_time");
+            String imgWall_owner_tel = request.getParameter("imgWall_owner_tel");
+            System.out.println("电话：" + imgWall_owner_tel);
+            System.out.println("时间：" + imgWall_time);
             // 接收图片:图片封装在part对象中
-            part = request.getPart("play_image");
+            part = request.getPart("imgWall_image");
             System.out.println(part);
             String fileName = getFileName(part);
 //            customer.setImg(fileName);
             // 保存图片
-            part.write(getServletContext().getRealPath("/WebContent/Client/img/user_img/") + fileName);
+            part.write(getServletContext().getRealPath("/img/ImgWall_img/") + fileName);
             //向数据库中存入路径
-            updateUserImg(user_name_id,fileName);
-            updateMessagesUserImg(user_email,fileName);
+            updateImgWall(imgWall_title,imgWall_time,imgWall_owner_tel,fileName);
 
             System.out.println(fileName);
             System.out.println(part.getSize());
-
             // 带着play对象转发到result.java页
             request.setAttribute("play", customer);
-            request.getRequestDispatcher("/WebContent/Client/html/UserImgUploadComplete.html").forward(request, response);
+            request.getRequestDispatcher("/html/ImgWallUploadComplete.html").forward(request, response);
         }
         catch(Exception e)
         {
@@ -68,7 +68,7 @@ public class UserImgUploadServlet extends HttpServlet
             {
                 System.out.println("上传文件过大!");
             }
-            request.setAttribute("desc", "上传文件过大(限制5M)，或存在异常!");
+            request.setAttribute("desc", "上传文件过大(限制10M)，或存在异常!");
         }
 
     }
@@ -96,14 +96,14 @@ public class UserImgUploadServlet extends HttpServlet
     }
 
 
-    public void updateUserImg(int user_name_id, String fileName)
+    public void updateImgWall(String imgWall_title,String imgWall_time,String imgWall_owner_tel,String fileName)
     {
         int result=0;
         try
         {
 
-            String sql="update customer set cus_img = '../img/user_img/" + fileName;
-            sql+="' where cus_id = " + user_name_id;
+            String sql="insert into imgWall(imgWall_title, imgWall_name, imgWall_time, imgWall_owner_tel) VALUES";
+            sql+="('"+ imgWall_title +"','"+ fileName +"','"+ imgWall_time +"','"+ imgWall_owner_tel +"')";
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -116,22 +116,4 @@ public class UserImgUploadServlet extends HttpServlet
     }
 
 
-    public void updateMessagesUserImg(String user_email, String fileName)
-    {
-        int result=0;
-        try
-        {
-
-            String sql="update messages set message_user_img = '../img/user_img/" + fileName;
-            sql+="' where message_email = '" + user_email + "'";
-            DBUtil db=new DBUtil();
-            db.openConnection();
-            result=db.execCommand(sql);
-            db.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 }

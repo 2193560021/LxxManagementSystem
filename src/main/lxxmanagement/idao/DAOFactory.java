@@ -12,8 +12,9 @@ public class DAOFactory
 
     private static iExpressagesDAO expressagesDAO;
 
-
     private static iOrdersDAO ordersDAO;
+
+    private static iImgWallDAO imgWallDAO;
 
     public static synchronized iCustomerDAO creatCustomerDAO()
     {
@@ -42,5 +43,12 @@ public class DAOFactory
         if(null == ordersDAO)
              ordersDAO=new OrdersDAO();
         return ordersDAO;
+    }
+
+    public static synchronized iImgWallDAO creatImgWallDAO()
+    {
+        if(null == imgWallDAO)
+            imgWallDAO=new ImgWallDAO();
+        return imgWallDAO;
     }
 }
