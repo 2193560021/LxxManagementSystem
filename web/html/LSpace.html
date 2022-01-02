@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/public/animate.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/Expressage.css">
+  <link rel="stylesheet" href="../css/LSpace.css">
 
   <style>
     #active{
@@ -23,7 +23,6 @@
     }
     body{
       background: #E4E9F7;
-
     }
 
   </style>
@@ -34,10 +33,8 @@
   <script src="../js/public/axios.min.js"></script>
 
   <script src="../js/Cookie_search.js"></script>
-  <script src="../js/Expressage.js"></script>
+  <script src="../js/LSpace.js"></script>
   <link rel="stylesheet" href="../css/ma5gallery.css">
-  <script src="../js/ma5gallery.js"></script>
-  <script src="../js/functions.js"></script>
 </head>
 <body>
   <div>
@@ -126,13 +123,13 @@
 </div>
 
 
-<div class="home_content">
+  <div class="home_content">
   <div class="row mx-1 clearfix">
-    <div id="expressage_left" class=" col-xl-12 col-md-12 col-sm-12">
+    <div id="" class=" col-xl-12 col-md-12 col-sm-12 clearfix">
 
       <!--            删除警示-->
       <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="delModalLabel">确认删除</h5>
@@ -152,198 +149,180 @@
       </div>
 
 
-      <div class="modal fade" id="delAllModal" tabindex="-1" aria-labelledby="delAllModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+      <!--展示照片-->
+      <div class="modal fade" id="ImgShowModal" tabindex="-1" aria-labelledby="ImgShowModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="delAllModalLabel">确认删除</h5>
+              <h5 class="modal-title" id="ImgShowModalLabel"><span id="title">灯光下的宝宝</span>
+                <span class="font-weight-bolder mx-3" style="font-size: 15px ">上传日期：<span id="time">2021-12-29 11:50</span></span>
+              </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              确认删除所有已取快递？
+              <img src="../img/LSpace_imgWall/2.jpg" class="col-12" alt="">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delAllConfirm">确认删除</button>
+              <button type="button" class="btn btn-danger mx-3" data-dismiss="modal"  data-toggle="modal" data-target="#delModal" id="del_btn" onclick="">删除照片</button>
+              <button type="button" class="btn btn-primary mx-3"  data-dismiss="modal">关闭</button>
             </div>
           </div>
         </div>
       </div>
 
 
-      <!--发送成功-->
-      <div class="modal fade" id="sendSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="sendSuccessModalLabel">添加成功</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              快递添加成功！
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success"  data-dismiss="modal">确定</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-<!--      取件确认-->
-      <div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+      <!--上传图片_模态框 ↓fade-->
+      <div class="modal fade" id="addLSpaceImgModal" tabindex="-1" aria-labelledby="addLSpaceImgModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " >
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="checkModalLabel">确认取件</h5>
+              <h1 class="modal-title font-weight-bolder" id="addLSpaceImgModalLabel">上传图片</h1>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              确认已取到该快递？
+            <div class="modal-body col-md-12">
+              <div class="col-md-12 float-right">
+
+                <form name="myform" id="img_wall_upload_form" action="../ImgWallUploadServlet" method="post" enctype="multipart/form-data">
+                  <input type="text" id="imgWall_title" name="imgWall_title" class="form-control" placeholder="输入图片标题">
+                  <input type="file" style="visibility: hidden" id="imgWall_image" name="imgWall_image"><br>
+                  <input type="button" id="btn_select" value="选择图片" class="mx-3 btn btn-danger my-1">
+                  <span id="img_name"></span>
+                  <input type="hidden" id="imgWall_time" name="imgWall_time" value="0" >
+                  <input type="hidden" id="imgWall_owner_tel" name="imgWall_owner_tel" value="0" >
+                  <span class=" px-3" style="font-size: 14px;color: #4e555b">仅支持jpg,png,gif格式，大小不要超过20MB</span>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">取消</button>
+                    <input type="submit" value="确认" class="btn btn-success" onclick="return isPic()">
+                  </div>
+                </form>
+
+              </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-success"  data-dismiss="modal" id="checkConfirm" >确认取件</button>
-            </div>
+
           </div>
         </div>
       </div>
 
 
-      <!--      恢复确认-->
-      <div class="modal fade" id="repeatModal" tabindex="-1" aria-labelledby="repeatModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="repeatModalLabel">确认恢复</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              没取到该快递？恢复一下
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary"  data-dismiss="modal" id="repeatConfirm" >确认恢复</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!--            列表-->
-      <div class="my-4 col-12">
-        <div class="card mb-4  main_card animated bounceInUp shadow">
+      <div class="my-4 col-xl-12 col-md-12 col-sm-12 float-left">
+        <div class="card mb-4  main_card animated flipInX shadow">
           <div class="card-body p-3">
             <div class="row">
-              <div id="message_left_title" class="col-12">
-                <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">我的快递</span>
-                  <div class="btn-toolbar mt-2 mb-md-0 float-right">
-                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计<span id="expressages_num" style="font-size: 25px">0</span>件</span>
-                    <span class="text-danger font-weight-bolder mx-2" style="font-size: 16px">未取<span id="expressages_0" style="font-size: 25px">0</span>件</span>
-                    <span class="text-success font-weight-bolder mx-2" style="font-size: 16px">已取<span id="expressages_1" style="font-size: 25px">0</span>件</span>
-
+              <div id="LSpace_title" class="col-12">
+                <div class="numbers clearfix">
+                  <img src="../img/user_img/LiuXiaoYang.jpg" class="rounded-circle col-xl-2 col-md-3 col-sm-3 float-left" alt="">
+                  <div class="text-center col-xl-8 col-md-6 col-sm-6 float-left">
+                    <span class="col-xl-5 l_small" >💕💕</span>
+                    <span class="col-xl-2 l_big">❤️</span>
+                    <span class="col-xl-5 l_small" >💕💕</span>
                   </div>
+                  <img src="../img/user_img/profile.jpg" class="rounded-circle col-xl-2 col-md-3 col-sm-3 float-right" alt="">
                 </div>
               </div>
             </div>
-
-            <div id="expressage_add " class="">
-              <!--            列表-->
-              <div class="my-4">
-                <div class="card mb-4  main_card animated fadeInUp">
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-12">
-                        <form class="form clearfix"  id="form_expressage">
-                          <select class="form-control col-xl-4 m-2 float-left" id="expressage_company_name">
-                              <option selected="">请选择快递公司</option>
-                              <option value="中通快递&ztkd.png">中通快递</option>
-                              <option value="圆通速递&ytsd.png">圆通速递</option>
-                              <option value="百世快递&bskd.png">百世快递</option>
-                              <option value="邮政快递&yzkd.png">邮政快递</option>
-                              <option value="韵达快递&ydkd.png">韵达快递</option>
-                              <option value="极兔速递&jtsd.png">极兔速递</option>
-                              <option value="京东快递&jdkd.png">京东快递</option>
-                              <option value="顺丰快递&sfkd.png">顺丰快递</option>
-
-                          </select>
-                          <input type="text" id="expressage_code" class="col-xl-4 m-2 form-control float-left" name="message_text" placeholder="输入取货码"/>
-                          <input type="button" value="添加快递" class="btn btn-primary m-2 col-xl-2 rounded-pill float-left font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="return add()">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-            <div id="expressage_list" class="col-xl-12 col-md-12 col-sm-12 alert-danger expressage_list sales_flower my-2 p-2">
-
-              <h3 class="col-12 font-weight-bolder text-danger my-2">未取快递</h3>
-
-              <div id="expressage_list_main">
-
-              </div>
-
-
-            </div>
-
-
-
-            <section class="site-header container">
-              <div class="ma5-gallery">
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a1.jpg" alt="">
-                  <figcaption>Kurka wodna</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a2.jpg" alt="">
-                  <figcaption>Łyska</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a3.jpg" alt="">
-                  <figcaption>Kawka</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a4.jpg" alt="">
-                  <figcaption>Kaczka</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a5.jpg" alt="">
-                  <figcaption>Wrona</figcaption>
-                </figure>
-                <figure class="gallery-item">
-                  <img src="./images/ptaki/a6.jpg" alt="">
-                  <figcaption>Wróbel</figcaption>
-                </figure>
-
-
-                </figure>
-
-
-              </div>
-            </section>
-
-
-
 
           </div>
         </div>
       </div>
+
+      <!--倒计时列表-->
+      <div class="my-4 col-xl-5 col-md-8 col-sm-12 float-left">
+        <div class="card mb-4  main_card animated flipInX shadow" style="background: #f92f60">
+          <div class="card-body p-3">
+            <div class="row">
+              <div id="LSpace_days_1" class="col-12 text-light">
+                <div class="numbers clearfix text-center">
+                  <h2 class="font-weight-bolder my-3">相恋天数</h2>
+                  <h1>
+                    <span id="L_day" style="font-size: 100px">00</span>天
+                    <br id="br_day">
+                    <span id="L_hour" style="font-size: 50px">00</span>时
+                    <span id="L_minute" style="font-size: 50px">00</span>分
+                    <span id="L_second" style="font-size: 50px">00</span>秒
+                  </h1>
+                  <h3>始于 <span>2021-07-03</span></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4  main_card animated flipInX shadow" style="background: #11101d">
+          <div class="card-body p-3">
+            <div class="row">
+              <div id="LSpace_days_2" class="col-12 text-light">
+                <div class="numbers clearfix text-center">
+                  <h2 class="font-weight-bolder my-3">考研倒计时</h2>
+                  <h1><span style="font-size: 100px">356</span>天</h1>
+                  <h3>终于 <span>2022-12-24</span></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="add_countdown" class="card mb-4  main_card animated flipInX shadow" style="">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-12 text-light">
+                <div class="numbers clearfix text-center">
+                  <i class="fa fa-plus py-5" style="font-size: 100px"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--照片列表-->
+      <div class="my-4 col-xl-7 col-md-4 col-sm-12 float-right">
+        <div class="card mb-4  main_card animated flipInX shadow" style="background: #fff">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-12">
+                <div class="numbers">
+                    <span class="title mb-0 text-capitalize font-weight-bolder">记录照片</span>
+                </div>
+
+                <div id="LSpace_imgWall">
+                  <img src="../img/LSpace_imgWall/1.jpg" alt=""  data-toggle="modal" data-target="#addLSpaceImgModal">
+                  <img src="../img/LSpace_imgWall/2.jpg" alt="" data-toggle="modal" data-target="#ImgShowModal">
+                  <img src="../img/LSpace_imgWall/5.jpg" alt="">
+                  <img src="../img/LSpace_imgWall/3.jpg" alt="">
+                  <img src="../img/LSpace_imgWall/4.jpg" alt="">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
     </div>
 
   </div>
 </div>
 
+<script>
+
+  document.querySelector('#btn_select').addEventListener('click',function () {
+    document.querySelector('#imgWall_image').click();
+  });
+  document.querySelector('#imgWall_image').onchange = function (){
+    document.getElementById("img_name").innerText = document.querySelector('#imgWall_image').value;
+  }
+</script>
 
 <script>
   let btn = document.querySelector("#btn");
@@ -363,5 +342,47 @@
   }
 </script>
 
+  <script>
+
+
+
+    function fun () {
+      let startTime = new Date('2021-07-03'); // 开始时间
+      let endTime = new Date(); // 结束时间
+      return Math.floor((endTime - startTime) / 1000);
+    }
+
+    var intDiff_L = parseInt(fun());//倒计时总秒数量
+
+    function timer_L(intDiff_L){
+      window.setInterval(function(){
+        var day=0,
+                hour=0,
+                minute=0,
+                second=0;//时间默认值
+        if(intDiff_L > 0){
+          day = Math.floor(intDiff_L / (60 * 60 * 24));
+          hour = Math.floor(intDiff_L / (60 * 60)) - (day * 24);
+          minute = Math.floor(intDiff_L / 60) - (day * 24 * 60) - (hour * 60);
+          second = Math.floor(intDiff_L) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+        }
+        if (minute <= 9) minute = '0' + minute;
+        if (second <= 9) second = '0' + second;
+        $('#L_day').html(day);
+        $('#L_hour').html('<s id="h"></s>'+hour);
+        $('#L_minute').html('<s></s>'+minute);
+        $('#L_second').html('<s></s>'+second);
+        intDiff_L++;
+      }, 1000);
+    }
+
+    $(function(){
+      timer_L(intDiff_L);
+    });
+
+
+  </script>
+
+</div>
 </body>
 </html>
