@@ -1,6 +1,6 @@
 
 function quit(){
-    document.cookie = "tel=???";
+    document.cookie = "tel=???;path=/";
     window.location = "../index.html";
 }
 
@@ -39,28 +39,40 @@ function cookie_tel_searchComplete(){
     if (req1.readyState == 4 && req1.status == 200) {
         var json =  JSON.parse(req1.responseText);//转换为json对象
         if(json.length > 0){
-            document.getElementById("user_name").value = json[0].name
-            document.getElementById("user_tel").value = json[0].tel
+            document.getElementById("user_name").value = json[0].cus_name
+            document.getElementById("user_tel").value = json[0].cus_tel
 
             document.getElementById("log_out").setAttribute("class","fa fa-sign-out")
             document.getElementById("log_out").setAttribute("style","color:#dc3545")
 
-            document.getElementById("user_tel").value = json[0].tel
-            document.getElementById("user_img").setAttribute("src",json[0].img)
+            document.getElementById("user_tel").value = json[0].cus_tel
+            document.getElementById("user_img").setAttribute("src",json[0].cus_img)
+
+            document.getElementById("user_img_sm").setAttribute("src",json[0].cus_img)
+
 
             document.getElementById("user_img").setAttribute("style","")
-            document.getElementById("name").innerText = json[0].name
-            document.getElementById("tel").innerText = json[0].tel
+            document.getElementById("user_img_sm").setAttribute("style","border-radius: 5px")
+
+            document.getElementById("name").innerText = json[0].cus_name
+            document.getElementById("tel").innerText = json[0].cus_tel
+            document.getElementById("name_sm").innerText = json[0].cus_name
+            document.getElementById("tel_sm").innerText = json[0].cus_tel
+
 
             document.getElementById("log_out").setAttribute("onclick","quit()")
 
 
+
         }else {
             document.getElementById("user_img").setAttribute("style","display:none")
+
             document.getElementById("log_out").setAttribute("class","fa fa-sign-in")
             document.getElementById("name").innerHTML = '请先登录'
             document.getElementById("log_out").setAttribute("onclick","goSign()")
             document.getElementById("log_out").setAttribute("style","color:#007bff")
+
+
         }
         //    修改资料
     } else{

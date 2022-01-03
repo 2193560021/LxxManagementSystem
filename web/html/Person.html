@@ -27,6 +27,7 @@
 
   </style>
 
+  <link rel="stylesheet" href="../css/MediaSelect.css">
   <script src="../js/public/jquery-1.12.4.min.js"></script>
   <script src="../css/public/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
   <script src="../js/public/vue.min.js"></script>
@@ -34,6 +35,7 @@
 
   <script src="../js/Cookie_search.js"></script>
   <script src="../js/Expressage.js"></script>
+  <link rel="stylesheet" href="../css/All.css">
 </head>
 <body>
   <div>
@@ -41,7 +43,7 @@
     <input type="hidden" id="user_tel">
 
   </div>
-<div class="sidebar shadow">
+<div id="nav_lg" class="sidebar shadow">
   <div class="logo_content">
     <div class="logo">
       <!--            <img src="../../public/img/logo_white.png" width="50" height="50" alt="">-->
@@ -99,30 +101,81 @@
       </a>
       <span class="tooltip">💕空间</span>
     </li>
-    <li>
-      <a href="#" id="active" class="shadow">
-        <i class='fa fa-cog' ></i>
-        <span class="links_name">设置</span>
-      </a>
-      <span class="tooltip">设置</span>
-    </li>
   </ul>
   <div class="profile_content">
     <div id="profile" class="profile">
-      <div class="profile_details">
-        <img src="../img/user_img/profile.jpg" id="user_img" alt="">
-        <div class="name_job">
-          <div id="name" class="name"></div>
-          <div id="tel" class="tel"></div>
+      <a href="Person.html">
+        <div class="profile_details">
+          <img src="../img/user_img/profile.jpg" id="user_img" alt="">
+          <div class="name_job">
+            <div id="name" class="name"></div>
+            <div id="tel" class="tel"></div>
+          </div>
         </div>
-      </div>
+      </a>
       <i id="log_out" ></i>
     </div>
   </div>
 </div>
 
 
-<div class="home_content">
+  <nav id="nav_sm" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-xl">
+      <a class="navbar-brand font-weight-bolder" style="font-size: 25px" href="#">璇宇空间</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample07XL" style="">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="index.html">
+              <i class='fa fa-home fa-lg' ></i> 首页</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="Orders.html">
+              <i class='fa fa-list-alt fa-lg' ></i> 账单</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="Expressage.html">
+              <i class='fa fa-archive fa-lg' ></i> 快递</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="#">
+              <i class='fa fa-comments fa-lg' ></i> 消息</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Notes.html">
+              <i class='fa fa-align-left fa-lg' ></i> 记事</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="ImgWall.html">
+              <i class='fa fa-photo fa-lg' ></i> 照片墙</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="LSpace.html">
+              <i class='fa fa-heart fa-lg'  style="color: #f92f60"></i> 💕空间</a>
+          </li>
+        </ul>
+        <div id="user_inf" class="form-inline my-2 my-md-0 clearfix w-100">
+          <a id="user_inf_main" href="Person.html">
+            <div class="profile_details float-left">
+              <img src="../img/user_img/用户.png" id="user_img_sm" class="float-left" width="50" height="50" style="" alt="">
+              <div class="name_job float-left text-light mx-3">
+                <div id="name_sm" class="name"></div>
+                <div id="tel_sm" class="tel"></div>
+              </div>
+            </div>
+          </a>
+          <input type="button" class="btn float-right" value="" onclick="">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <div class="home_content">
   <div class="row mx-1 clearfix">
     <div id="expressage_left" class=" col-xl-6 col-md-6 col-sm-12">
 

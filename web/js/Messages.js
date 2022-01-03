@@ -96,7 +96,7 @@ function searchAcceptComplete(){
         for(let i = 0;i < json1.length;i++){
             if(json1[i].tel !== getCookie("tel")){
                 document.getElementById("accept_name").innerHTML +=
-                    '<option value="'+ json1[i].name +'-'+ json1[i].tel +'">'+ json1[i].name +'</option>'
+                    '<option value="'+ json1[i].cus_name +'-'+ json1[i].tel +'">'+ json1[i].cus_name +'</option>'
             }
         }
     }
