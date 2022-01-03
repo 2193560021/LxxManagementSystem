@@ -39,6 +39,7 @@ function cookie_tel_searchComplete(){
     if (req1.readyState == 4 && req1.status == 200) {
         var json =  JSON.parse(req1.responseText);//转换为json对象
         if(json.length > 0){
+            document.getElementById("user_inf_main").setAttribute("style","")
             document.getElementById("user_name").value = json[0].cus_name
             document.getElementById("user_tel").value = json[0].cus_tel
 
@@ -63,15 +64,23 @@ function cookie_tel_searchComplete(){
             document.getElementById("log_out").setAttribute("onclick","quit()")
 
 
+            document.getElementById("lou_out_btn").classList.add("btn-danger")
+            document.getElementById("lou_out_btn").setAttribute("value","退出登录")
+            document.getElementById("lou_out_btn").setAttribute("onclick","quit()")
+
 
         }else {
             document.getElementById("user_img").setAttribute("style","display:none")
-
             document.getElementById("log_out").setAttribute("class","fa fa-sign-in")
             document.getElementById("name").innerHTML = '请先登录'
             document.getElementById("log_out").setAttribute("onclick","goSign()")
             document.getElementById("log_out").setAttribute("style","color:#007bff")
 
+
+            document.getElementById("user_inf_main").setAttribute("style","display:none")
+            document.getElementById("lou_out_btn").classList.add("btn-primary")
+            document.getElementById("lou_out_btn").setAttribute("value","登录/注册")
+            document.getElementById("lou_out_btn").setAttribute("onclick","goSign()")
 
         }
         //    修改资料
@@ -82,6 +91,12 @@ function cookie_tel_searchComplete(){
         document.getElementById("name").innerText = '请先登录'
         document.getElementById("log_out").setAttribute("onclick","goSign()")
         document.getElementById("log_out").setAttribute("style","color:#007bff")
+
+
+        document.getElementById("user_inf_main").setAttribute("style","display:none")
+        document.getElementById("lou_out_btn").classList.add("btn-primary")
+        document.getElementById("lou_out_btn").setAttribute("value","登录/注册")
+        document.getElementById("lou_out_btn").setAttribute("onclick","goSign()")
 
     }
 }
