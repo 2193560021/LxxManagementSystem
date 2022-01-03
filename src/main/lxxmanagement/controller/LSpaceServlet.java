@@ -1,6 +1,8 @@
 package main.lxxmanagement.controller;
 
+import main.lxxmanagement.model.LSpace;
 import main.lxxmanagement.model.Messages;
+import main.lxxmanagement.service.LSpaceSrv;
 import main.lxxmanagement.service.MessagesSrv;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/MessagesServlet")
+@WebServlet("/LSpaceServlet")
 public class LSpaceServlet extends HttpServlet
 {
     private static final long serialVersionUID=1L;
@@ -30,89 +32,32 @@ public class LSpaceServlet extends HttpServlet
         String type=request.getParameter("type");
 
         // 根据请求操作类型，执行相应的增、删、该、查
-        if(type.equalsIgnoreCase("add"))
-            add(request, response);
-        else if(type.equalsIgnoreCase("delete"))
-            delete(request, response);
-        else if(type.equalsIgnoreCase("search"))
+        if(type.equalsIgnoreCase("search"))
             search(request, response);
-    }
-
-    private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        Messages messages=null;
-        int id=0;
-        try
-        {
-            String message_send_name=request.getParameter("message_send_name");
-            String message_send_tel=request.getParameter("message_send_tel");
-            String message_accept_name=request.getParameter("message_accept_name");
-            String message_accept_tel=request.getParameter("message_accept_tel");
-            String message_time=request.getParameter("message_time");
-            String message_send_user_img=request.getParameter("message_send_user_img");
-            String message_text=request.getParameter("message_text");
-            messages=new Messages( id,  message_send_name,  message_send_tel,  message_accept_name,  message_accept_tel,  message_time,  message_send_user_img,  message_text);
-
-            response.setContentType("text/html;charset=utf-8");
-            PrintWriter out=response.getWriter();
-
-            if(new MessagesSrv().add(messages) == 1)
-                out.write("数据添加成功");
-            else
-                out.write("数据添加失败，请重试");
-
-            out.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().write("操作错误，请重试");
-        }
-    }
-
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        try
-        {
-            int id=Integer.valueOf(request.getParameter("id"));
-            response.setContentType("text/html;charset=utf-8");
-            PrintWriter out=response.getWriter();
-            out.write("" + new MessagesSrv().delete(id));
-            out.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().write("操作错误，请重试");
-        }
     }
 
     private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
-        String message_accept_tel=request.getParameter("message_accept_tel");
-        String method=request.getParameter("method");
-        List<Messages> result=null;
-        result=new MessagesSrv().Fetch(message_accept_tel ,method);
+        String LSpace_owner_tel=request.getParameter("LSpace_owner_tel");
+        List<LSpace> result=null;
+        result=new LSpaceSrv().Fetch(LSpace_owner_tel);
         String jsonStr="";
         try
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Messages s : result)
+
+            for(LSpace s : result)
             {
                 json=new JSONObject();
-                json.put("id", s.getID());
-                json.put("message_send_name", s.getMessage_send_name());
-                json.put("message_send_tel", s.getMessage_send_tel());
-                json.put("message_accept_name", s.getMessage_accept_name());
-                json.put("message_accept_tel", s.getMessage_accept_tel());
-                json.put("message_time", s.getMessage_time());
-                json.put("message_send_user_img", s.getMessage_send_user_img());
-                json.put("message_text", s.getMessage_text());
+                String LSpace_lovers = s.getLSpace_lovers();
+                if(LSpace_owner_tel.equals(LSpace_lovers.split("-")[0]) || LSpace_owner_tel.equals(LSpace_lovers.split("-")[1])){
+                    json.put("LSpace_id", s.getLSpace_id());
+                    json.put("LSpace_lovers", s.getLSpace_lovers());
+                    json.put("LSpace_time", s.getLSpace_time());
+                }
 
                 array.put(json);
             }

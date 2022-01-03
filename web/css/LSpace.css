@@ -40,4 +40,5 @@
 #LSpace_imgWall img{
     margin: 3px;
     height: 200px;
+    cursor: pointer;
 }

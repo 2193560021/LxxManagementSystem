@@ -16,6 +16,12 @@ public class DAOFactory
 
     private static iImgWallDAO imgWallDAO;
 
+    private static iLSpaceDAO lSpaceDAO;
+
+    private static iLSpaceCountDownDAO lSpaceCountDownDAO;
+
+    private static iLSpaceImgWallDAO lSpaceImgWallDAO;
+
     public static synchronized iCustomerDAO creatCustomerDAO()
     {
         if(null == cusDao)
@@ -51,4 +57,27 @@ public class DAOFactory
             imgWallDAO=new ImgWallDAO();
         return imgWallDAO;
     }
+
+    public static synchronized iLSpaceDAO creatLSpaceDAO()
+    {
+        if(null == lSpaceDAO)
+            lSpaceDAO=new LSpaceDAO();
+        return lSpaceDAO;
+    }
+
+    public static synchronized iLSpaceCountDownDAO creatLSpaceCountDownDAO()
+    {
+        if(null == lSpaceCountDownDAO)
+            lSpaceCountDownDAO=new LSpaceCountDownDAO();
+        return lSpaceCountDownDAO;
+    }
+
+    public static synchronized iLSpaceImgWallDAO creatLSpaceImgWallDAO()
+    {
+        if(null == lSpaceImgWallDAO)
+            lSpaceImgWallDAO=new LSpaceImgWallDAO();
+        return lSpaceImgWallDAO;
+    }
+
+
 }

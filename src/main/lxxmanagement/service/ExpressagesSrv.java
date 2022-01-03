@@ -15,11 +15,7 @@ public class ExpressagesSrv {
     public int add(Expressages expressages){
         return expressagesDAO.insert(expressages);
     }
-//
-//    public int modify(Play play){
-//        return employeeDAO.update(play);
-//    }
-//
+
     public int delete(int ID){
         return expressagesDAO.delete(ID);
     }

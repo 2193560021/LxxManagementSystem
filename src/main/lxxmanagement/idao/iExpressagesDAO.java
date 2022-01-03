@@ -10,9 +10,7 @@ public interface iExpressagesDAO {
 
 //
     public int insert(Expressages expressages);
-//
-//    public int update(Play play);
-//
+
     public int delete(int ID);
 //
 

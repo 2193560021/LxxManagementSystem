@@ -202,14 +202,13 @@ public class CustomerServlet  extends HttpServlet
             for(Customer s : result)
             {
                 json=new JSONObject();
-                json.put("id", s.getID());
-                json.put("name", s.getName());
-                json.put("tel", s.getTel());
-                json.put("email", s.getEmail());
-                json.put("pwd", s.getPwd());
-                json.put("img",s.getImg());
-                json.put("imgbg", s.getImg_bg());
-                json.put("address", s.getAddress());
+                json.put("cus_id", s.getID());
+                json.put("cus_name", s.getName());
+                json.put("cus_tel", s.getTel());
+                json.put("cus_email", s.getEmail());
+                json.put("cus_pwd", s.getPwd());
+                json.put("cus_img",s.getImg());
+                json.put("cus_img_bg", s.getImg_bg());
                 array.put(json);
             }
             jsonStr=array.toString();

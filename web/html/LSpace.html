@@ -34,7 +34,8 @@
 
   <script src="../js/Cookie_search.js"></script>
   <script src="../js/LSpace.js"></script>
-  <link rel="stylesheet" href="../css/ma5gallery.css">
+  <script src="../js/LSpaceCountDown.js"></script>
+  <script src="../js/LSpaceImgWall.js"></script>
 </head>
 <body>
   <div>
@@ -122,155 +123,146 @@
   </div>
 </div>
 
+  <!--            删除警示-->
+  <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="delModalLabel">确认删除</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          确认删除该照片？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--展示照片-->
+  <div class="modal fade" id="LSpaceImgShowModal" tabindex="-1" aria-labelledby="LSpaceImgShowModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="LSpaceImgShowModalLabel"><span id="title"></span>
+            <span class="font-weight-bolder mx-3" style="font-size: 15px ">上传日期：<span id="time"></span></span>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="" class="col-12" id="LSpaceImg_modal_body" alt="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger mx-3" data-dismiss="modal"  data-toggle="modal" data-target="#delModal" id="del_btn" onclick="">删除照片</button>
+          <button type="button" class="btn btn-primary mx-3"  data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!--上传图片_模态框 ↓fade-->
+  <div class="modal fade" id="addLSpaceImgModal" tabindex="-1" aria-labelledby="addLSpaceImgModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addLSpaceImgModalLabel">上传图片</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-md-12">
+          <div class="col-md-12 float-right">
+
+            <form name="myform" id="LSpaceImg_wall_upload_form" action="../LSpaceImgWallUploadServlet" method="post" enctype="multipart/form-data">
+              <input type="text" id="LSpaceImgWall_title" name="LSpaceImgWall_title" class="form-control" placeholder="输入图片标题">
+              <input type="file" style="visibility: hidden" id="LSpaceImgWall_image" name="LSpaceImgWall_image"><br>
+              <input type="button" id="btn_select" value="选择图片" class="mx-3 btn btn-danger my-1">
+              <span id="img_name"></span>
+              <input type="hidden" id="LSpaceImgWall_time" name="LSpaceImgWall_time" value="0" >
+              <input type="hidden" id="LSpaceImgWall_owners_id" name="LSpaceImgWall_owners_id" value="0" >
+              <span class=" px-3" style="font-size: 14px;color: #4e555b">仅支持jpg,png,gif格式，大小不要超过20MB</span>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <input type="submit" value="确认" class="btn btn-success" onclick="return isPic()">
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="addCountdownModal" tabindex="-1" aria-labelledby="addCountdownModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCountdownModalLabel">添加倒计时</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="position: relative">
+          <input type="hidden" id="LSpace_countdown_owners_id" class="form-control mb-3">
+          <input type="text" id="LSpace_countdown_title" class="form-control mb-3" placeholder="倒计时名称">
+          <input type="text" id="LSpace_countdown_time" class="form-control mb-3" placeholder="日期，格式：xxxx-xx-xx">
+          <select class="form-control" id="LSpace_countdown_bg">
+            <option selected="">请选择卡片背景颜色...</option>
+            <option value="#b41a8e" style="background: #b41a8e">#b41a8e</option>
+            <option value="#7b23ad" style="background: #7b23ad">#7b23ad</option>
+            <option value="#7169e1" style="background: #7169e1">#7169e1</option>
+            <option value="#0f73a7" style="background: #0f73a7">#0f73a7</option>
+            <option value="#11101d" style="background: #11101d">#11101d</option>
+            <option value="#1ba518" style="background: #1ba518">#1ba518</option>
+            <option value="#6c9507" style="background: #6c9507">#6c9507</option>
+            <option value="#a05718" style="background: #a05718">#a05718</option>
+            <option value="#83091d" style="background: #83091d">#83091d</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCountdown()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="home_content">
   <div class="row mx-1 clearfix">
-    <div id="" class=" col-xl-12 col-md-12 col-sm-12 clearfix">
+    <div id="main" class=" col-xl-12 col-md-12 col-sm-12 clearfix">
 
-      <!--            删除警示-->
-      <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="delModalLabel">确认删除</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              确认删除该快递？
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
-            </div>
-          </div>
-        </div>
+      <div id="LSpace_header">
+
       </div>
 
 
+      <div class="mb-4 col-xl-5 col-md-8 col-sm-12 float-left">
+        <!--倒计时列表-->
+        <div id="LSpace_time_card">
 
-      <!--展示照片-->
-      <div class="modal fade" id="ImgShowModal" tabindex="-1" aria-labelledby="ImgShowModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="ImgShowModalLabel"><span id="title">灯光下的宝宝</span>
-                <span class="font-weight-bolder mx-3" style="font-size: 15px ">上传日期：<span id="time">2021-12-29 11:50</span></span>
-              </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <img src="../img/LSpace_imgWall/2.jpg" class="col-12" alt="">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger mx-3" data-dismiss="modal"  data-toggle="modal" data-target="#delModal" id="del_btn" onclick="">删除照片</button>
-              <button type="button" class="btn btn-primary mx-3"  data-dismiss="modal">关闭</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <!--上传图片_模态框 ↓fade-->
-      <div class="modal fade" id="addLSpaceImgModal" tabindex="-1" aria-labelledby="addLSpaceImgModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg " >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title font-weight-bolder" id="addLSpaceImgModalLabel">上传图片</h1>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body col-md-12">
-              <div class="col-md-12 float-right">
-
-                <form name="myform" id="img_wall_upload_form" action="../ImgWallUploadServlet" method="post" enctype="multipart/form-data">
-                  <input type="text" id="imgWall_title" name="imgWall_title" class="form-control" placeholder="输入图片标题">
-                  <input type="file" style="visibility: hidden" id="imgWall_image" name="imgWall_image"><br>
-                  <input type="button" id="btn_select" value="选择图片" class="mx-3 btn btn-danger my-1">
-                  <span id="img_name"></span>
-                  <input type="hidden" id="imgWall_time" name="imgWall_time" value="0" >
-                  <input type="hidden" id="imgWall_owner_tel" name="imgWall_owner_tel" value="0" >
-                  <span class=" px-3" style="font-size: 14px;color: #4e555b">仅支持jpg,png,gif格式，大小不要超过20MB</span>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">取消</button>
-                    <input type="submit" value="确认" class="btn btn-success" onclick="return isPic()">
-                  </div>
-                </form>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-
-      <!--            列表-->
-      <div class="my-4 col-xl-12 col-md-12 col-sm-12 float-left">
-        <div class="card mb-4  main_card animated flipInX shadow">
-          <div class="card-body p-3">
-            <div class="row">
-              <div id="LSpace_title" class="col-12">
-                <div class="numbers clearfix">
-                  <img src="../img/user_img/LiuXiaoYang.jpg" class="rounded-circle col-xl-2 col-md-3 col-sm-3 float-left" alt="">
-                  <div class="text-center col-xl-8 col-md-6 col-sm-6 float-left">
-                    <span class="col-xl-5 l_small" >💕💕</span>
-                    <span class="col-xl-2 l_big">❤️</span>
-                    <span class="col-xl-5 l_small" >💕💕</span>
-                  </div>
-                  <img src="../img/user_img/profile.jpg" class="rounded-circle col-xl-2 col-md-3 col-sm-3 float-right" alt="">
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!--倒计时列表-->
-      <div class="my-4 col-xl-5 col-md-8 col-sm-12 float-left">
-        <div class="card mb-4  main_card animated flipInX shadow" style="background: #f92f60">
-          <div class="card-body p-3">
-            <div class="row">
-              <div id="LSpace_days_1" class="col-12 text-light">
-                <div class="numbers clearfix text-center">
-                  <h2 class="font-weight-bolder my-3">相恋天数</h2>
-                  <h1>
-                    <span id="L_day" style="font-size: 100px">00</span>天
-                    <br id="br_day">
-                    <span id="L_hour" style="font-size: 50px">00</span>时
-                    <span id="L_minute" style="font-size: 50px">00</span>分
-                    <span id="L_second" style="font-size: 50px">00</span>秒
-                  </h1>
-                  <h3>始于 <span>2021-07-03</span></h3>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div class="card mb-4  main_card animated flipInX shadow" style="background: #11101d">
-          <div class="card-body p-3">
-            <div class="row">
-              <div id="LSpace_days_2" class="col-12 text-light">
-                <div class="numbers clearfix text-center">
-                  <h2 class="font-weight-bolder my-3">考研倒计时</h2>
-                  <h1><span style="font-size: 100px">356</span>天</h1>
-                  <h3>终于 <span>2022-12-24</span></h3>
-                </div>
-              </div>
-            </div>
-          </div>
+
+        <div id="LSpace_countdown">
+
         </div>
 
-        <div id="add_countdown" class="card mb-4  main_card animated flipInX shadow" style="">
+        <div id="add_countdown" class="card mb-4  main_card animated flipInX shadow" data-toggle="modal" data-target="#addCountdownModal">
           <div class="card-body p-3">
             <div class="row">
               <div class="col-12 text-light">
@@ -286,21 +278,19 @@
 
 
       <!--照片列表-->
-      <div class="my-4 col-xl-7 col-md-4 col-sm-12 float-right">
+      <div class="mb-4 col-xl-7 col-md-4 col-sm-12 float-right">
         <div class="card mb-4  main_card animated flipInX shadow" style="background: #fff">
           <div class="card-body p-3">
             <div class="row">
               <div class="col-12">
                 <div class="numbers">
-                    <span class="title mb-0 text-capitalize font-weight-bolder">记录照片</span>
+                    <span class="title mb-0 text-capitalize font-weight-bolder clearfix">记录照片
+                      <span class="float-right mx-3">
+                        <input type="button" class="btn btn-outline-dark" value="添加照片"  data-toggle="modal" data-target="#addLSpaceImgModal">
+                      </span>
+                    </span>
                 </div>
-
                 <div id="LSpace_imgWall">
-                  <img src="../img/LSpace_imgWall/1.jpg" alt=""  data-toggle="modal" data-target="#addLSpaceImgModal">
-                  <img src="../img/LSpace_imgWall/2.jpg" alt="" data-toggle="modal" data-target="#ImgShowModal">
-                  <img src="../img/LSpace_imgWall/5.jpg" alt="">
-                  <img src="../img/LSpace_imgWall/3.jpg" alt="">
-                  <img src="../img/LSpace_imgWall/4.jpg" alt="">
                 </div>
 
               </div>
@@ -314,13 +304,14 @@
   </div>
 </div>
 
+
 <script>
 
   document.querySelector('#btn_select').addEventListener('click',function () {
-    document.querySelector('#imgWall_image').click();
+    document.querySelector('#LSpaceImgWall_image').click();
   });
-  document.querySelector('#imgWall_image').onchange = function (){
-    document.getElementById("img_name").innerText = document.querySelector('#imgWall_image').value;
+  document.querySelector('#LSpaceImgWall_image').onchange = function (){
+    document.getElementById("img_name").innerText = document.querySelector('#LSpaceImgWall_image').value;
   }
 </script>
 
@@ -341,47 +332,6 @@
     sidebar.classList.toggle("active");
   }
 </script>
-
-  <script>
-
-
-
-    function fun () {
-      let startTime = new Date('2021-07-03'); // 开始时间
-      let endTime = new Date(); // 结束时间
-      return Math.floor((endTime - startTime) / 1000);
-    }
-
-    var intDiff_L = parseInt(fun());//倒计时总秒数量
-
-    function timer_L(intDiff_L){
-      window.setInterval(function(){
-        var day=0,
-                hour=0,
-                minute=0,
-                second=0;//时间默认值
-        if(intDiff_L > 0){
-          day = Math.floor(intDiff_L / (60 * 60 * 24));
-          hour = Math.floor(intDiff_L / (60 * 60)) - (day * 24);
-          minute = Math.floor(intDiff_L / 60) - (day * 24 * 60) - (hour * 60);
-          second = Math.floor(intDiff_L) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
-        }
-        if (minute <= 9) minute = '0' + minute;
-        if (second <= 9) second = '0' + second;
-        $('#L_day').html(day);
-        $('#L_hour').html('<s id="h"></s>'+hour);
-        $('#L_minute').html('<s></s>'+minute);
-        $('#L_second').html('<s></s>'+second);
-        intDiff_L++;
-      }, 1000);
-    }
-
-    $(function(){
-      timer_L(intDiff_L);
-    });
-
-
-  </script>
 
 </div>
 </body>

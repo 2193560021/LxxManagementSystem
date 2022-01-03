@@ -1,6 +1,7 @@
 window.onload = function (){
     cookie_tel_search()
-    searchAll();
+    searchLovers();
+
 }
 
 
@@ -25,8 +26,8 @@ function getCurrentDate() {
 }
 
 
-function searchAll(){
-    var url = "../ExpressagesServlet"
+function searchLovers(){
+    var url = "../LSpaceServlet"
     if (window.XMLHttpRequest)
         req = new XMLHttpRequest();
     else if (window.ActiveXObject)
@@ -34,220 +35,168 @@ function searchAll(){
     if (req) {
         req.open("post", url, true);
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req.onreadystatechange = searchAllComplete;
-        req.send("type=search&method=searchByTel&expressage_owner_tel=" + getCookie("tel"));
+        req.onreadystatechange = searchLoversComplete;
+        req.send("type=search&LSpace_owner_tel=" + getCookie("tel"));
     }
 }
 
-function searchAllComplete(){
-    if(req.readyState === 4 && req.status === 200){
-        var json =  JSON.parse(req.responseText);//转换为json对象
+function searchLoversComplete() {
+    if (req.readyState === 4 && req.status === 200) {
+        var json = JSON.parse(req.responseText);//转换为json对象
 
-        document.getElementById("expressages_num").innerText = 0
-        document.getElementById("expressages_0").innerText = 0
-        document.getElementById("expressages_1").innerText = 0
+        if (json.length > 0) {
+            console.log("搜索到了")
+            console.log("时间：" + json[0].LSpace_time)
 
-        if(json.length > 0){
+            document.getElementById("LSpace_countdown_owners_id").value = json[0].LSpace_id
+            document.getElementById("LSpaceImgWall_owners_id").value = json[0].LSpace_id
 
-            document.getElementById("expressages_num").innerHTML = json.length
-            document.getElementById("expressage_list_main").innerHTML = ""
-            document.getElementById("expressage_yes_list_main").innerHTML = ""
-            let b=0
-            for(let i=0; i < json.length; i++) {
-                if(json[i].expressage_status === "0"){
-                    document.getElementById("expressages_0").innerText = parseInt(parseInt(document.getElementById("expressages_0").innerText) + 1);
-
-
-
-                    document.getElementById("expressage_list_main").innerHTML +=
-                        '<div class="expressage_card_list mx-auto sales_flower mx-1 shadow row mb-3">\n' +
-                        '                <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 pt-1 text-center">\n' +
-                        '                  <img src="../img/Expressage_img/'+ json[i].expressage_company.split("&")[1] +'" alt="" class="expressage_card_list_img mt-4 mb-1">\n' +
-                        '                  <span class="mx-auto text-center font-weight-bolder ">'+ json[i].expressage_company.split("&")[0] +'</span>\n' +
-                        '                </div>\n' +
-                        '                <div class="col-xl-10 col-md-10 col-sm-10 expressage_card_content text-center pt-5 pb-4">\n' +
-                        '                  <span class="expressage_card_content_code mx-auto font-weight-bolder">'+ json[i].expressage_code +'</span>\n' +
-                        '                  <span class="expressage_card_content_other mx-auto text-center font-weight-bolder mt-2"><span class="expressage_card_content_time">'+ json[i].expressage_time +'</span>\n' +
-                        '                  <i class="fa fa-check  fa-lg mx-1 expressage_check"  data-toggle="modal" data-target="#checkModal" onclick="check('+ json[i].expressage_id +')"></i>\n' +
-                        '                  <i class="fa fa-trash-o fa-lg mx-1 expressage_delete" data-toggle="modal" data-target="#delModal" onclick="del('+ json[i].expressage_id +')"></i>\n' +
-                        '                  </span>\n' +
-                        '                </div>\n' +
-                        '              </div>'
-
-                }else if(json[i].expressage_status === "1"){
+            document.getElementById("LSpace_header").innerHTML =
+                '<div class="my-4 col-xl-12 col-md-12 col-sm-12 float-left">\n' +
+                '          <div class="card mb-4  main_card animated flipInX shadow">\n' +
+                '            <div class="card-body p-3">\n' +
+                '              <div class="row">\n' +
+                '                <div id="LSpace_title" class="col-12">\n' +
+                '                  <div class="numbers clearfix">\n' +
+                '                    <img id="L1" src="" class="rounded-circle col-xl-2 col-md-3 col-sm-3 float-left" alt="">\n' +
+                '                    <div class="text-center col-xl-8 col-md-6 col-sm-6 float-left">\n' +
+                '                      <span class="col-xl-5 l_small" >💕💕</span>\n' +
+                '                      <span class="col-xl-2 l_big">❤️</span>\n' +
+                '                      <span class="col-xl-5 l_small" >💕💕</span>\n' +
+                '                    </div>\n' +
+                '                    <img id="L2" src="" class="rounded-circle col-xl-2 col-md-3 col-sm-3 float-right" alt="">\n' +
+                '                  </div>\n' +
+                '                </div>\n' +
+                '              </div>\n' +
+                '            </div>\n' +
+                '          </div>\n' +
+                '        </div>'
 
 
-                    document.getElementById("expressages_1").innerText = parseInt(parseInt(document.getElementById("expressages_1").innerText) + 1);
+            document.getElementById("LSpace_time_card").innerHTML =
+                '        <div class="card mb-4  main_card animated flipInX shadow" style="background: #f92f60">\n' +
+                '          <div class="card-body p-3">\n' +
+                '            <div class="row">\n' +
+                '              <div id="LSpace_days_1" class="col-12 text-light">\n' +
+                '                <div class="numbers clearfix text-center">\n' +
+                '                  <h2 class="font-weight-bolder my-3">相恋天数</h2>\n' +
+                '                  <h1>\n' +
+                '                    <span id="L_day" style="font-size: 100px">00</span>天\n' +
+                '                    <br id="br_day">\n' +
+                '                    <span id="L_hour" style="font-size: 50px">00</span>时\n' +
+                '                    <span id="L_minute" style="font-size: 50px">00</span>分\n' +
+                '                    <span id="L_second" style="font-size: 50px">00</span>秒\n' +
+                '                  </h1>\n' +
+                '                  <h5>始于 <span id="LSpace_time">0000-00-00</span></h5>\n' +
+                '                </div>\n' +
+                '              </div>\n' +
+                '            </div>\n' +
+                '          </div>\n' +
+                '        </div>'
 
 
-                    document.getElementById("expressage_yes_list").setAttribute("style","")
+            var L1 = json[0].LSpace_lovers.split("-")[0]
+            var L2 = json[0].LSpace_lovers.split("-")[1]
+            searchCus1(L1)
+            searchCus2(L2)
+            document.getElementById("LSpace_time").innerHTML = json[0].LSpace_time
 
+            let startTime = new Date(json[0].LSpace_time.toString()); // 开始时间
+            let endTime = new Date(); // 结束时间
+            var intDiff_L = parseInt(Math.floor((endTime - startTime) / 1000));
 
-                    document.getElementById("expressage_yes_list_main").innerHTML +=
-                        '              <div class="expressage_card_list mx-auto sales_flower mx-1 shadow row mb-3">\n' +
-                        '                <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 pt-1 text-center">\n' +
-                        '                  <img src="../img/Expressage_img/'+ json[i].expressage_company.split("&")[1] +'" alt="" class="expressage_card_list_img mt-4 mb-1">\n' +
-                        '                  <span class="mx-auto text-center font-weight-bolder ">'+ json[i].expressage_company.split("&")[0] +'</span>\n' +
-                        '                </div>\n' +
-                        '                <div class="col-xl-10 col-md-10 col-sm-10 expressage_card_content text-center py-4">\n' +
-                        '                  <span class="expressage_card_content_code mx-auto font-weight-bolder ">'+ json[i].expressage_code +'</span>\n' +
-                        '                  <span class="expressage_card_content_other mx-auto text-center font-weight-bolder mt-3"><span class="expressage_card_content_time">'+ json[i].expressage_yes_time +'</span>\n' +
-                        '                  <i class="fa fa-repeat  fa-lg mx-1 expressage_repeat" data-toggle="modal" data-target="#repeatModal"  onclick="repeat('+ json[i].expressage_id +')"></i>\n' +
-                        '                  <i class="fa fa-trash-o fa-lg mx-1 expressage_delete" data-toggle="modal" data-target="#delModal" onclick="del('+ json[i].expressage_id +')"></i>\n' +
-                        '                  </span>\n' +
-                        '                </div>\n' +
-                        '              </div>'
+            window.setInterval(function(){
+                var day=0,
+                    hour=0,
+                    minute=0,
+                    second=0;//时间默认值
+                if(intDiff_L > 0){
+                    day = Math.floor(intDiff_L / (60 * 60 * 24));
+                    hour = Math.floor(intDiff_L / (60 * 60)) - (day * 24);
+                    minute = Math.floor(intDiff_L / 60) - (day * 24 * 60) - (hour * 60);
+                    second = Math.floor(intDiff_L) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
                 }
+                if (minute <= 9) minute = '0' + minute;
+                if (second <= 9) second = '0' + second;
+                $('#L_day').html(day);
+                $('#L_hour').html('<s id="h"></s>'+hour);
+                $('#L_minute').html('<s></s>'+minute);
+                $('#L_second').html('<s></s>'+second);
+                intDiff_L++;
+            }, 1000);
 
-
-                if(document.getElementById("expressages_0").innerHTML === "0"){
-                    document.getElementById("expressage_list_main").innerHTML =
-                        "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
-
-                }
-
-
-            }
+            searchCountdown()
         }else {
-            document.getElementById("expressage_yes_list").setAttribute("style","display:none")
-            document.getElementById("expressage_list_main").innerHTML =
-                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
-
+            console.log("有点错误")
+            document.getElementById("main").innerHTML =
+                '      <div class="my-4 col-xl-12 col-md-12 col-sm-12 float-left">\n' +
+                '        <div class="card mb-4  main_card animated flipInX shadow">\n' +
+                '          <div class="card-body p-3">\n' +
+                '            <div class="row">\n' +
+                '              <div id="LSpace_title" class="col-12">\n' +
+                '                <div class="numbers clearfix">\n' +
+                '                  <h1 class="display-4 font-weight-bolder text-center my-5">你还没有开通💕LoveSpace空间，找到你的另一半然后再联系刘小阳开通哦...</h1> ' +
+                '                </div>\n' +
+                '              </div>\n' +
+                '            </div>\n' +
+                '          </div>\n' +
+                '        </div>\n' +
+                '      </div>'
         }
-    }else {
-        document.getElementById("expressage_yes_list").setAttribute("style","display:none")
-        document.getElementById("expressage_list_main").innerHTML =
-            "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去买东西+添加取件码，一件快递都没有...</p> "
-    }
-}
+    } else {
+        console.log("有点错误")
 
-
-function del(id){
-    $("#delConfirm").click(function (){
-
-        var url = "../ExpressagesServlet";
-        if (window.XMLHttpRequest)
-            req = new XMLHttpRequest();
-        else if (window.ActiveXObject)
-            req = new ActiveXObject("Microsoft.XMLHTTP");
-        if (req) {
-            //采用POST方式，异步传输
-            req.open("post", url, true);
-            //POST方式，必须加入如下头信息设定
-            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            req.onreadystatechange = delComplete;
-            req.send("type=delete&id="+id);
-        }
-    })
-}
-
-function delComplete(){
-    if(req.readyState === 4 && req.status === 200){
-        searchAll()
-    }
-}
-
-
-function delAll(){
-    $("#delAllConfirm").click(function (){
-
-        var url = "../ExpressagesServlet";
-        if (window.XMLHttpRequest)
-            req = new XMLHttpRequest();
-        else if (window.ActiveXObject)
-            req = new ActiveXObject("Microsoft.XMLHTTP");
-        if (req) {
-            //采用POST方式，异步传输
-            req.open("post", url, true);
-            //POST方式，必须加入如下头信息设定
-            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            req.onreadystatechange = delAllComplete;
-            req.send("type=deleteAllYes");
-        }
-    })
-}
-
-function delAllComplete(){
-    if(req.readyState === 4 && req.status === 200){
-        searchAll()
     }
 }
 
 
 
 
-function add(){
-
-    var url = "../ExpressagesServlet"
+function searchCus1(L1){
+    var url = "../CustomerServlet";
     if (window.XMLHttpRequest)
-        req = new XMLHttpRequest();
+        req1 = new XMLHttpRequest();
     else if (window.ActiveXObject)
-        req = new ActiveXObject("Microsoft.XMLHTTP");
-    if (req) {
-        req.open("post", url, true);
-        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req.onreadystatechange = addComplete;
-        req.send("type=add&expressage_code="
-            +encodeURIComponent(document.getElementById("expressage_code").value)
-            +"&expressage_company="
-            +encodeURIComponent(document.getElementById("expressage_company_name").value)
-            +"&expressage_time="
-            +encodeURIComponent(getCurrentDate())
-            +"&expressage_owner_tel="
-            +encodeURIComponent(getCookie("tel"))
-
-        )
+        req1 = new ActiveXObject("Microsoft.XMLHTTP");
+    if (req1) {
+        //采用POST方式，异步传输
+        req1.open("post", url, true);
+        //POST方式，必须加入如下头信息设定
+        req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req1.onreadystatechange = searchCus1Complete;
+        req1.send("type=search&method=byTel&tel="+ L1);
     }
 }
 
-function addComplete(){
-    if(req.readyState === 4 && req.status === 200){
-        document.getElementById("expressage_code").value = ''
-        searchAll()
+function searchCus1Complete() {
+    if (req1.readyState == 4 && req1.status == 200) {
+        var json = JSON.parse(req1.responseText);//转换为json对象
+        document.getElementById("L1").setAttribute("src",json[0].cus_img)
+
     }
 }
 
-function check(id){
-    $("#checkConfirm").click(function (){
-        var url = "../ExpressagesServlet"
-        if (window.XMLHttpRequest)
-            req = new XMLHttpRequest();
-        else if (window.ActiveXObject)
-            req = new ActiveXObject("Microsoft.XMLHTTP");
-        if (req) {
-            req.open("post", url, true);
-            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            req.onreadystatechange = checkComplete;
-            req.send("type=check&expressage_id=" + id + "&expressage_yes_time=" + encodeURIComponent(getCurrentDate()))
-        }
-    })
-}
 
-function checkComplete(){
-    if(req.readyState === 4 && req.status === 200){
-        searchAll()
+function searchCus2(L2){
+    var url = "../CustomerServlet";
+    if (window.XMLHttpRequest)
+        req2 = new XMLHttpRequest();
+    else if (window.ActiveXObject)
+        req2 = new ActiveXObject("Microsoft.XMLHTTP");
+    if (req2) {
+        //采用POST方式，异步传输
+        req2.open("post", url, true);
+        //POST方式，必须加入如下头信息设定
+        req2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req2.onreadystatechange = searchCus2Complete;
+        req2.send("type=search&method=byTel&tel="+ L2);
     }
 }
 
-function repeat(id){
+function searchCus2Complete() {
+    if (req2.readyState == 4 && req2.status == 200) {
+        var json = JSON.parse(req2.responseText);//转换为json对象
+        document.getElementById("L2").setAttribute("src",json[0].cus_img)
 
-    $("#repeatConfirm").click(function (){
-        var url = "../ExpressagesServlet"
-        if (window.XMLHttpRequest)
-            req = new XMLHttpRequest();
-        else if (window.ActiveXObject)
-            req = new ActiveXObject("Microsoft.XMLHTTP");
-        if (req) {
-            req.open("post", url, true);
-            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            req.onreadystatechange = repeatComplete;
-            req.send("type=repeat&expressage_id=" + id + "&expressage_time=" + encodeURIComponent(getCurrentDate()))
-        }
-    })
-}
-
-function repeatComplete(){
-    if(req.readyState === 4 && req.status === 200){
-        searchAll()
     }
 }

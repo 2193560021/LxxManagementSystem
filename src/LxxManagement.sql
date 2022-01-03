@@ -104,20 +104,6 @@ CREATE TABLE `LSpace_countdowns`  (
 insert into LSpace_countdowns(LSpace_countdown_owners_id, LSpace_countdown_title, LSpace_countdown_time, LSpace_countdown_bg) values
 ('1','考研倒计时','2022-12-24','#11101d');
 
--- ----------------------------
--- Table structure for LSpace_countups
--- ----------------------------
-DROP TABLE IF EXISTS `LSpace_countups`;
-CREATE TABLE `LSpace_countups`  (
-      `LSpace_countup_id` int(11) NOT NULL AUTO_INCREMENT,
-      `LSpace_countup_owners_tel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-      `LSpace_countup_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-      `LSpace_countup_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-      `LSpace_countup_bg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-      PRIMARY KEY (`LSpace_countup_id`) USING BTREE
-
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
-
 
 -- ----------------------------
 -- Table structure for lspace_imgWall
@@ -125,15 +111,25 @@ CREATE TABLE `LSpace_countups`  (
 DROP TABLE IF EXISTS `LSpace_imgWall`;
 CREATE TABLE `LSpace_imgWall`  (
     `LSpace_imgWall_id` int(11) NOT NULL AUTO_INCREMENT,
+    `LSpace_imgWall_owners_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
     `LSpace_imgWall_title` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
     `LSpace_imgWall_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
     `LSpace_imgWall_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-    `LSpace_imgWall_owners_tel` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
 
     PRIMARY KEY (`LSpace_imgWall_id`) USING BTREE
 
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
+insert into LSpace_imgWall(LSpace_imgWall_owners_id,LSpace_imgWall_title, LSpace_imgWall_name, LSpace_imgWall_time) values
+('1','合照','../img/LSpace_imgWall/1.jpg','2022-01-03 11:36');
+insert into LSpace_imgWall(LSpace_imgWall_owners_id,LSpace_imgWall_title, LSpace_imgWall_name, LSpace_imgWall_time) values
+('1','合照','../img/LSpace_imgWall/2.jpg','2022-01-01 11:36');
+insert into LSpace_imgWall(LSpace_imgWall_owners_id,LSpace_imgWall_title, LSpace_imgWall_name, LSpace_imgWall_time) values
+('1','合照','../img/LSpace_imgWall/3.jpg','2022-01-02 11:36');
+insert into LSpace_imgWall(LSpace_imgWall_owners_id,LSpace_imgWall_title, LSpace_imgWall_name, LSpace_imgWall_time) values
+('1','合照','../img/LSpace_imgWall/4.jpg','2022-01-04 11:36');
+insert into LSpace_imgWall(LSpace_imgWall_owners_id,LSpace_imgWall_title, LSpace_imgWall_name, LSpace_imgWall_time) values
+('1','合照','../img/LSpace_imgWall/5.jpg','2022-01-03 11:36');
 
 
 -- ----------------------------
