@@ -40,6 +40,7 @@ function cookie_tel_searchComplete(){
         var json =  JSON.parse(req1.responseText);//转换为json对象
         if(json.length > 0){
             document.getElementById("user_inf_main").setAttribute("style","")
+            document.getElementById("user_inf_main").setAttribute("href","Person.html")
             document.getElementById("user_name").value = json[0].cus_name
             document.getElementById("user_tel").value = json[0].cus_tel
 
@@ -78,6 +79,7 @@ function cookie_tel_searchComplete(){
 
 
             document.getElementById("user_inf_main").setAttribute("style","display:none")
+            document.getElementById("user_inf_main").setAttribute("href","#")
             document.getElementById("lou_out_btn").classList.add("btn-primary")
             document.getElementById("lou_out_btn").setAttribute("value","登录/注册")
             document.getElementById("lou_out_btn").setAttribute("onclick","goSign()")
@@ -94,6 +96,7 @@ function cookie_tel_searchComplete(){
 
 
         document.getElementById("user_inf_main").setAttribute("style","display:none")
+        document.getElementById("user_inf_main").setAttribute("href","#")
         document.getElementById("lou_out_btn").classList.add("btn-primary")
         document.getElementById("lou_out_btn").setAttribute("value","登录/注册")
         document.getElementById("lou_out_btn").setAttribute("onclick","goSign()")
