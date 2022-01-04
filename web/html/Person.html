@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/public/bootstrap-4.6.0-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/public/animate.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/Expressage.css">
+  <link rel="stylesheet" href="../css/Person.css">
 
   <style>
     #active{
@@ -33,8 +33,7 @@
   <script src="../js/public/vue.min.js"></script>
   <script src="../js/public/axios.min.js"></script>
 
-  <script src="../js/Cookie_search.js"></script>
-  <script src="../js/Expressage.js"></script>
+  <script src="../js/Person.js"></script>
   <link rel="stylesheet" href="../css/All.css">
 </head>
 <body>
@@ -175,9 +174,133 @@
 
 
 
+
+
+
+
+
+  <!--编辑资料_模态框 ↓fade-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-xl" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">编辑资料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-md-12">
+          <form id="myform" method="post" action="#" class="clearfix">
+            <input type="hidden" id="owner_id" name="owner_id" value="0">
+
+            <div  class="person_img_div person_img_bg col-md-6 float-left px-3" >
+
+              <div id="user_editor" class="row py-5 border-ra">
+
+                <div id="main_user_img1" class="col-xl-4 col-md-4 col-sm-12 py-3 text-center">
+                  <img src="" id="main_user_img_main1" class="rounded-circle" width="120" height="120" alt="">
+                </div>
+                <div class="col-xl-5 main_user_inf col-md-8 col-sm-12 py-2 px-5">
+                  <h4 id ="person_name1" class="font-weight-bolder text-light mt-3"></h4>
+                  <h5 id="person_tel1" class="text-light my-3"></h5>
+                  <h6 id="person_email1" class="text-light my-3"></h6>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 float-right">
+              <div class="input-group  my-3 float-left">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon2">用户名</span>
+                </div>
+                <input id="owner_name" name="owner_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group  mb-3 float-left">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">邮箱</span>
+                </div>
+                <input id="owner_email" name="owner_email" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class=" input-group  mb-3 float-left">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon4">电话</span>
+                </div>
+                <input id="owner_tel" name="owner_tel" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class=" input-group  mb-3 float-left">
+                <select class="form-control" id="LSpace_countdown_bg">
+                  <option selected="" class="text-dark">请选择背景颜色...</option>
+                  <option class="text-light" value="#e60039" style="background: #e60039">#e60039-署红</option>
+                  <option class="text-light" value="#1e3124" style="background: #1e3124">#1e3124-墨绿</option>
+                  <option class="text-light" value="#3c374a" style="background: #3c374a">#3c374a-罗兰灰</option>
+                  <option class="text-light" value="#0b2d64" style="background: #0b2d64">#0b2d64-海蓝</option>
+                  <option class="text-light" value="#972626" style="background: #972626">#972626-朱砂</option>
+                  <option class="text-light" value="#ff441a" style="background: #ff441a">#ff441a-桔红</option>
+                  <option class="text-light" value="#283144" style="background: #283144">#283144-鹊灰</option>
+                  <option class="text-light" value="#39200f" style="background: #39200f">#39200f-酱色</option>
+                  <option class="text-light" value="#296939" style="background: #296939">#296939-绿琉璃</option>
+                </select>
+              </div>
+            </div>
+          </form>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="checkUpdate()">确认修改</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!--更换头像_模态框 ↓fade-->
+  <div class="modal fade" id="UserImgUploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="UserImgUploadModalLabel">更换头像</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-md-12">
+
+          <div  class="person_img_div person_img_bg col-md-12 float-left mb-3">
+            <img src="" id="person_img_upload" class="rounded-circle person_img_upload col-12"  alt="">
+
+          </div>
+          <div class="col-md-12 float-right">
+
+            <form name="myform" action="../UserImgUploadServlet" method="post" enctype="multipart/form-data">
+              <input type="file" style="visibility: hidden" id="play_image" name="play_image"><br>
+              <input type="button" id="btn_select" value="上传图片" class="btn btn-danger my-1">
+              <span id="img_name"></span>
+              <input type="hidden" id="img_user_id" name="img_user_id" value="未登录用户" >
+              <input type="hidden" id="img_user_email" name="img_user_email" value="未登录用户">
+              <!--                            <input type="submit" value="提交" onclick="return isPic()"><br>-->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <input type="submit" value="确认" class="btn btn-success" data-toggle="modal" data-target="#updateSuccessModal" onclick="return isPic()">
+              </div>
+              <!--                            <input type="submit" value="确认" class="btn btn-success" data-toggle="modal" data-target="#updateSuccessModal" onclick="return isPic()">-->
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
   <div class="home_content">
-  <div class="row mx-1 clearfix">
-    <div id="expressage_left" class=" col-xl-6 col-md-6 col-sm-12">
+  <div class="row-cols-1 mx-1 clearfix">
+    <div id="expressage_left" class="">
 
       <!--            删除警示-->
       <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
@@ -278,8 +401,8 @@
               没取到该快递？恢复一下
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary"  data-dismiss="modal" id="repeatConfirm" >确认恢复</button>
+              <button type="button" class="btn btn-secondary mb-3" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary mb-3"  data-dismiss="modal" id="repeatConfirm" >确认恢复</button>
             </div>
           </div>
         </div>
@@ -292,40 +415,33 @@
             <div class="row">
               <div id="message_left_title" class="col-12">
                 <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">我的快递</span>
-                  <div class="btn-toolbar mt-2 mb-md-0 float-right">
-                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计<span id="expressages_num" style="font-size: 25px">0</span>件</span>
-                    <span class="text-danger font-weight-bolder mx-2" style="font-size: 16px">未取<span id="expressages_0" style="font-size: 25px">0</span>件</span>
-                    <span class="text-success font-weight-bolder mx-2" style="font-size: 16px">已取<span id="expressages_1" style="font-size: 25px">0</span>件</span>
-
-                  </div>
+<!--                  <span class="title mb-0 text-capitalize font-weight-bolder">我的快递</span>-->
+<!--                  <div class="btn-toolbar mt-2 mb-md-0 float-right">-->
+<!--                    <span class="text-primary font-weight-bolder mx-2" style="font-size: 16px">总计<span id="expressages_num" style="font-size: 25px">0</span>件</span>-->
+<!--                    <span class="text-danger font-weight-bolder mx-2" style="font-size: 16px">未取<span id="expressages_0" style="font-size: 25px">0</span>件</span>-->
+<!--                    <span class="text-success font-weight-bolder mx-2" style="font-size: 16px">已取<span id="expressages_1" style="font-size: 25px">0</span>件</span>-->
+<!--                  </div>-->
                 </div>
               </div>
             </div>
 
-            <div id="expressage_add " class="">
+            <div id="main_user " class="">
               <!--            列表-->
               <div class="my-4">
-                <div class="card mb-4  main_card animated fadeInUp">
+                <div id="user_bg" class="card mb-4  main_card animated fadeInUp shadow">
                   <div class="card-body ">
-                    <div class="row">
-                      <div class="col-12">
-                        <form class="form clearfix"  id="form_expressage">
-                          <select class="form-control col-xl-4 m-2 float-left" id="expressage_company_name">
-                              <option selected="">请选择快递公司</option>
-                              <option value="中通快递&ztkd.png">中通快递</option>
-                              <option value="圆通速递&ytsd.png">圆通速递</option>
-                              <option value="百世快递&bskd.png">百世快递</option>
-                              <option value="邮政快递&yzkd.png">邮政快递</option>
-                              <option value="韵达快递&ydkd.png">韵达快递</option>
-                              <option value="极兔速递&jtsd.png">极兔速递</option>
-                              <option value="京东快递&jdkd.png">京东快递</option>
-                              <option value="顺丰快递&sfkd.png">顺丰快递</option>
-
-                          </select>
-                          <input type="text" id="expressage_code" class="col-xl-4 m-2 form-control float-left" name="message_text" placeholder="输入取货码"/>
-                          <input type="button" value="添加快递" class="btn btn-primary m-2 col-xl-2 rounded-pill float-left font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="return add()">
-                        </form>
+                    <div class=" row">
+                      <div id="main_user_img" class="col-xl-2 col-md-4 col-sm-12 py-3 text-center">
+                        <img id="main_user_img_main" src="" class="rounded-circle" width="200" height="200" alt="">
+                      </div>
+                      <div class="col-xl-6 main_user_inf col-md-8 col-sm-12 py-2 px-5">
+                        <h1 id="person_name" class="font-weight-bolder text-light mt-3"></h1>
+                        <h6 id="person_tel" class="text-light my-3"></h6>
+                        <p id="person_email" class="text-light my-3"></p>
+                        <div>
+                          <input type="button" class="btn btn-outline-info mb-3" value="更换头像" data-toggle="modal" data-target="#UserImgUploadModal">
+                          <input type="button" class="btn btn-outline-primary mb-3" value="编辑资料" data-toggle="modal" data-target="#exampleModal">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -366,94 +482,26 @@
       </div>
     </div>
 
-
-
-
-
-    <div id="expressage_right" class="float-right col-xl-6 col-md-6 col-sm-12">
-
-
-      <!--            列表-->
-      <div class="my-4 col-12">
-        <div class="card mb-4  main_card animated bounceInUp shadow">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-12">
-                <div class="numbers">
-                  <span class="title mb-0 text-capitalize font-weight-bolder">购物推荐</span>
-                </div>
-                <!--                                <hr class="col-11">-->
-                <div class="shop_list sales_flower my-3">
-                  <a href="http://www.lyylxx125420.xyz/Doc.flower" target="_blank">
-                    <div id="DocFlower" class="mb-3">
-                      <img src="../img/shop_img/Doc.flower_logo_white.png" class="col-xl-3 col-md-4 col-sm-2 mt-4" alt="">
-                    </div>
-                  </a>
-
-                  <div class="mb-3 clearfix">
-                    <a href="http://www.taobao.com" target="_blank">
-
-                      <div id="tb" class="float-left pt-3">
-                        <img src="../img/shop_img/tb.png" class="col-xl-5 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-                    <a href="http://jd.com" target="_blank">
-
-                      <div id="jd" class="float-right pt-5">
-                        <img src="../img/shop_img/jd.png" class="col-xl-4 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-
-                  </div>
-
-
-                  <div class="mt-3 clearfix">
-                    <a href="http://www.vip.com" target="_blank">
-
-                      <div id="wph" class="float-left pt-3">
-                        <img src="../img/shop_img/wph.png" class="col-xl-5 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-
-                    <a href="http://www.tmall.com" target="_blank">
-
-                      <div id="tm" class="float-right pt-4">
-                        <img src="../img/shop_img/tm.png" class="col-xl-4 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-                  </div>
-
-
-
-                  <div class="mt-3 clearfix">
-                    <a href="http://www.suning.com" target="_blank">
-
-                      <div id="sn" class="float-left pt-3">
-                        <img src="../img/shop_img/sn.png" class="col-xl-5 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-
-                    <a href="https://www.dewu.com/" target="_blank">
-
-                      <div id="dw" class="float-right pt-4">
-                        <img src="../img/shop_img/dw.png" class="col-xl-4 col-md-8 col-sm-3 mt-4" alt="">
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
+  <script>
+    $("#inputGroupFile01").change(function (){
+      console.log(document.getElementById("inputGroupFile01").value);
+      document.getElementById("inputGroupFile01_name").innerText = document.getElementById("inputGroupFile01").value;
+    })
 
-<script>
+    document.querySelector('#btn_select').addEventListener('click',function () {
+      document.querySelector('#play_image').click();
+    });
+    document.querySelector('#play_image').onchange = function (){
+      document.getElementById("img_name").innerText = document.querySelector('#play_image').value;
+    }
+  </script>
+
+
+
+  <script>
   let btn = document.querySelector("#btn");
   let sidebar = document.querySelector(".sidebar");
   let searchBtn = document.querySelector(".bx-search");

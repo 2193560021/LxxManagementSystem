@@ -2,171 +2,20 @@
     font-size: 25px;
 }
 
-
-.expressage_list{
-    /*background: #E4E9F7;*/
-    /*height: 700px;*/
-    border-radius: 20px;
-}
-
-
-.expressage_card_list{
-
-    /*background: #ffe3e3;*/
-    background: #fff;
-
-    /*height: 100px;*/
-    border-radius: 20px;
-}
-
-.expressage_card_list_img{
-    width: 100%;
+#main_user_img{
 
 }
 
-
-.expressage_card_content{
-    position: relative;
-    border-left: 0.3px solid #d2d2d2;
+#border-ra{
+    border-radius: 10px
 }
 
-.expressage_card_content_code{
-    font-size: 35px;
-}
-.expressage_card_content_other{
-
-    position: absolute;
-    right: 15px;
-    bottom: 0;
-    color: #747576;
-}
-
-.expressage_card_content_time{
-    font-size: 15px;
-}
-
-.expressage_check{
-    color: #28a745;
-}
-.expressage_repeat{
-    color: #007bff;
-}
-.expressage_delete{
-    color: #dc3545;
-}
-
-.expressage_check,.expressage_repeat,.expressage_delete{
-    transition: .4s;
-    cursor: pointer;
-}
-.expressage_check:hover{
-    color: #083913;
-    font-weight: bolder;
-}
-.expressage_repeat:hover{
-    color: #063261;
-    font-weight: bolder;
-}
-.expressage_delete:hover{
-    color: #71040f;
-    font-weight: bolder;
-}
-
-/*右侧*/
-#DocFlower{
-    height: 200px;
-    background: #d4237a;
-    border-radius: 10px;
-    text-align: center;
-    transition: .3s;
-}
-#DocFlower:hover{
-
-    background: #970b50;
-}
-#tb{
-
-    height: 200px;
-    width: 49%;
-    background: #ff7224;
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    transition: .3s;
-}
-#tb:hover{
-
-    background: #bf4a0a;
-}
-#jd{
-    width: 49%;
-    height: 200px;
-    background: #cb0507;
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    transition: .3s;
-}
-#jd:hover{
-
-    background: #a00204;
+@media screen and (max-width: 768px) {
+    .main_user_inf{
+        text-align: center;
+    }
 }
 
 
-#wph{
-
-    height: 200px;
-    width: 49%;
-    background: #f10180;
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    transition: .3s;
-}
-#wph:hover{
-
-    background: #bd0164;
-}
-#tm{
-    width: 49%;
-    height: 200px;
-    background: #cb0507;
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    transition: .3s;
-}
-#tm:hover{
-
-    background: #a00608;
-}
 
 
-#sn{
-
-    height: 200px;
-    width: 49%;
-    background: #f7b401;
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    transition: .3s;
-}
-#sn:hover{
-
-    background: #bd8b00;
-}
-
-#dw{
-    width: 49%;
-    height: 200px;
-    background: #333;
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    transition: .3s;
-}
-#dw:hover{
-
-    background: #111;
-}
