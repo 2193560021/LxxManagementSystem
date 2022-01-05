@@ -101,7 +101,7 @@
           <img src="../img/user_img/profile.jpg" id="user_img" alt="">
           <div class="name_job">
             <div id="name" class="name"></div>
-            <div id="tel" class="tel"></div>
+            <div  id="tel" class="tel"></div>
           </div>
         </div>
       </a>
@@ -230,7 +230,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon4">电话</span>
                 </div>
-                <input id="owner_tel" name="owner_tel" disabled type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                <input id="owner_tel" v-model="UserTel" name="owner_tel" disabled type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
               </div>
               <div class=" input-group  mb-3 float-left">
                 <select class="form-control" id="LSpace_countdown_bg">
@@ -301,7 +301,7 @@
 
 
 
-  <div class="home_content">
+  <div class="home_content"  id="root">
   <div class="row-cols-1 clearfix">
     <div id="expressage_left" class="">
 
@@ -369,7 +369,7 @@
                         <h4 class="my-0 font-weight-normal">快递数量</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><span id="ExpressagesNum">4</span> <small class="text-muted"></small></h1>
+                        <h1 class="card-title pricing-card-title"><span id="ExpressagesNum">{{ExpressagesNum}}</span> <small class="text-muted"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                         </ul>
                         <a href="Expressage.html"><button type="button" class="btn btn-lg btn-block btn-outline-primary">快递信息</button></a>
@@ -380,7 +380,7 @@
                         <h4 class="my-0 font-weight-normal">消息数量</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><span id="MessagesNum">6</span> <small class="text-muted"></small></h1>
+                        <h1 class="card-title pricing-card-title"><span id="MessagesNum">{{MessagesNum}}</span> <small class="text-muted"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                         </ul>
                         <a href="Messages.html"><button type="button" class="btn btn-lg btn-block btn-outline-danger">消息留言</button></a>
@@ -391,7 +391,7 @@
                         <h4 class="my-0 font-weight-normal">照片数量</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><span id="ImgsNum">4</span> <small class="text-muted"></small></h1>
+                        <h1 class="card-title pricing-card-title"><span id="ImgsNum">{{ImgsNum}}</span> <small class="text-muted"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                         </ul>
                         <a href="ImgWall.html"><button type="button" class="btn btn-lg btn-block btn-outline-info">照片管理</button></a>
@@ -409,6 +409,65 @@
 
   </div>
 </div>
+
+
+  <script>
+    Vue.config.productionTip = false
+
+    new Vue({
+      el:'#root',
+      data:{
+        UserTel:"",
+        ExpressagesNum:"",
+        MessagesNum:"",
+        ImgsNum:"",
+
+      },
+      mounted(){
+        this.searchExpressagesNum()
+        this.searchMessagesNum()
+        this.searchImgsNum()
+      },
+      methods:{
+        searchExpressagesNum:function () {
+          var that = this;        //保存this
+          axios.post('../ExpressagesServlet?type=search&method=searchByTel&expressage_owner_tel=' +  getCookie("tel"))
+                  .then(function (response) {
+                    console.log(response);
+                    that.ExpressagesNum = response.data.length
+                  })
+                  .catch(function (err) {
+                  })
+        },
+        searchMessagesNum:function () {
+          var that = this;        //保存this
+          axios.post('../MessagesServlet?type=search&method=searchByTel&message_accept_tel=' + getCookie("tel"))
+                  .then(function (response) {
+                    console.log(response);
+                    that.MessagesNum = response.data.length
+                  })
+                  .catch(function (err) {
+                  })
+        },
+        searchImgsNum:function () {
+          var that = this;        //保存this
+          axios.post('../ImgWallServlet?type=search&method=searchByTel&imgWall_owner_tel=' +  getCookie("tel"))
+                  .then(function (response) {
+                    console.log(response);
+                    that.ImgsNum = response.data.length
+                  })
+                  .catch(function (err) {
+                  })
+        },
+
+      }
+    })
+  </script>
+
+
+
+
+
 
   <script>
     $("#inputGroupFile01").change(function (){
