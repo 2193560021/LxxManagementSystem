@@ -94,7 +94,7 @@ function searchAcceptComplete(){
         var json1 = JSON.parse(req1.responseText)
         document.getElementById("accept_name").innerHTML = '<option selected>请选择收方...</option>'
         for(let i = 0;i < json1.length;i++){
-            if(json1[i].tel !== getCookie("tel")){
+            if(json1[i].cus_tel !== getCookie("tel")){
                 document.getElementById("accept_name").innerHTML +=
                     '<option value="'+ json1[i].cus_name +'-'+ json1[i].cus_tel +'">'+ json1[i].cus_name +'</option>'
             }

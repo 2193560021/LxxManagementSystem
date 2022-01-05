@@ -1,9 +1,7 @@
 package main.lxxmanagement.dao;
 
 import main.lxxmanagement.idao.iLSpaceDAO;
-import main.lxxmanagement.idao.iMessagesDAO;
 import main.lxxmanagement.model.LSpace;
-import main.lxxmanagement.model.Messages;
 import main.util.DBUtil;
 
 import java.sql.ResultSet;

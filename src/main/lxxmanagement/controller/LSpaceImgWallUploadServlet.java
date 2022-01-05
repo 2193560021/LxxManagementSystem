@@ -1,7 +1,6 @@
 package main.lxxmanagement.controller;
 
 
-import main.lxxmanagement.model.Customer;
 import main.util.DBUtil;
 
 import javax.servlet.ServletException;

@@ -1,9 +1,6 @@
 package main.lxxmanagement.dao;
 
 import main.lxxmanagement.idao.iLSpaceCountDownDAO;
-import main.lxxmanagement.idao.iLSpaceDAO;
-import main.lxxmanagement.model.Expressages;
-import main.lxxmanagement.model.LSpace;
 import main.lxxmanagement.model.LSpaceCountDown;
 import main.util.DBUtil;
 

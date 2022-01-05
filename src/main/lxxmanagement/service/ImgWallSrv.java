@@ -10,10 +10,7 @@ public class ImgWallSrv {
 
     private iImgWallDAO iImgWallDAO= DAOFactory.creatImgWallDAO();
 
-//    public int modify(Play play){
-//        return employeeDAO.update(play);
-//    }
-//
+
     public int delete(int ID){
         return iImgWallDAO.delete(ID);
     }

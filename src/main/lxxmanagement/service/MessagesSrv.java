@@ -13,11 +13,7 @@ public class MessagesSrv {
     public int add(Messages messages){
         return messagesDAO.insert(messages);
     }
-//
-//    public int modify(Play play){
-//        return employeeDAO.update(play);
-//    }
-//
+
     public int delete(int ID){
         return messagesDAO.delete(ID);
     }

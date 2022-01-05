@@ -37,13 +37,6 @@ CREATE TABLE `expressages`  (
 
 
 
-insert into expressages(expressage_code, expressage_company, expressage_time, expressage_yes_time, expressage_owner_tel) values
-('14-2-5680','中通快递&../img/Expressage_img/ztkd.png','2021-12-23 15:29','2021-12-24 11:55','13279505680');
-
-insert into expressages(expressage_code, expressage_company, expressage_time, expressage_yes_time, expressage_owner_tel,expressage_status) values
-('A-2-8966','圆通速递&../img/Expressage_img/ytsd.png','2021-12-22 13:17','2021-12-24 15:31','13279505680',1);
-
-
 
 -- ----------------------------
 -- Table structure for imgWall

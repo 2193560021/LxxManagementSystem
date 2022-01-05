@@ -1,8 +1,6 @@
 package main.lxxmanagement.dao;
 
-import main.lxxmanagement.idao.iExpressagesDAO;
 import main.lxxmanagement.idao.iOrdersDAO;
-import main.lxxmanagement.model.Expressages;
 import main.lxxmanagement.model.Orders;
 import main.util.DBUtil;
 

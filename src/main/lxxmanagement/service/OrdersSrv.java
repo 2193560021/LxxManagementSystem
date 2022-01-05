@@ -15,11 +15,7 @@ public class OrdersSrv {
     public int add(Orders orders){
         return ordersDAO.insert(orders);
     }
-//
-//    public int modify(Play play){
-//        return employeeDAO.update(play);
-//    }
-//
+
     public int delete(int ID){
         return ordersDAO.delete(ID);
     }

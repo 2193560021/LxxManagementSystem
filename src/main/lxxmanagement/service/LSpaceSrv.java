@@ -2,9 +2,7 @@ package main.lxxmanagement.service;
 
 import main.lxxmanagement.idao.DAOFactory;
 import main.lxxmanagement.idao.iLSpaceDAO;
-import main.lxxmanagement.idao.iMessagesDAO;
 import main.lxxmanagement.model.LSpace;
-import main.lxxmanagement.model.Messages;
 
 import java.util.List;
 

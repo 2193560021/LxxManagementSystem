@@ -101,6 +101,7 @@ function cookie_tel_searchComplete(){
         document.getElementById("lou_out_btn").setAttribute("value","登录/注册")
         document.getElementById("lou_out_btn").setAttribute("onclick","goSign()")
 
+
     }
 }
 

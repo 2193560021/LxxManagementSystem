@@ -60,7 +60,7 @@ public class ImgWallUploadServlet extends HttpServlet
             System.out.println(part.getSize());
             // 带着play对象转发到result.java页
             request.setAttribute("play", customer);
-            request.getRequestDispatcher("/html/UserImgUploadComplete.html").forward(request, response);
+            request.getRequestDispatcher("/html/ImgWallUploadComplete.html").forward(request, response);
         }
         catch(Exception e)
         {

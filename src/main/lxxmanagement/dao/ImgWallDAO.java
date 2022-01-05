@@ -1,8 +1,6 @@
 package main.lxxmanagement.dao;
 
-import main.lxxmanagement.idao.iExpressagesDAO;
 import main.lxxmanagement.idao.iImgWallDAO;
-import main.lxxmanagement.model.Expressages;
 import main.lxxmanagement.model.ImgWall;
 import main.util.DBUtil;
 

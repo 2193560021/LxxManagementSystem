@@ -1,7 +1,6 @@
 package main.lxxmanagement.idao;
 
 import main.lxxmanagement.dao.*;
-import main.lxxmanagement.idao.*;
 
 public class DAOFactory
 {

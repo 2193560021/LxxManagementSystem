@@ -1,9 +1,7 @@
 package main.lxxmanagement.dao;
 
 import main.lxxmanagement.idao.iExpressagesDAO;
-import main.lxxmanagement.idao.iMessagesDAO;
 import main.lxxmanagement.model.Expressages;
-import main.lxxmanagement.model.Messages;
 import main.util.DBUtil;
 
 import java.sql.ResultSet;

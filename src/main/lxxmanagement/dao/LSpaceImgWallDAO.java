@@ -1,7 +1,6 @@
 package main.lxxmanagement.dao;
 
 import main.lxxmanagement.idao.iLSpaceImgWallDAO;
-import main.lxxmanagement.model.LSpaceCountDown;
 import main.lxxmanagement.model.LSpaceImgWall;
 import main.util.DBUtil;
 
