@@ -118,7 +118,7 @@
 </div>
 
 
-  <nav id="nav_sm" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav id="nav_sm" class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-xl">
       <a class="navbar-brand font-weight-bolder" style="font-size: 25px" href="#">璇宇空间</a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
@@ -174,8 +174,24 @@
 
 
 
-
-
+  <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateSuccessModalLabel">修改成功</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          修改成功！
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -219,13 +235,13 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon3">邮箱</span>
                 </div>
-                <input id="owner_email" name="owner_email" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                <input id="owner_email" name="owner_email" disabled type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
               </div>
               <div class=" input-group  mb-3 float-left">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon4">电话</span>
                 </div>
-                <input id="owner_tel" name="owner_tel" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                <input id="owner_tel" name="owner_tel" disabled type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
               </div>
               <div class=" input-group  mb-3 float-left">
                 <select class="form-control" id="LSpace_countdown_bg">
@@ -234,11 +250,11 @@
                   <option class="text-light" value="#1e3124" style="background: #1e3124">#1e3124-墨绿</option>
                   <option class="text-light" value="#3c374a" style="background: #3c374a">#3c374a-罗兰灰</option>
                   <option class="text-light" value="#0b2d64" style="background: #0b2d64">#0b2d64-海蓝</option>
-                  <option class="text-light" value="#972626" style="background: #972626">#972626-朱砂</option>
-                  <option class="text-light" value="#ff441a" style="background: #ff441a">#ff441a-桔红</option>
+                  <option class="text-light" value="#02774f" style="background: #02774f">#02774f-深绿宝石</option>
+                  <option class="text-light" value="#730099" style="background: #730099">#730099-青莲紫</option>
                   <option class="text-light" value="#283144" style="background: #283144">#283144-鹊灰</option>
                   <option class="text-light" value="#39200f" style="background: #39200f">#39200f-酱色</option>
-                  <option class="text-light" value="#296939" style="background: #296939">#296939-绿琉璃</option>
+                  <option class="text-light" value="#777bce" style="background: #777bce">#777bce-雪蓝</option>
                 </select>
               </div>
             </div>
@@ -246,7 +262,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="checkUpdate()">确认修改</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="check()">确认修改</button>
           </div>
         </div>
 
@@ -259,7 +275,7 @@
 
   <!--更换头像_模态框 ↓fade-->
   <div class="modal fade" id="UserImgUploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " >
+    <div class="modal-dialog" >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="UserImgUploadModalLabel">更换头像</h5>
@@ -270,23 +286,21 @@
         <div class="modal-body col-md-12">
 
           <div  class="person_img_div person_img_bg col-md-12 float-left mb-3">
-            <img src="" id="person_img_upload" class="rounded-circle person_img_upload col-12"  alt="">
+            <img src="" id="person_img_upload" class="person_img_upload col-12"  alt="">
 
           </div>
           <div class="col-md-12 float-right">
 
-            <form name="myform" action="../UserImgUploadServlet" method="post" enctype="multipart/form-data">
-              <input type="file" style="visibility: hidden" id="play_image" name="play_image"><br>
+            <form name="myform" id="UserImgUploadFrom" action="../UserImgUploadServlet" method="post" enctype="multipart/form-data">
+              <input type="file" style="visibility: hidden" id="user_image" name="user_image"><br>
               <input type="button" id="btn_select" value="上传图片" class="btn btn-danger my-1">
               <span id="img_name"></span>
               <input type="hidden" id="img_user_id" name="img_user_id" value="未登录用户" >
-              <input type="hidden" id="img_user_email" name="img_user_email" value="未登录用户">
-              <!--                            <input type="submit" value="提交" onclick="return isPic()"><br>-->
+              <input type="hidden" id="img_user_tel" name="img_user_tel" value="未登录用户" >
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 <input type="submit" value="确认" class="btn btn-success" data-toggle="modal" data-target="#updateSuccessModal" onclick="return isPic()">
               </div>
-              <!--                            <input type="submit" value="确认" class="btn btn-success" data-toggle="modal" data-target="#updateSuccessModal" onclick="return isPic()">-->
 
             </form>
           </div>
@@ -318,27 +332,6 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
               <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="modal fade" id="delAllModal" tabindex="-1" aria-labelledby="delAllModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="delAllModalLabel">确认删除</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              确认删除所有已取快递？
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delAllConfirm">确认删除</button>
             </div>
           </div>
         </div>
@@ -387,7 +380,7 @@
                         <h4 class="my-0 font-weight-normal">快递数量</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><span id="BlogsNum"></span> <small class="text-muted"></small></h1>
+                        <h1 class="card-title pricing-card-title"><span id="ExpressagesNum">4</span> <small class="text-muted"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                         </ul>
                         <a href="Expressage.html"><button type="button" class="btn btn-lg btn-block btn-outline-primary">快递信息</button></a>
@@ -398,7 +391,7 @@
                         <h4 class="my-0 font-weight-normal">消息数量</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><span id="OrdersNum"></span> <small class="text-muted"></small></h1>
+                        <h1 class="card-title pricing-card-title"><span id="MessagesNum">6</span> <small class="text-muted"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                         </ul>
                         <a href="Messages.html"><button type="button" class="btn btn-lg btn-block btn-outline-danger">消息留言</button></a>
@@ -409,7 +402,7 @@
                         <h4 class="my-0 font-weight-normal">照片数量</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><span id="MessagesNum"></span> <small class="text-muted"></small></h1>
+                        <h1 class="card-title pricing-card-title"><span id="ImgsNum">4</span> <small class="text-muted"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                         </ul>
                         <a href="ImgWall.html"><button type="button" class="btn btn-lg btn-block btn-outline-info">照片管理</button></a>
@@ -435,10 +428,10 @@
     })
 
     document.querySelector('#btn_select').addEventListener('click',function () {
-      document.querySelector('#play_image').click();
+      document.querySelector('#user_image').click();
     });
-    document.querySelector('#play_image').onchange = function (){
-      document.getElementById("img_name").innerText = document.querySelector('#play_image').value;
+    document.querySelector('#user_image').onchange = function (){
+      document.getElementById("img_name").innerText = document.querySelector('#user_image').value;
     }
   </script>
 

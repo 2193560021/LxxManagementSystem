@@ -126,33 +126,15 @@ public class CustomerServlet  extends HttpServlet
         {
 
             String name=request.getParameter("cusname");
-            String tel=request.getParameter("custel");
-            String email=request.getParameter("cusemail");
+            String tel="";
+            String email="";
             String img_bg=request.getParameter("customerimg_bg");
-            String address=request.getParameter("customeraddress");
+            String address="";
             String path="";
             customer=new Customer(id,tel, name, email,null,img_bg,address);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            String method = "login";
-
-            List<Customer> result=null;
-            result=new CustomerSrv().Fetch(email,method,path);
-
-            JSONArray array=new JSONArray();
-            JSONObject json;
-
-            for(Customer s : result)
-            {
-                json=new JSONObject();
-                json.put("email", s.getEmail());
-                array.put(json);
-            }
-            if(array.length() >= 2){
-                out.write("3");     //邮箱不唯一
-                return;
-            }
             if(new CustomerSrv().modify(customer) == 1)
                 out.write("数据修改成功");
             else

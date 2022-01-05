@@ -133,49 +133,23 @@ insert into LSpace_imgWall(LSpace_imgWall_owners_id,LSpace_imgWall_title, LSpace
 
 
 -- ----------------------------
--- Table structure for cpmment
+-- Table structure for orders
 -- ----------------------------
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE `comment`  (
-                            `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
-                            `blog_id`INT(10) DEFAULT NULL,
-                            `comment_owner` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_image` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_text` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_time` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_likes` INT(10) DEFAULT NULL,
-                            PRIMARY KEY (`comment_id`) USING BTREE
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
 
-) ENGINE = INNODB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = COMPACT;
+   order_id       int(11) NOT NULL AUTO_INCREMENT,
+   order_text       varchar(200)    null,
+   order_kind       int(5)          null comment '0为支出，1为收入',
+   order_amount     float           null,
+   order_amount_sum float default 0 null,
+   order_owner_tel  varchar(100)    null,
+   order_time       varchar(100)    null,
 
-INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(1,'刘璇','../img/user_img.jpg','中秋节应该和家人一起过','2021年11月6日',100);
-INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(2,'刘宇阳','../img/user_img.jpg','学到了','2021年11月7日',100);
-INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(3,'徐卓龙','../img/user_img.jpg','种植鲜花小技巧','2021年11月8日',100);
-INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(4,'范佳伟','../img/user_img.jpg','这没想到有这么多的鲜花品种','2021年11月6日',100);
-INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(5,'苗欢欢','../img/user_img.jpg','教师节可以送康乃馨','2021年11月1日',100);
+   PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for order
--- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order`  (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_commodity_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_commodity_img` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_owner_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_owner_tel` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_pay` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin default NULL,
 
-  PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 -- ----------------------------
 -- Table structure for messages
 -- ----------------------------
@@ -202,19 +176,4 @@ insert into messages (message_send_name, message_send_tel, message_accept_name, 
 
 insert into messages (message_send_name, message_send_tel, message_accept_name, message_accept_tel, message_send_user_img, message_time, message_text) values
 ('隔壁润迎','13279505680','刘小璇','15929068966','../img/user_img/用户.png','2021-12-21 10:07','我是隔壁润迎');
-
-
-
-
-
-INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-11-4 15:00','卡罗拉','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
-INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-10-4 15:00','白牡丹','../img/花/菊花类/2.白牡丹图集/白牡丹1.jpg','刘璇','15929068966','西安邮电大学长安校区东区安美公寓','19.9','已签收');
-INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-11-26 15:00','郁金香','../img/花/百合类/2.郁金香图集/郁金香1.png','苗欢','13279505680','西安邮电大学长安校区东区','19.9','运输中');
-INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-11-4 15:00','向日葵','../img/花/向日葵/1.向日葵(未包装)图集/向日葵2.jpg','范佳伟','15830599166','西安邮电大学长安校区东区','19.9','未发货');
-INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-11-4 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
 

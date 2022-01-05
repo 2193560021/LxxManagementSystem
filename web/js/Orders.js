@@ -97,7 +97,9 @@ function searchAllComplete(){
 
         }else {
             document.getElementById("order_list_main").innerHTML =
-                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去添加账单...</p> "
+                "<p class='font-weight-bolder text-center mx-auto my-5' style='font-size: 25px'>快去添加账单...</p> " +
+                "<div id='order_0' hidden><div class='order_amount_sum_new'>0</div></div>"
+
 
         }
     }else {

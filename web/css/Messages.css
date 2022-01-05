@@ -16,11 +16,12 @@
     /*background: #ffe3e3;*/
     background: #fff;
 
-    height: 130px;
+    /*height: 130px;*/
     border-radius: 20px;
 }
 .messages_card_list_img{
-    width: 100%;
+    width: 100px;
+    height: 100px;
 }
 .messages_card_content{
     position: relative;

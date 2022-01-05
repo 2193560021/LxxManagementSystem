@@ -6,6 +6,10 @@
 
 }
 
+#person_img_upload{
+    border-radius: 70px;
+}
+
 #border-ra{
     border-radius: 10px
 }
@@ -13,6 +17,9 @@
 @media screen and (max-width: 768px) {
     .main_user_inf{
         text-align: center;
+    }
+    #person_img_upload{
+        border-radius: 70px;
     }
 }
 

@@ -49,10 +49,10 @@ function searchAllComplete(){
                 document.getElementById("messages_list").innerHTML +=
                 '                  <div class="messages_card_list mx-auto sales_flower mx-1 shadow row mb-3">\n' +
                 '                    <div class="col-xl-2 col-md-2 col-sm-2 rounded-circle mb-2 text-center">\n' +
-                '                      <img src="'+ json[i].message_send_user_img +'" alt="" class="messages_card_list_img rounded-circle mt-2">\n' +
+                '                      <img src="'+ json[i].message_send_user_img +'" alt="" class="messages_card_list_img rounded-circle mt-2" >\n' +
                 '                      <span class="mx-auto text-center font-weight-bolder mt-1">'+ json[i].message_send_name +'</span>\n' +
                 '                    </div>\n' +
-                '                    <div class="col-xl-10 col-md-10 col-sm-10 messages_card_content mt-2 mb-2 pt-2">\n' +
+                '                    <div class="col-xl-10 col-md-10 col-sm-10 messages_card_content mt-2 mb-2 pt-2 pb-5">\n' +
                 '                      <span class="messages_card_content_text mx-auto text-center font-weight-bolder mt-3">'+ json[i].message_text +'</span>\n' +
                 '                      <span class="messages_card_content_time mx-auto text-center font-weight-bolder mt-3">'+ json[i].message_time +'</span>\n' +
                 '                    </div>\n' +
@@ -96,14 +96,11 @@ function searchAcceptComplete(){
         for(let i = 0;i < json1.length;i++){
             if(json1[i].tel !== getCookie("tel")){
                 document.getElementById("accept_name").innerHTML +=
-                    '<option value="'+ json1[i].cus_name +'-'+ json1[i].tel +'">'+ json1[i].cus_name +'</option>'
+                    '<option value="'+ json1[i].cus_name +'-'+ json1[i].cus_tel +'">'+ json1[i].cus_name +'</option>'
             }
         }
     }
 }
-
-
-
 
 function add(){
 
